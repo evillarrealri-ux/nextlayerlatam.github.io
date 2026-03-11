@@ -1,26 +1,232 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-<title>NextLayer LATAM</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NextLayer LATAM</title>
+
 <style>
+
+/* =========================
+ESTILO GENERAL
+========================= */
+
 body{
 margin:0;
-background:black;
+font-family:Arial, Helvetica, sans-serif;
+background-color:#0c0c2b;
+color:white;
+}
+
+/* =========================
+HEADER
+========================= */
+
+header{
+background:#0c0c2b;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+header img{
+height:45px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-size:16px;
+}
+
+nav a:hover{
+color:#9c7cff;
+}
+
+/* =========================
+HERO (IMAGEN PRINCIPAL)
+========================= */
+
+.hero{
+background-image:url("images/fondo-nextlayer.png");
+background-size:cover;
+background-position:center;
+height:520px;
+display:flex;
+align-items:center;
+padding-left:60px;
+}
+
+.hero-text{
+max-width:500px;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:18px;
+line-height:1.5;
+}
+
+/* =========================
+SECCIÓN SERVICIOS
+========================= */
+
+.servicios{
+background:#ffffff;
+color:#333;
+padding:70px 20px;
+text-align:center;
+}
+
+.servicios h2{
+margin-bottom:50px;
+font-size:32px;
+}
+
+.servicios-container{
 display:flex;
 justify-content:center;
-align-items:center;
-height:100vh;
+flex-wrap:wrap;
+gap:40px;
 }
-img{
-max-width:100%;
-height:auto;
+
+.servicio{
+max-width:260px;
+padding:20px;
 }
+
+.servicio img{
+width:80px;
+margin-bottom:15px;
+}
+
+.servicio h3{
+margin-bottom:10px;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+background:#0c0c2b;
+text-align:center;
+padding:25px;
+font-size:14px;
+}
+
 </style>
+
 </head>
 
 <body>
-<img src="banner.png">
-</body>
 
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header>
+
+<img src="images/logo-nl-blanco.png" alt="NextLayer LATAM">
+
+<nav>
+<a href="#">Inicio</a>
+<a href="#">Servicios</a>
+<a href="#">Cursos</a>
+<a href="#">Contacto</a>
+</nav>
+
+</header>
+
+
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>Soluciones IT y Ciberseguridad</h1>
+
+<p>
+Consultoría, capacitación y soluciones tecnológicas para fortalecer
+la seguridad informática y optimizar la gestión de servicios IT.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+SERVICIOS
+========================= -->
+
+<section class="servicios">
+
+<h2>Nuestros Servicios</h2>
+
+<div class="servicios-container">
+
+<div class="servicio">
+<img src="images/icon-ciberseguridad.png">
+<h3>Ciberseguridad</h3>
+<p>
+Evaluación de riesgos, concientización en seguridad y protección
+de la información para empresas.
+</p>
+</div>
+
+<div class="servicio">
+<img src="images/icon-gestion-it.png">
+<h3>Gestión de Servicios IT</h3>
+<p>
+Implementación de buenas prácticas ITSM, inventarios,
+gestión de incidentes y mejora de procesos tecnológicos.
+</p>
+</div>
+
+<div class="servicio">
+<img src="images/icon-formacion.png">
+<h3>Formación</h3>
+<p>
+Cursos y programas de capacitación en ciberseguridad,
+buenas prácticas IT y concientización para usuarios.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer>
+
+© 2026 NextLayer LATAM — Soluciones en Tecnología y Ciberseguridad
+
+</footer>
+
+
+
+</body>
 </html>
