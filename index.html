@@ -44,6 +44,7 @@ color:white;
 text-decoration:none;
 margin-left:25px;
 font-size:16px;
+cursor:pointer;
 }
 
 nav a:hover{
@@ -216,7 +217,7 @@ HEADER
 <a href="#">Inicio</a>
 <a href="#">Servicios</a>
 <a href="#">Cursos</a>
-<a href="#">Contacto</a>
+<a id="contactMenu">Contacto</a>
 </nav>
 
 </header>
@@ -292,7 +293,6 @@ MODAL FORMULARIO
   <div class="modal-content">
     <span class="close">&times;</span>
     <h2>Formulario de Contacto</h2>
-    <!-- FORMULARIO CON FORMSPREE -->
     <form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
       <label for="name">Nombre:</label>
       <input type="text" id="name" name="name" required>
@@ -329,22 +329,25 @@ JS MODAL + CONFIRMACIÓN FORMULARIO
 <script>
 const modal = document.getElementById("ctaModal");
 const btn = document.getElementById("ctaBtn");
+const contactMenu = document.getElementById("contactMenu");
 const span = document.getElementsByClassName("close")[0];
 const form = document.getElementById("contactForm");
 const status = document.getElementById("formStatus");
 
-// Abrir modal
+// Abrir modal con botón CTA
 btn.onclick = () => modal.style.display = "block";
+
+// Abrir modal con menú "Contacto"
+contactMenu.onclick = () => modal.style.display = "block";
 
 // Cerrar modal
 span.onclick = () => modal.style.display = "none";
 window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; };
 
-// Mostrar mensaje de confirmación al enviar
+// Enviar formulario y mostrar confirmación
 form.addEventListener("submit", function(e){
   e.preventDefault(); // evitar envío normal
 
-  // enviar a Formspree usando fetch
   fetch(form.action, {
     method: "POST",
     body: new FormData(form),
