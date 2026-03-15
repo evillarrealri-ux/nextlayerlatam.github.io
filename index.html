@@ -36,232 +36,229 @@
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
 
 <link rel="icon" href="images/logo-nl-morado.jpg">
-
 <link rel="preload" as="image" href="images/fondo-nextlayer.png">
 
 <style>
-
-/* GENERAL */
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background-color:#0c0c2b;
-color:white;
+/* =========================
+GENERAL
+========================= */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0c0c2b;
+  color: white;
 }
 
 /* HEADER */
-header{
-background:#0c0c2b;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-position:sticky;
-top:0;
-z-index:1000;
+header {
+  background: #0c0c2b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-header img{
-height:75px;
+header img {
+  height: 75px;
 }
 
-nav a{
-color:white;
-text-decoration:none;
-margin-left:25px;
-font-size:16px;
-cursor:pointer;
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-nav a:hover{
-color:#9c7cff;
+nav a:hover {
+  color: #9c7cff;
 }
 
 /* HERO */
-.hero{
-background-image:url("images/fondo-nextlayer.png");
-background-size:cover;
-background-position:center;
-height:520px;
-display:flex;
-align-items:center;
-padding-left:60px;
+.hero {
+  background-image: url("images/fondo-nextlayer.png");
+  background-size: cover;
+  background-position: center;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
 }
 
-.hero-text{
-max-width:500px;
+.hero-text {
+  max-width: 500px;
 }
 
-.hero h1{
-font-size:42px;
-margin-bottom:15px;
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
 }
 
-.hero p{
-font-size:18px;
-line-height:1.5;
+.hero p {
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 /* CTA */
-.cta-button{
-background-color:#9c7cff;
-color:white;
-padding:12px 24px;
-border:none;
-cursor:pointer;
-border-radius:6px;
-font-size:16px;
-margin-top:20px;
+.cta-button {
+  background-color: #9c7cff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
-/* PROBLEMAS */
-.problemas{
-background:#11113a;
-padding:70px 20px;
-text-align:center;
+/* PROBLEMAS QUE RESOLVEMOS */
+.problemas {
+  background: #11113a;
+  padding: 70px 20px;
+  text-align: center;
 }
 
-.problemas h2{
-font-size:32px;
-margin-bottom:15px;
+.problemas h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
 }
 
-.problemas-intro{
-max-width:700px;
-margin:auto;
-margin-bottom:50px;
-color:#ccccff;
+.problemas-intro {
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 50px;
+  color: #ccccff;
 }
 
-.problemas-container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
+.problemas-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
 }
 
-.problema{
-max-width:380px; /* aumentado para imágenes más grandes */
+.problema {
+  max-width: 320px;
 }
 
-.problema img{
-width:100%;
-max-height:220px; /* limita altura sin romper proporción */
-object-fit:cover;
-border-radius:8px;
-margin-bottom:15px;
+.problema img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
-.problema h3{
-margin-bottom:10px;
-font-size:20px;
+.problema h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
 }
 
-.problema p{
-font-size:14px;
-color:#d6d6ff;
-line-height:1.5;
+.problema p {
+  font-size: 15px;
+  color: #d6d6ff;
+  line-height: 1.5;
 }
 
 /* SERVICIOS */
-.servicios{
-background:#ffffff;
-color:#333;
-padding:70px 20px;
-text-align:center;
+.servicios {
+  background: #ffffff;
+  color: #333;
+  padding: 70px 20px;
+  text-align: center;
 }
 
-.servicios h2{
-margin-bottom:50px;
-font-size:32px;
+.servicios h2 {
+  margin-bottom: 50px;
+  font-size: 32px;
 }
 
-.servicios-container{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:40px;
+.servicios-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
-.servicio{
-max-width:260px;
-padding:20px;
+.servicio {
+  max-width: 260px;
+  padding: 20px;
 }
 
-.servicio img{
-width:80px;
-margin-bottom:15px;
+.servicio img {
+  width: 80px;
+  margin-bottom: 15px;
 }
 
-.servicio h3{
-margin-bottom:10px;
+.servicio h3 {
+  margin-bottom: 10px;
 }
 
 /* MODAL */
-.modal{
-display:none;
-position:fixed;
-z-index:1000;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background-color:rgba(0,0,0,0.8);
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
 }
 
-.modal-content{
-background-color:#0c0c2b;
-color:white;
-margin:10% auto;
-padding:20px;
-border-radius:8px;
-width:90%;
-max-width:500px;
-position:relative;
+.modal-content {
+  background-color: #0c0c2b;
+  color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
 }
 
 .modal-content input,
-.modal-content textarea{
-width:100%;
-padding:8px;
-margin-top:4px;
-border-radius:4px;
-border:1px solid #ccc;
-background-color:#1a1a3d;
-color:white;
+.modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #1a1a3d;
+  color: white;
 }
 
-.modal-content button{
-margin-top:12px;
-padding:10px 20px;
-background-color:#9c7cff;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
+.modal-content button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #9c7cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.close{
-position:absolute;
-top:10px;
-right:16px;
-font-size:24px;
-cursor:pointer;
+.close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 24px;
+  cursor: pointer;
 }
 
-#formStatus{
-margin-top:10px;
-color:#7fff7f;
+#formStatus {
+  margin-top: 10px;
+  color: #7fff7f;
 }
 
 /* FOOTER */
-footer{
-background:#0c0c2b;
-text-align:center;
-padding:25px;
-font-size:14px;
+footer {
+  background: #0c0c2b;
+  text-align: center;
+  padding: 25px;
+  font-size: 14px;
 }
-
 </style>
 
 </head>
@@ -269,166 +266,146 @@ font-size:14px;
 <body>
 
 <header>
-<img src="images/logo-nl-blanco.png" alt="NextLayer LATAM logo">
-<nav>
-<a href="#">Inicio</a>
-<a href="#">Servicios</a>
-<a href="#">Cursos</a>
-<a id="contactMenu">Contacto</a>
-</nav>
+  <img src="images/logo-nl-blanco.png" alt="NextLayer LATAM logo">
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Servicios</a>
+    <a href="#">Cursos</a>
+    <a id="contactMenu">Contacto</a>
+  </nav>
 </header>
 
 <section class="hero">
-<div class="hero-text">
-<h1>Soluciones IT y Ciberseguridad</h1>
-<p>
-Consultoría tecnológica, ciberseguridad y formación profesional
-para fortalecer la seguridad informática y optimizar la gestión de
-servicios IT en las organizaciones.
-</p>
-<button id="ctaBtn" class="cta-button">Contáctanos</button>
-</div>
+  <div class="hero-text">
+    <h1>Soluciones IT y Ciberseguridad</h1>
+    <p>Consultoría tecnológica, ciberseguridad y formación profesional
+    para fortalecer la seguridad informática y optimizar la gestión de
+    servicios IT en las organizaciones.</p>
+    <button id="ctaBtn" class="cta-button">Contáctanos</button>
+  </div>
 </section>
 
 <section class="problemas">
-<h2>Problemas que Resolvemos</h2>
-<p class="problemas-intro">
-Muchas organizaciones enfrentan desafíos tecnológicos que afectan su seguridad,
-productividad y estabilidad operativa. NextLayer LATAM ayuda a identificar
-y resolver estos problemas mediante soluciones profesionales de IT y ciberseguridad.
-</p>
+  <h2>Problemas que Resolvemos</h2>
+  <p class="problemas-intro">
+    Muchas organizaciones enfrentan desafíos tecnológicos que afectan su seguridad,
+    productividad y estabilidad operativa. NextLayer LATAM ayuda a identificar
+    y resolver estos problemas mediante soluciones profesionales de IT y ciberseguridad.
+  </p>
+  <div class="problemas-container">
 
-<div class="problemas-container">
-<div class="problema">
-<img src="images/ciberseguridad-empresa.png" alt="Riesgos de ciberseguridad en empresas" loading="lazy">
-<h3>Riesgos de Ciberseguridad</h3>
-<p>
-Las amenazas como phishing, malware y accesos no autorizados pueden comprometer
-la información crítica de una empresa si no se implementan controles adecuados.
-</p>
-</div>
+    <div class="problema">
+      <img src="images/ciberseguridad-empresa.png" alt="Riesgos de ciberseguridad en empresas" loading="lazy">
+      <h3>Riesgos de Ciberseguridad</h3>
+      <p>Las amenazas como phishing, malware y accesos no autorizados pueden comprometer
+      la información crítica de una empresa si no se implementan controles adecuados.</p>
+    </div>
 
-<div class="problema">
-<img src="images/gestion-infraestructura-ti.jpg" alt="Gestión de infraestructura IT empresarial" loading="lazy">
-<h3>Gestión IT Desorganizada</h3>
-<p>
-Una infraestructura tecnológica sin monitoreo ni administración adecuada
-puede generar fallas, lentitud en los sistemas y dificultades para escalar.
-</p>
-</div>
+    <div class="problema">
+      <img src="images/gestion-infraestructura-ti.jpg" alt="Gestión de infraestructura IT empresarial" loading="lazy">
+      <h3>Gestión IT Desorganizada</h3>
+      <p>Una infraestructura tecnológica sin monitoreo ni administración adecuada
+      puede generar fallas, lentitud en los sistemas y dificultades para escalar.</p>
+    </div>
 
-<div class="problema">
-<img src="images/cultura-ciberseguridad-empresa.png" alt="Cultura de ciberseguridad en empresas" loading="lazy">
-<h3>Falta de Cultura de Seguridad</h3>
-<p>
-Los errores humanos siguen siendo una de las principales causas de incidentes
-cuando los usuarios no cuentan con capacitación adecuada.
-</p>
-</div>
+    <div class="problema">
+      <img src="images/cultura-ciberseguridad-empresa.png" alt="Cultura de ciberseguridad en empresas" loading="lazy">
+      <h3>Falta de Cultura de Seguridad</h3>
+      <p>Los errores humanos siguen siendo una de las principales causas de incidentes
+      cuando los usuarios no cuentan con capacitación adecuada.</p>
+    </div>
 
-<div class="problema">
-<img src="images/interrupcion-tecnologica-oficina.jpg" alt="Interrupciones tecnológicas en empresas" loading="lazy">
-<h3>Interrupciones Tecnológicas</h3>
-<p>
-Las fallas en redes, sistemas o equipos pueden detener las operaciones
-de una empresa y afectar la productividad del equipo.
-</p>
-</div>
-</div>
+    <div class="problema">
+      <img src="images/interrupcion-tecnologica-oficina.jpg" alt="Interrupciones tecnológicas en empresas" loading="lazy">
+      <h3>Interrupciones Tecnológicas</h3>
+      <p>Las fallas en redes, sistemas o equipos pueden detener las operaciones
+      de una empresa y afectar la productividad del equipo.</p>
+    </div>
+
+  </div>
 </section>
 
 <section class="servicios">
-<h2>Nuestros Servicios</h2>
-<div class="servicios-container">
-<div class="servicio">
-<img src="images/icon-ciberseguridad.png" alt="Servicios de ciberseguridad" loading="lazy">
-<h3>Ciberseguridad</h3>
-<p>
-Evaluación de vulnerabilidades, gestión de riesgos y programas de
-concientización en seguridad para proteger la información empresarial.
-</p>
-</div>
+  <h2>Nuestros Servicios</h2>
+  <div class="servicios-container">
 
-<div class="servicio">
-<img src="images/icon-gestion-it.png" alt="Gestión de servicios IT" loading="lazy">
-<h3>Gestión de Servicios IT</h3>
-<p>
-Implementación de buenas prácticas ITSM, gestión de incidentes,
-inventario tecnológico y mejora continua de procesos IT.
-</p>
-</div>
+    <div class="servicio">
+      <img src="images/icon-ciberseguridad.png" alt="Servicios de ciberseguridad" loading="lazy">
+      <h3>Ciberseguridad</h3>
+      <p>Evaluación de vulnerabilidades, gestión de riesgos y programas de
+      concientización en seguridad para proteger la información empresarial.</p>
+    </div>
 
-<div class="servicio">
-<img src="images/icon-formacion.png" alt="Capacitación tecnológica" loading="lazy">
-<h3>Formación</h3>
-<p>
-Programas de capacitación en ciberseguridad, buenas prácticas
-tecnológicas y formación para usuarios y equipos IT.
-</p>
-</div>
-</div>
+    <div class="servicio">
+      <img src="images/icon-gestion-it.png" alt="Gestión de servicios IT" loading="lazy">
+      <h3>Gestión de Servicios IT</h3>
+      <p>Implementación de buenas prácticas ITSM, gestión de incidentes,
+      inventario tecnológico y mejora continua de procesos IT.</p>
+    </div>
+
+    <div class="servicio">
+      <img src="images/icon-formacion.png" alt="Capacitación tecnológica" loading="lazy">
+      <h3>Formación</h3>
+      <p>Programas de capacitación en ciberseguridad, buenas prácticas
+      tecnológicas y formación para usuarios y equipos IT.</p>
+    </div>
+
+  </div>
 </section>
 
 <div id="ctaModal" class="modal">
-<div class="modal-content">
-<span class="close">&times;</span>
-<h2>Formulario de Contacto</h2>
-<form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
-<label>Nombre</label>
-<input type="text" name="name" required>
-<label>Correo</label>
-<input type="email" name="email" required>
-<label>Teléfono</label>
-<input type="tel" name="phone" placeholder="+507 6000-0000" required pattern="[\+0-9\s\-]{7,15}">
-<label>Mensaje</label>
-<textarea name="message" rows="4" required></textarea>
-<button type="submit">Enviar</button>
-</form>
-<p id="formStatus"></p>
-</div>
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Formulario de Contacto</h2>
+    <form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
+      <label>Nombre</label>
+      <input type="text" name="name" required>
+      <label>Correo</label>
+      <input type="email" name="email" required>
+      <label>Teléfono</label>
+      <input type="tel" name="phone" placeholder="+507 6000-0000" required pattern="[\+0-9\s\-]{7,15}">
+      <label>Mensaje</label>
+      <textarea name="message" rows="4" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <p id="formStatus"></p>
+  </div>
 </div>
 
 <footer>
-© 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
+  © 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
 </footer>
 
 <script>
-const modal=document.getElementById("ctaModal");
-const btn=document.getElementById("ctaBtn");
-const contactMenu=document.getElementById("contactMenu");
-const span=document.getElementsByClassName("close")[0];
-const form=document.getElementById("contactForm");
-const status=document.getElementById("formStatus");
+const modal = document.getElementById("ctaModal");
+const btn = document.getElementById("ctaBtn");
+const contactMenu = document.getElementById("contactMenu");
+const span = document.getElementsByClassName("close")[0];
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
 
-btn.onclick=()=>modal.style.display="block";
-contactMenu.onclick=()=>modal.style.display="block";
+btn.onclick = () => modal.style.display = "block";
+contactMenu.onclick = () => modal.style.display = "block";
+span.onclick = () => modal.style.display = "none";
 
-span.onclick=()=>modal.style.display="none";
+window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; }
 
-window.onclick=(e)=>{
-if(e.target==modal){
-modal.style.display="none";
-}
-};
-
-form.addEventListener("submit",function(e){
-e.preventDefault();
-fetch(form.action,{
-method:"POST",
-body:new FormData(form),
-headers:{'Accept':'application/json'}
-})
-.then(response=>{
-if(response.ok){
-status.textContent="¡Gracias! Tu mensaje ha sido enviado.";
-form.reset();
-}else{
-status.textContent="Ups! Hubo un error, intenta nuevamente.";
-}
-})
-.catch(()=>{
-status.textContent="Ups! Hubo un error, intenta nuevamente.";
-});
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  fetch(form.action, {
+    method:"POST",
+    body: new FormData(form),
+    headers: {'Accept':'application/json'}
+  })
+  .then(response => {
+    if(response.ok){
+      status.textContent="¡Gracias! Tu mensaje ha sido enviado.";
+      form.reset();
+    } else {
+      status.textContent="Ups! Hubo un error, intenta nuevamente.";
+    }
+  })
+  .catch(()=>{ status.textContent="Ups! Hubo un error, intenta nuevamente."; });
 });
 </script>
 
