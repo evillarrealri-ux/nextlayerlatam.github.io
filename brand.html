@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Guidelines | NextLayer LATAM</title>
+    <!-- Importación segura de Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #61358B;
+            --neutral-grey: #6E6E73;
+            --bg-dark: #0f0f12;
+            --card-bg: #1a1a1f;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+        header { border-bottom: 2px solid var(--primary-purple); margin-bottom: 50px; padding-bottom: 20px; }
+        h1 { color: var(--primary-purple); font-weight: 700; margin: 0; font-size: 2.5rem; }
+        .lang-toggle { font-size: 0.9rem; color: var(--neutral-grey); margin-bottom: 10px; }
+        
+        .main-blueprint { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .main-blueprint img { width: 100%; height: auto; display: block; }
+        
+        .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid #333; transition: transform 0.3s ease; }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary-purple); }
+        .card h3 { color: var(--primary-purple); margin-top: 0; border-left: 4px solid var(--primary-purple); padding-left: 15px; }
+        
+        .swatch { height: 60px; border-radius: 6px; margin-bottom: 15px; border: 1px solid #444; }
+        .purple { background-color: var(--primary-purple); }
+        .grey { background-color: var(--neutral-grey); }
+        
+        footer { margin-top: 80px; text-align: center; border-top: 1px solid #333; padding-top: 40px; color: var(--neutral-grey); font-size: 0.9rem; }
+        .back-link { color: var(--primary-purple); text-decoration: none; font-weight: 700; display: inline-block; margin-top: 20px; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="lang-toggle">ES | EN</div>
+            <h1>Brand Identity Guidelines</h1>
+            <p>Sistemas y normativas visuales de NextLayer LATAM.</p>
+        </header>
+
+        <section class="main-blueprint">
+            <!-- Asegúrate de subir la imagen a la carpeta /brand con este nombre exacto -->
+            <img src="brand/brand-master-blueprint-montserrat.png" alt="NextLayer LATAM Engineering Blueprint">
+        </section>
+
+        <div class="spec-grid">
+            <div class="card">
+                <h3>Logotipo / Isotype</h3>
+                <p>Uso oficial del símbolo NL y el wordmark. El espaciado de seguridad equivale a la altura de la "N".</p>
+                <p><em>Minimum clear space: Height of 'N'.</em></p>
+            </div>
+
+            <div class="card">
+                <h3>Colores / Colors</h3>
+                <div class="swatch purple"></div>
+                <p><strong>Corporate Purple:</strong> #61358B</p>
+                <div class="swatch grey"></div>
+                <p><strong>Neutral Grey:</strong> #6E6E73</p>
+            </div>
+
+            <div class="card">
+                <h3>Tipografía / Typography</h3>
+                <p>La fuente oficial de la marca es <strong>Montserrat</strong>. </p>
+                <p style="font-weight: 700;">Montserrat Bold (Títulos)</p>
+                <p style="font-weight: 300;">Montserrat Light (Cuerpo de texto)</p>
+            </div>
+        </div>
+
+        <footer>
+            © 2026 NextLayer LATAM — Todos los derechos reservados.<br>
+            <a href="index.html" class="back-link">← Volver al inicio</a>
+        </footer>
+    </div>
+</body>
+</html>
