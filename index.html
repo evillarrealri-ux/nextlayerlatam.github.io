@@ -222,9 +222,11 @@ max-width:260px;
 padding:20px;
 }
 
-.servicio img{
-width:80px;
-margin-bottom:15px;
+.servicio img {
+  width: 100%;          /* ocupa todo el ancho del contenedor */
+  max-width: 220px;     /* límite de tamaño máximo */
+  height: auto;         /* mantiene la proporción original */
+  margin-bottom: 15px;
 }
 
 .servicio h3{
