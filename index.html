@@ -140,7 +140,7 @@ gap:40px;
 }
 
 .problema{
-max-width:320px; /* Aumentado de 260px a 320px */
+max-width:320px; 
 }
 
 .problema img{
@@ -180,9 +180,9 @@ max-width:260px;
 }
 
 .elegir img {
-  width: 100%;          /* ocupa todo el ancho del contenedor */
-  max-width: 220px;     /* límite de tamaño máximo */
-  height: auto;         /* mantiene la proporción original */
+  width: 100%;
+  max-width: 220px;
+  height: auto;
   margin-bottom: 15px;
 }
 
@@ -223,9 +223,9 @@ padding:20px;
 }
 
 .servicio img {
-  width: 100%;          /* ocupa todo el ancho del contenedor */
-  max-width: 220px;     /* límite de tamaño máximo */
-  height: auto;         /* mantiene la proporción original */
+  width: 100%; 
+  max-width: 220px; 
+  height: auto; 
   margin-bottom: 15px;
 }
 
@@ -300,8 +300,8 @@ font-size:14px;
 
 /* DOLLY AVATAR Y CHAT */
 #chatAvatar {
-    position: fixed;       /* siempre visible en pantalla */
-    bottom: 20px;          /* esquina inferior derecha */
+    position: fixed;       
+    bottom: 20px;          
     right: 20px;
     width: 60px;
     height: 60px;
@@ -311,15 +311,15 @@ font-size:14px;
 }
 
 #chatContainer {
-    position: fixed;       /* chat flotante sobre el avatar */
-    bottom: 90px;          /* encima del avatar */
+    position: fixed;      
+    bottom: 90px;        
     right: 20px;
     width: 300px;
     max-height: 400px;
     background-color: #1a1a3d;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    display: none;         /* inicia minimizado */
+    display: none;       
     flex-direction: column;
     z-index: 9999;
     overflow: hidden;
@@ -435,7 +435,6 @@ de una empresa y afectar la productividad del equipo.
 </div>
 </section>
 
-<!-- NUEVA SECCIÓN POR QUÉ ELEGIRNOS -->
 <section class="elegirnos">
 <h2>Por qué elegirnos</h2>
 <p class="elegirnos-intro">
@@ -581,8 +580,21 @@ const chatMessages=document.getElementById("chatMessages");
 const chatInput=document.getElementById("chatInput");
 const chatSend=document.getElementById("chatSend");
 
-chatAvatar.onclick=()=>{chatContainer.style.display="flex"; chatInput.focus();}
-chatMinimize.onclick=()=>{chatContainer.style.display="none";}
+let firstInteraction=true;
+
+// Mostrar chat al hacer click en Dolly
+chatAvatar.onclick=()=>{
+  if(chatContainer.style.display==="flex"){
+    chatContainer.style.display="none";
+  }else{
+    chatContainer.style.display="flex"; 
+    chatInput.focus();
+  }
+}
+
+chatMinimize.onclick=()=>{
+  chatContainer.style.display="none";
+}
 
 // Funciones de chat
 const addMessage=(msg,sender="bot")=>{
@@ -608,7 +620,6 @@ const responses={
   "Formación y Capacitación":"Ofrecemos programas de capacitación en ciberseguridad y buenas prácticas IT para tu equipo."
 };
 
-let firstInteraction=true;
 chatSend.onclick=()=>{handleUserMessage();}
 chatInput.addEventListener("keypress",(e)=>{if(e.key==="Enter"){handleUserMessage();}});
 
@@ -618,21 +629,18 @@ function handleUserMessage(){
   addMessage(msg,"user");
   chatInput.value="";
   
-  // Primer mensaje
   if(firstInteraction){
     addMessage("¡Hola! Soy Dolly 🤖. ¿Deseas información sobre algunos de nuestros servicios?\n1 - Ciberseguridad\n2 - Gestión de Servicios IT\n3 - Outsourcing de personal IT\n4 - Formación y Capacitación\nEscribe el número o el nombre del servicio.");
     firstInteraction=false;
     return;
   }
 
-  // Validar número
   if(menu[msg]){
     addMessage(responses[menu[msg]]);
     addMessage("¿Deseas que alguien se ponga en contacto contigo para más detalles? (sí/no)");
     return;
   }
 
-  // Validar nombre de servicio (palabra clave)
   let found=false;
   for(const key in responses){
     if(msg.toLowerCase().includes(key.toLowerCase())){
