@@ -140,7 +140,7 @@ gap:40px;
 }
 
 .problema{
-max-width:320px;
+max-width:320px; /* Aumentado de 260px a 320px */
 }
 
 .problema img{
@@ -180,9 +180,9 @@ max-width:260px;
 }
 
 .elegir img {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
+  width: 100%;          /* ocupa todo el ancho del contenedor */
+  max-width: 220px;     /* límite de tamaño máximo */
+  height: auto;         /* mantiene la proporción original */
   margin-bottom: 15px;
 }
 
@@ -223,9 +223,9 @@ padding:20px;
 }
 
 .servicio img {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
+  width: 100%;          /* ocupa todo el ancho del contenedor */
+  max-width: 220px;     /* límite de tamaño máximo */
+  height: auto;         /* mantiene la proporción original */
   margin-bottom: 15px;
 }
 
@@ -298,93 +298,70 @@ padding:25px;
 font-size:14px;
 }
 
-/* CHAT FLOTANTE */
+/* DOLLY AVATAR Y CHAT */
+#chatAvatar {
+    position: fixed;       /* siempre visible en pantalla */
+    bottom: 20px;          /* esquina inferior derecha */
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+}
+
 #chatContainer {
-  position: fixed;
-  bottom:20px;
-  right:20px;
-  width:320px;
-  max-height:500px;
-  background:#1a1a3d;
-  border-radius:8px;
-  display:none;
-  flex-direction:column;
-  z-index:2000;
-  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    position: fixed;       /* chat flotante sobre el avatar */
+    bottom: 90px;          /* encima del avatar */
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background-color: #1a1a3d;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: none;         /* inicia minimizado */
+    flex-direction: column;
+    z-index: 9999;
+    overflow: hidden;
 }
 
-#chatHeader {
-  display:flex;
-  align-items:center;
-  padding:10px;
-  background:#9c7cff;
-  border-top-left-radius:8px;
-  border-top-right-radius:8px;
-  cursor:pointer;
-}
-
-#chatHeader img {
-  height:40px;
-  width:40px;
-  border-radius:50%;
-  margin-right:10px;
-}
-
-#chatBody {
-  flex:1;
-  padding:10px;
-  overflow-y:auto;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  max-height:350px;
-  color:white;
+#chatMessages {
+    padding: 10px;
+    overflow-y: auto;
+    flex: 1;
+    font-size: 14px;
 }
 
 #chatInputContainer {
-  display:flex;
-  padding:8px;
-  background:#0c0c2b;
+    display: flex;
+    border-top: 1px solid #333;
 }
 
-#chatInputContainer input {
-  flex:1;
-  padding:8px;
-  border:none;
-  border-radius:6px;
-  margin-right:5px;
+#chatInput {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background-color: #0c0c2b;
+    color: white;
+    font-size: 14px;
 }
 
-#chatInputContainer button {
-  padding:8px 12px;
-  border:none;
-  border-radius:6px;
-  background:#9c7cff;
-  color:white;
-  cursor:pointer;
+#chatSend {
+    background-color: #9c7cff;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
 }
 
-/* AVATAR FLOTANTE */
-#chatAvatar img {
-  height:60px;
-  width:60px;
-  border-radius:50%;
-  cursor:pointer;
-}
-
-.message.bot {
-  background:#333366;
-  padding:8px 12px;
-  border-radius:12px;
-  align-self:flex-start;
-}
-
-.message.user {
-  background:#7a5fff;
-  padding:8px 12px;
-  border-radius:12px;
-  align-self:flex-end;
-  color:white;
+#chatMinimize {
+    background: none;
+    border: none;
+    color: #9c7cff;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: right;
+    padding: 4px 8px;
 }
 
 </style>
@@ -458,6 +435,7 @@ de una empresa y afectar la productividad del equipo.
 </div>
 </section>
 
+<!-- NUEVA SECCIÓN POR QUÉ ELEGIRNOS -->
 <section class="elegirnos">
 <h2>Por qué elegirnos</h2>
 <p class="elegirnos-intro">
@@ -537,6 +515,7 @@ tecnológicas y formación para usuarios y equipos IT.
 </div>
 </section>
 
+<!-- MODAL CONTACTO -->
 <div id="ctaModal" class="modal">
 <div class="modal-content">
 <span class="close">&times;</span>
@@ -556,29 +535,26 @@ tecnológicas y formación para usuarios y equipos IT.
 </div>
 </div>
 
-<footer>
-© 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
-</footer>
+<!-- AVATAR Y CHAT DE DOLLY -->
+<div id="chatAvatar">
+  <img src="images/dolly-avatar.png" alt="Dolly">
+</div>
 
-<!-- CHAT FLOTANTE DOLLY -->
 <div id="chatContainer">
-  <div id="chatHeader">
-    <img src="images/dolly-avatar.png" alt="Dolly avatar">
-    <span>Dolly</span>
-    <button id="minimizeChat">_</button>
-  </div>
-  <div id="chatBody"></div>
+  <button id="chatMinimize">_</button>
+  <div id="chatMessages"></div>
   <div id="chatInputContainer">
-    <input type="text" id="chatInput" placeholder="Escribe aquí...">
+    <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
     <button id="chatSend">Enviar</button>
   </div>
 </div>
 
-<div id="chatAvatar">
-  <img src="images/dolly-avatar.png" alt="Chatee con Dolly">
-</div>
+<footer>
+© 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
+</footer>
 
 <script>
+// MODAL CONTACTO
 const modal=document.getElementById("ctaModal");
 const btn=document.getElementById("ctaBtn");
 const contactMenu=document.getElementById("contactMenu");
@@ -586,96 +562,99 @@ const span=document.getElementsByClassName("close")[0];
 const form=document.getElementById("contactForm");
 const status=document.getElementById("formStatus");
 
-// Modal Contacto
 btn.onclick=()=>modal.style.display="block";
 contactMenu.onclick=()=>modal.style.display="block";
 span.onclick=()=>modal.style.display="none";
 window.onclick=(e)=>{if(e.target==modal){modal.style.display="none";}};
 form.addEventListener("submit",function(e){
-  e.preventDefault();
-  fetch(form.action,{
-    method:"POST",
-    body:new FormData(form),
-    headers:{'Accept':'application/json'}
-  })
-  .then(response=>{
-    if(response.ok){status.textContent="¡Gracias! Tu mensaje ha sido enviado.";form.reset();}
-    else{status.textContent="Ups! Hubo un error, intenta nuevamente.";}
-  })
-  .catch(()=>{status.textContent="Ups! Hubo un error, intenta nuevamente."});
+e.preventDefault();
+fetch(form.action,{method:"POST",body:new FormData(form),headers:{'Accept':'application/json'}})
+.then(response=>{if(response.ok){status.textContent="¡Gracias! Tu mensaje ha sido enviado.";form.reset();}else{status.textContent="Ups! Hubo un error, intenta nuevamente.";}})
+.catch(()=>{status.textContent="Ups! Hubo un error, intenta nuevamente."});
 });
 
-// CHAT DOLLY MINIMIZABLE
-const chatContainer = document.getElementById("chatContainer");
-const chatAvatar = document.getElementById("chatAvatar");
-const minimizeChatBtn = document.getElementById("minimizeChat");
-const chatBody = document.getElementById("chatBody");
-const chatInput = document.getElementById("chatInput");
-const chatSend = document.getElementById("chatSend");
+// CHAT DOLLY
+const chatAvatar=document.getElementById("chatAvatar");
+const chatContainer=document.getElementById("chatContainer");
+const chatMinimize=document.getElementById("chatMinimize");
+const chatMessages=document.getElementById("chatMessages");
+const chatInput=document.getElementById("chatInput");
+const chatSend=document.getElementById("chatSend");
 
-chatAvatar.addEventListener("click", () => {
-  chatContainer.style.display = "flex";
-  chatAvatar.style.display = "none";
-});
+chatAvatar.onclick=()=>{chatContainer.style.display="flex"; chatInput.focus();}
+chatMinimize.onclick=()=>{chatContainer.style.display="none";}
 
-minimizeChatBtn.addEventListener("click", () => {
-  chatContainer.style.display = "none";
-  chatAvatar.style.display = "block";
-});
-
-const addMessage = (text, sender="bot") => {
-  const msg = document.createElement("div");
-  msg.className = "message " + sender;
-  msg.textContent = text;
-  chatBody.appendChild(msg);
-  chatBody.scrollTop = chatBody.scrollHeight;
+// Funciones de chat
+const addMessage=(msg,sender="bot")=>{
+  const div=document.createElement("div");
+  div.textContent=msg;
+  div.style.marginBottom="8px";
+  if(sender==="user"){div.style.textAlign="right";}
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop=chatMessages.scrollHeight;
 };
 
-const menu = {"1":"Ciberseguridad","2":"Gestión de Servicios IT","3":"Outsourcing de personal IT","4":"Formación y Capacitación"};
-const responses = {
-  "Ciberseguridad":"- Evaluamos vulnerabilidades de tus sistemas y redes.\n- Implementamos controles para prevenir accesos no autorizados.\n- Capacitamos a tu equipo para detectar phishing, malware y otras amenazas.\n- Ayudamos a proteger la información crítica de tu empresa.",
-  "Gestión de Servicios IT":"- Monitoreo y administración de infraestructura.\n- Gestión de incidentes y resolución rápida.\n- Mejora continua de procesos IT y optimización de recursos.",
-  "Outsourcing de personal IT":"- Profesionales especializados en soporte, redes, servidores y seguridad.\n- Flexibilidad para proyectos temporales o permanentes.",
-  "Formación y Capacitación":"- Cursos en ciberseguridad y tecnología.\n- Talleres prácticos y simulaciones para reforzar el aprendizaje."
+const menu={
+  "1":"Ciberseguridad",
+  "2":"Gestión de Servicios IT",
+  "3":"Outsourcing de personal IT",
+  "4":"Formación y Capacitación"
 };
 
-const keywords = {
-  "penetración":["penetración","pen test","seguridad"],
-  "iot":["iot","sensor","integración"]
+const responses={
+  "Ciberseguridad":"Evaluamos vulnerabilidades, gestionamos riesgos y capacitamos al equipo para prevenir accesos no autorizados.",
+  "Gestión de Servicios IT":"Monitoreamos y administramos infraestructura, gestionamos incidentes y mejoramos procesos IT.",
+  "Outsourcing de personal IT":"Proveemos personal especializado en soporte, administración de sistemas y proyectos IT.",
+  "Formación y Capacitación":"Ofrecemos programas de capacitación en ciberseguridad y buenas prácticas IT para tu equipo."
 };
 
-const handleUserInput = (input) => {
-  input=input.toLowerCase();
-  if(Object.keys(menu).includes(input)){
-    addMessage(`Has seleccionado **${menu[input]}**:\n${responses[menu[input]]}`);
-    addMessage("¿Deseas saber más sobre otro servicio? (Sí / No)");
-  } else if (keywords["penetración"].some(k=>input.includes(k))){
-    addMessage("En NextLayer LATAM realizamos pruebas de penetración para redes, aplicaciones web e infraestructura crítica. ¿Deseas que alguien se ponga en contacto para más información? (Sí / No)");
-  } else if (keywords["iot"].some(k=>input.includes(k))){
-    addMessage("Podemos mostrar demos de Integraciones IoT y dashboards interactivos. ¿Deseas que alguien se ponga en contacto para más información? (Sí / No)");
-  } else if(input==="sí" || input==="si"){
-    modal.style.display="block";
-  } else if(input==="no"){
-    addMessage("¡Perfecto! Puedes seguir explorando nuestra página o hacer otra pregunta.");
-  } else {
-    addMessage("No estoy segura de la respuesta exacta. ¿Desea que alguien de NextLayer se ponga en contacto para más explicaciones? (Sí / No)");
-  }
-};
+let firstInteraction=true;
+chatSend.onclick=()=>{handleUserMessage();}
+chatInput.addEventListener("keypress",(e)=>{if(e.key==="Enter"){handleUserMessage();}});
 
-chatSend.onclick = () => {
-  const input = chatInput.value.trim();
-  if(input==="") return;
-  addMessage(input,"user");
+function handleUserMessage(){
+  const msg=chatInput.value.trim();
+  if(!msg) return;
+  addMessage(msg,"user");
   chatInput.value="";
-  handleUserInput(input);
-};
+  
+  // Primer mensaje
+  if(firstInteraction){
+    addMessage("¡Hola! Soy Dolly 🤖. ¿Deseas información sobre algunos de nuestros servicios?\n1 - Ciberseguridad\n2 - Gestión de Servicios IT\n3 - Outsourcing de personal IT\n4 - Formación y Capacitación\nEscribe el número o el nombre del servicio.");
+    firstInteraction=false;
+    return;
+  }
 
-chatInput.addEventListener("keypress", (e) => {
-  if(e.key==="Enter") chatSend.click();
-});
+  // Validar número
+  if(menu[msg]){
+    addMessage(responses[menu[msg]]);
+    addMessage("¿Deseas que alguien se ponga en contacto contigo para más detalles? (sí/no)");
+    return;
+  }
 
-// SALUDO INICIAL
-addMessage("¡Hola! 👋 Soy Dolly, tu asistente virtual de NextLayer LATAM.\n¿Deseas saber más sobre alguno de nuestros servicios? Ingresa el número correspondiente:\n1️⃣ Ciberseguridad\n2️⃣ Gestión de Servicios IT\n3️⃣ Outsourcing de personal IT\n4️⃣ Formación y Capacitación");
+  // Validar nombre de servicio (palabra clave)
+  let found=false;
+  for(const key in responses){
+    if(msg.toLowerCase().includes(key.toLowerCase())){
+      addMessage(responses[key]);
+      addMessage("¿Deseas que alguien se ponga en contacto contigo para más detalles? (sí/no)");
+      found=true;
+      break;
+    }
+  }
+
+  if(!found){
+    if(msg.toLowerCase().includes("sí") || msg.toLowerCase().includes("si")){
+      modal.style.display="block";
+      addMessage("¡Perfecto! Alguien de nuestro equipo se pondrá en contacto contigo.");
+    } else if(msg.toLowerCase().includes("no")){
+      addMessage("Está bien, si cambias de opinión, solo escríbeme.");
+    } else{
+      addMessage("No entendí tu mensaje. ¿Deseas que alguien se ponga en contacto contigo para más detalles? (sí/no)");
+    }
+  }
+}
+
 </script>
 
 </body>
