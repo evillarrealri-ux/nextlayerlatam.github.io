@@ -2,16 +2,11 @@
 <html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NextLayer LATAM | Ciberseguridad, Consultoría IT y Gestión de Servicios Tecnológicos</title>
-
 <meta name="description" content="NextLayer LATAM ofrece servicios de ciberseguridad, consultoría IT, gestión de servicios tecnológicos y capacitación para empresas en Latinoamérica.">
-
 <meta name="robots" content="index, follow">
-
 <link rel="canonical" href="https://nextlayerlatam.com/">
 
 <!-- Open Graph -->
@@ -39,333 +34,387 @@
 <link rel="preload" as="image" href="images/fondo-nextlayer.png">
 
 <style>
-
-/* GENERAL */
+/* ===== GENERAL ===== */
 body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background-color:#0c0c2b;
-color:white;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background-color:#0c0c2b;
+  color:white;
 }
 
 /* HEADER */
 header{
-background:#0c0c2b;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-position:sticky;
-top:0;
-z-index:1000;
+  background:#0c0c2b;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
 header img{
-height:75px;
+  height:75px;
 }
 
 nav a{
-color:white;
-text-decoration:none;
-margin-left:25px;
-font-size:16px;
-cursor:pointer;
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:16px;
+  cursor:pointer;
 }
 
 nav a:hover{
-color:#9c7cff;
+  color:#9c7cff;
 }
 
 /* HERO */
 .hero{
-background-image:url("images/fondo-nextlayer.png");
-background-size:cover;
-background-position:center;
-height:520px;
-display:flex;
-align-items:center;
-padding-left:60px;
+  background-image:url("images/fondo-nextlayer.png");
+  background-size:cover;
+  background-position:center;
+  height:520px;
+  display:flex;
+  align-items:center;
+  padding-left:60px;
 }
 
 .hero-text{
-max-width:500px;
+  max-width:500px;
 }
 
 .hero h1{
-font-size:42px;
-margin-bottom:15px;
+  font-size:42px;
+  margin-bottom:15px;
 }
 
 .hero p{
-font-size:18px;
-line-height:1.5;
+  font-size:18px;
+  line-height:1.5;
 }
 
 /* CTA */
 .cta-button{
-background-color:#9c7cff;
-color:white;
-padding:12px 24px;
-border:none;
-cursor:pointer;
-border-radius:6px;
-font-size:16px;
-margin-top:20px;
+  background-color:#9c7cff;
+  color:white;
+  padding:12px 24px;
+  border:none;
+  cursor:pointer;
+  border-radius:6px;
+  font-size:16px;
+  margin-top:20px;
 }
 
 /* PROBLEMAS */
 .problemas{
-background:#11113a;
-padding:70px 20px;
-text-align:center;
+  background:#11113a;
+  padding:70px 20px;
+  text-align:center;
 }
 
 .problemas h2{
-font-size:32px;
-margin-bottom:15px;
+  font-size:32px;
+  margin-bottom:15px;
 }
 
 .problemas-intro{
-max-width:700px;
-margin:auto;
-margin-bottom:50px;
-color:#ccccff;
+  max-width:700px;
+  margin:auto;
+  margin-bottom:50px;
+  color:#ccccff;
 }
 
 .problemas-container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:40px;
 }
 
 .problema{
-max-width:320px; 
+  max-width:320px;
 }
 
 .problema img{
-width:100%;
-border-radius:8px;
-margin-bottom:15px;
+  width:100%;
+  border-radius:8px;
+  margin-bottom:15px;
 }
 
 /* POR QUÉ ELEGIRNOS */
 .elegirnos{
-background:#0d0d3f;
-padding:70px 20px;
-text-align:center;
+  background:#0d0d3f;
+  padding:70px 20px;
+  text-align:center;
 }
 
 .elegirnos h2{
-font-size:32px;
-margin-bottom:15px;
+  font-size:32px;
+  margin-bottom:15px;
 }
 
 .elegirnos-intro{
-max-width:700px;
-margin:auto;
-margin-bottom:50px;
-color:#ccccff;
+  max-width:700px;
+  margin:auto;
+  margin-bottom:50px;
+  color:#ccccff;
 }
 
 .elegirnos-container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:40px;
 }
 
 .elegir{
-max-width:260px;
+  max-width:260px;
 }
 
-.elegir img {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
-  margin-bottom: 15px;
+.elegir img{
+  width:100%;
+  max-width:220px;
+  height:auto;
+  margin-bottom:15px;
 }
 
 .elegir h3{
-margin-bottom:10px;
-font-size:20px;
+  margin-bottom:10px;
+  font-size:20px;
 }
 
 .elegir p{
-font-size:14px;
-color:#d6d6ff;
-line-height:1.5;
+  font-size:14px;
+  color:#d6d6ff;
+  line-height:1.5;
 }
 
 /* SERVICIOS */
 .servicios{
-background:#ffffff;
-color:#333;
-padding:70px 20px;
-text-align:center;
+  background:#ffffff;
+  color:#333;
+  padding:70px 20px;
+  text-align:center;
 }
 
 .servicios h2{
-margin-bottom:50px;
-font-size:32px;
+  margin-bottom:50px;
+  font-size:32px;
 }
 
 .servicios-container{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:40px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:40px;
 }
 
 .servicio{
-max-width:260px;
-padding:20px;
+  max-width:260px;
+  padding:20px;
 }
 
-.servicio img {
-  width: 100%; 
-  max-width: 220px; 
-  height: auto; 
-  margin-bottom: 15px;
+.servicio img{
+  width:100%;
+  max-width:220px;
+  height:auto;
+  margin-bottom:15px;
 }
 
 .servicio h3{
-margin-bottom:10px;
+  margin-bottom:10px;
 }
 
-/* MODAL */
+/* MODAL CONTACTO */
 .modal{
-display:none;
-position:fixed;
-z-index:1000;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background-color:rgba(0,0,0,0.8);
+  display:none;
+  position:fixed;
+  z-index:1000;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.8);
 }
 
 .modal-content{
-background-color:#0c0c2b;
-color:white;
-margin:10% auto;
-padding:20px;
-border-radius:8px;
-width:90%;
-max-width:500px;
-position:relative;
+  background-color:#0c0c2b;
+  color:white;
+  margin:10% auto;
+  padding:20px;
+  border-radius:8px;
+  width:90%;
+  max-width:500px;
+  position:relative;
 }
 
 .modal-content input,
 .modal-content textarea{
-width:100%;
-padding:8px;
-margin-top:4px;
-border-radius:4px;
-border:1px solid #ccc;
-background-color:#1a1a3d;
-color:white;
+  width:100%;
+  padding:8px;
+  margin-top:4px;
+  border-radius:4px;
+  border:1px solid #ccc;
+  background-color:#1a1a3d;
+  color:white;
 }
 
 .modal-content button{
-margin-top:12px;
-padding:10px 20px;
-background-color:#9c7cff;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
+  margin-top:12px;
+  padding:10px 20px;
+  background-color:#9c7cff;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
 }
 
 .close{
-position:absolute;
-top:10px;
-right:16px;
-font-size:24px;
-cursor:pointer;
+  position:absolute;
+  top:10px;
+  right:16px;
+  font-size:24px;
+  cursor:pointer;
 }
 
 #formStatus{
-margin-top:10px;
-color:#7fff7f;
+  margin-top:10px;
+  color:#7fff7f;
 }
 
 /* FOOTER */
 footer{
-background:#0c0c2b;
-text-align:center;
-padding:25px;
-font-size:14px;
+  background:#0c0c2b;
+  text-align:center;
+  padding:25px;
+  font-size:14px;
 }
 
-/* DOLLY AVATAR Y CHAT */
+/* ===== DOLLY AVATAR Y CHAT ===== */
 #chatAvatar {
-    position: fixed;       
-    bottom: 20px;          
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10000;
+  position: fixed;
+  bottom:20px;
+  right:20px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:10000;
+  transition: transform 0.3s ease;
+}
+
+#chatAvatar img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+}
+
+#chatAvatar:hover{
+  transform: scale(1.1);
 }
 
 #chatContainer {
-    position: fixed;      
-    bottom: 90px;        
-    right: 20px;
-    width: 300px;
-    max-height: 400px;
-    background-color: #1a1a3d;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    display: none;       
-    flex-direction: column;
-    z-index: 9999;
-    overflow: hidden;
+  position: fixed;
+  bottom:90px;
+  right:20px;
+  width:300px;
+  max-height:400px;
+  background-color:#1a1a3d;
+  border-radius:12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: none;
+  flex-direction: column;
+  z-index:9999;
+  overflow: hidden;
+  font-size:14px;
 }
 
-#chatMessages {
-    padding: 10px;
-    overflow-y: auto;
-    flex: 1;
-    font-size: 14px;
+#chatHeader{
+  background:#0c0c2b;
+  padding:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:bold;
+  color:#9c7cff;
 }
 
-#chatInputContainer {
-    display: flex;
-    border-top: 1px solid #333;
+#chatMessages{
+  padding:10px;
+  overflow-y:auto;
+  flex:1;
 }
 
-#chatInput {
-    flex: 1;
-    padding: 8px;
-    border: none;
-    background-color: #0c0c2b;
-    color: white;
-    font-size: 14px;
+.message{
+  padding:8px 12px;
+  border-radius:12px;
+  margin-bottom:8px;
+  max-width:80%;
+  clear:both;
 }
 
-#chatSend {
-    background-color: #9c7cff;
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    cursor: pointer;
+.bot{
+  background:#9c7cff;
+  color:white;
+  float:left;
 }
 
-#chatMinimize {
-    background: none;
-    border: none;
-    color: #9c7cff;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: right;
-    padding: 4px 8px;
+.user{
+  background:#333366;
+  color:white;
+  float:right;
+  text-align:right;
+}
+
+#chatInputContainer{
+  display:flex;
+  border-top:1px solid #333;
+}
+
+#chatInput{
+  flex:1;
+  padding:8px;
+  border:none;
+  background-color:#0c0c2b;
+  color:white;
+}
+
+#chatSend{
+  background-color:#9c7cff;
+  border:none;
+  color:white;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+#chatMinimize{
+  background:none;
+  border:none;
+  color:#9c7cff;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* Botones menú inicial */
+.menu-btn{
+  display:block;
+  background:#333366;
+  color:white;
+  padding:6px 10px;
+  border-radius:6px;
+  margin:5px 0;
+  cursor:pointer;
+  text-align:left;
+  width:100%;
+  border:none;
+}
+.menu-btn:hover{
+  background:#4b4b8f;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -383,91 +432,61 @@ font-size:14px;
 <section class="hero">
 <div class="hero-text">
 <h1>Soluciones IT y Ciberseguridad</h1>
-<p>
-Consultoría tecnológica, ciberseguridad y formación profesional
-para fortalecer la seguridad informática y optimizar la gestión de
-servicios IT en las organizaciones.
-</p>
+<p>Consultoría tecnológica, ciberseguridad y formación profesional para fortalecer la seguridad informática y optimizar la gestión de servicios IT en las organizaciones.</p>
 <button id="ctaBtn" class="cta-button">Contáctanos</button>
 </div>
 </section>
 
 <section class="problemas">
 <h2>Problemas que Resolvemos</h2>
-<p class="problemas-intro">
-Muchas organizaciones enfrentan desafíos tecnológicos que afectan su seguridad,
-productividad y estabilidad operativa. NextLayer LATAM ayuda a identificar
-y resolver estos problemas mediante soluciones profesionales de IT y ciberseguridad.
-</p>
+<p class="problemas-intro">Muchas organizaciones enfrentan desafíos tecnológicos que afectan su seguridad, productividad y estabilidad operativa. NextLayer LATAM ayuda a identificar y resolver estos problemas mediante soluciones profesionales de IT y ciberseguridad.</p>
 <div class="problemas-container">
 <div class="problema">
 <img src="images/ciberseguridad-empresa.png" alt="Riesgos de ciberseguridad en empresas" loading="lazy">
 <h3>Riesgos de Ciberseguridad</h3>
-<p>
-Las amenazas como phishing, malware y accesos no autorizados pueden comprometer
-la información crítica de una empresa si no se implementan controles adecuados.
-</p>
+<p>Las amenazas como phishing, malware y accesos no autorizados pueden comprometer la información crítica de una empresa si no se implementan controles adecuados.</p>
 </div>
 <div class="problema">
 <img src="images/gestion-infraestructura-ti.jpg" alt="Gestión de infraestructura IT empresarial" loading="lazy">
 <h3>Gestión IT Desorganizada</h3>
-<p>
-Una infraestructura tecnológica sin monitoreo ni administración adecuada
-puede generar fallas, lentitud en los sistemas y dificultades para escalar.
-</p>
+<p>Una infraestructura tecnológica sin monitoreo ni administración adecuada puede generar fallas, lentitud en los sistemas y dificultades para escalar.</p>
 </div>
 <div class="problema">
 <img src="images/cultura-ciberseguridad-empresa.png" alt="Cultura de ciberseguridad en empresas" loading="lazy">
 <h3>Falta de Cultura de Seguridad</h3>
-<p>
-Los errores humanos siguen siendo una de las principales causas de incidentes
-cuando los usuarios no cuentan con capacitación adecuada.
-</p>
+<p>Los errores humanos siguen siendo una de las principales causas de incidentes cuando los usuarios no cuentan con capacitación adecuada.</p>
 </div>
 <div class="problema">
 <img src="images/interrupcion-tecnologica-oficina.jpg" alt="Interrupciones tecnológicas en empresas" loading="lazy">
 <h3>Interrupciones Tecnológicas</h3>
-<p>
-Las fallas en redes, sistemas o equipos pueden detener las operaciones
-de una empresa y afectar la productividad del equipo.
-</p>
+<p>Las fallas en redes, sistemas o equipos pueden detener las operaciones de una empresa y afectar la productividad del equipo.</p>
 </div>
 </div>
 </section>
 
 <section class="elegirnos">
 <h2>Por qué elegirnos</h2>
-<p class="elegirnos-intro">
-NextLayer LATAM combina experiencia, seguridad y formación para ofrecer soluciones IT de alta calidad adaptadas a las necesidades de tu empresa.
-</p>
+<p class="elegirnos-intro">NextLayer LATAM combina experiencia, seguridad y formación para ofrecer soluciones IT de alta calidad adaptadas a las necesidades de tu empresa.</p>
 <div class="elegirnos-container">
 <div class="elegir">
 <img src="images/experiencia_tecnologica.png" alt="Experiencia tecnológica" loading="lazy">
 <h3>Experiencia Tecnológica</h3>
-<p>
-Años de trabajo con empresas de diferentes industrias garantizan soluciones efectivas y confiables.
-</p>
+<p>Años de trabajo con empresas de diferentes industrias garantizan soluciones efectivas y confiables.</p>
 </div>
 <div class="elegir">
 <img src="images/buenas_practicas_it.png" alt="Buenas prácticas IT" loading="lazy">
 <h3>Buenas Prácticas IT</h3>
-<p>
-Aplicamos metodologías probadas para mantener tus sistemas organizados, seguros y eficientes.
-</p>
+<p>Aplicamos metodologías probadas para mantener tus sistemas organizados, seguros y eficientes.</p>
 </div>
 <div class="elegir">
 <img src="images/enfoque_en_seguridad.png" alt="Enfoque en Seguridad" loading="lazy">
 <h3>Enfoque en Seguridad</h3>
-<p>
-Protegemos la información de tu empresa con estrategias preventivas y controles avanzados.
-</p>
+<p>Protegemos la información de tu empresa con estrategias preventivas y controles avanzados.</p>
 </div>
 <div class="elegir">
 <img src="images/capacitacion_continua.png" alt="Capacitación continua" loading="lazy">
 <h3>Capacitación Continua</h3>
-<p>
-Formamos a tus equipos en seguridad y buenas prácticas para reducir riesgos y aumentar la productividad.
-</p>
+<p>Formamos a tus equipos en seguridad y buenas prácticas para reducir riesgos y aumentar la productividad.</p>
 </div>
 </div>
 </section>
@@ -475,42 +494,26 @@ Formamos a tus equipos en seguridad y buenas prácticas para reducir riesgos y a
 <section class="servicios">
 <h2>Nuestros Servicios</h2>
 <div class="servicios-container">
-
 <div class="servicio">
 <img src="images/services/ciberseguridad.png" alt="Servicios de ciberseguridad" loading="lazy">
 <h3>Ciberseguridad</h3>
-<p>
-Evaluación de vulnerabilidades, gestión de riesgos y programas de
-concientización en seguridad para proteger la información empresarial.
-</p>
+<p>Evaluación de vulnerabilidades, gestión de riesgos y programas de concientización en seguridad para proteger la información empresarial.</p>
 </div>
-
 <div class="servicio">
 <img src="images/services/gestion-it.png" alt="Gestión de servicios IT" loading="lazy">
 <h3>Gestión de Servicios IT</h3>
-<p>
-Implementación de buenas prácticas ITSM, gestión de incidentes,
-inventario tecnológico y mejora continua de procesos IT.
-</p>
+<p>Implementación de buenas prácticas ITSM, gestión de incidentes, inventario tecnológico y mejora continua de procesos IT.</p>
 </div>
-
 <div class="servicio">
 <img src="images/services/outsourcing.png" alt="Outsourcing de personal IT" loading="lazy">
 <h3>Outsourcing</h3>
-<p>
-Proveemos personal especializado para IT según las necesidades de tu empresa.
-</p>
+<p>Proveemos personal especializado para IT según las necesidades de tu empresa.</p>
 </div>
-
 <div class="servicio">
 <img src="images/services/formacion.png" alt="Capacitación tecnológica" loading="lazy">
 <h3>Formación</h3>
-<p>
-Programas de capacitación en ciberseguridad, buenas prácticas
-tecnológicas y formación para usuarios y equipos IT.
-</p>
+<p>Programas de capacitación en ciberseguridad, buenas prácticas tecnológicas y formación para usuarios y equipos IT.</p>
 </div>
-
 </div>
 </section>
 
@@ -534,18 +537,15 @@ tecnológicas y formación para usuarios y equipos IT.
 </div>
 </div>
 
-<!-- AVATAR Y CHAT DE DOLLY -->
-<div id="chatAvatar">
-  <img src="images/dolly-avatar.png" alt="Dolly">
-</div>
-
+<!-- DOLLY -->
+<div id="chatAvatar"><img src="images/dolly-avatar.png" alt="Dolly"></div>
 <div id="chatContainer">
-  <button id="chatMinimize">_</button>
-  <div id="chatMessages"></div>
-  <div id="chatInputContainer">
-    <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
-    <button id="chatSend">Enviar</button>
-  </div>
+<div id="chatHeader">Dolly <button id="chatMinimize">_</button></div>
+<div id="chatMessages"></div>
+<div id="chatInputContainer">
+<input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+<button id="chatSend">Enviar</button>
+</div>
 </div>
 
 <footer>
@@ -568,8 +568,7 @@ window.onclick=(e)=>{if(e.target==modal){modal.style.display="none";}};
 form.addEventListener("submit",function(e){
 e.preventDefault();
 fetch(form.action,{method:"POST",body:new FormData(form),headers:{'Accept':'application/json'}})
-.then(response=>{if(response.ok){status.textContent="¡Gracias! Tu mensaje ha sido enviado.";form.reset();}else{status.textContent="Ups! Hubo un error, intenta nuevamente.";}})
-.catch(()=>{status.textContent="Ups! Hubo un error, intenta nuevamente."});
+.then(response=>{if(response.ok){status.textContent="¡Gracias! Tu mensaje ha sido enviado.";form.reset();}else{status.textContent="Ups! Hubo un error, intenta nuevamente.";}}).catch(()=>{status.textContent="Ups! Hubo un error, intenta nuevamente."});
 });
 
 // CHAT DOLLY
@@ -580,38 +579,26 @@ const chatMessages=document.getElementById("chatMessages");
 const chatInput=document.getElementById("chatInput");
 const chatSend=document.getElementById("chatSend");
 
-let firstInteraction=true;
-
-// Mostrar chat al hacer click en Dolly
-chatAvatar.onclick=()=>{
-  if(chatContainer.style.display==="flex"){
-    chatContainer.style.display="none";
-  }else{
-    chatContainer.style.display="flex"; 
-    chatInput.focus();
-  }
-}
-
-chatMinimize.onclick=()=>{
-  chatContainer.style.display="none";
-}
+chatAvatar.onclick=()=>{chatContainer.style.display="flex"; chatInput.focus();}
+chatMinimize.onclick=()=>{chatContainer.style.display="none";}
 
 // Funciones de chat
 const addMessage=(msg,sender="bot")=>{
   const div=document.createElement("div");
   div.textContent=msg;
-  div.style.marginBottom="8px";
-  if(sender==="user"){div.style.textAlign="right";}
+  div.classList.add("message");
+  div.classList.add(sender);
   chatMessages.appendChild(div);
   chatMessages.scrollTop=chatMessages.scrollHeight;
 };
 
-const menu={
-  "1":"Ciberseguridad",
-  "2":"Gestión de Servicios IT",
-  "3":"Outsourcing de personal IT",
-  "4":"Formación y Capacitación"
-};
+// Menú inicial como botones
+const menuOptions=[
+  {id:1,label:"Ciberseguridad"},
+  {id:2,label:"Gestión de Servicios IT"},
+  {id:3,label:"Outsourcing de personal IT"},
+  {id:4,label:"Formación y Capacitación"}
+];
 
 const responses={
   "Ciberseguridad":"Evaluamos vulnerabilidades, gestionamos riesgos y capacitamos al equipo para prevenir accesos no autorizados.",
@@ -620,7 +607,25 @@ const responses={
   "Formación y Capacitación":"Ofrecemos programas de capacitación en ciberseguridad y buenas prácticas IT para tu equipo."
 };
 
-chatSend.onclick=()=>{handleUserMessage();}
+let firstInteraction=true;
+
+function showMenuButtons(){
+  menuOptions.forEach(opt=>{
+    const btn=document.createElement("button");
+    btn.textContent=opt.label;
+    btn.classList.add("menu-btn");
+    btn.onclick=()=>{addMessage(opt.label,"user"); respondService(opt.label);}
+    chatMessages.appendChild(btn);
+  });
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+}
+
+function respondService(service){
+  addMessage(responses[service]);
+  addMessage("¿Deseas que alguien se ponga en contacto contigo para más detalles? (sí/no)");
+}
+
+chatSend.onclick=handleUserMessage;
 chatInput.addEventListener("keypress",(e)=>{if(e.key==="Enter"){handleUserMessage();}});
 
 function handleUserMessage(){
@@ -630,26 +635,19 @@ function handleUserMessage(){
   chatInput.value="";
   
   if(firstInteraction){
-    addMessage("¡Hola! Soy Dolly 🤖. ¿Deseas información sobre algunos de nuestros servicios?\n1 - Ciberseguridad\n2 - Gestión de Servicios IT\n3 - Outsourcing de personal IT\n4 - Formación y Capacitación\nEscribe el número o el nombre del servicio.");
+    addMessage("¡Hola! Soy Dolly 🤖. ¿Deseas información sobre nuestros servicios?");
+    showMenuButtons();
     firstInteraction=false;
     return;
   }
 
-  if(menu[msg]){
-    addMessage(responses[menu[msg]]);
-    addMessage("¿Deseas que alguien se ponga en contacto contigo para más detalles? (sí/no)");
-    return;
-  }
-
   let found=false;
-  for(const key in responses){
-    if(msg.toLowerCase().includes(key.toLowerCase())){
-      addMessage(responses[key]);
-      addMessage("¿Deseas que alguien se ponga en contacto contigo para más detalles? (sí/no)");
+  menuOptions.forEach(opt=>{
+    if(msg.toLowerCase().includes(opt.label.toLowerCase())){
+      respondService(opt.label);
       found=true;
-      break;
     }
-  }
+  });
 
   if(!found){
     if(msg.toLowerCase().includes("sí") || msg.toLowerCase().includes("si")){
@@ -662,7 +660,6 @@ function handleUserMessage(){
     }
   }
 }
-
 </script>
 
 </body>
