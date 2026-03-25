@@ -139,6 +139,63 @@ nav a:hover {
     line-height: 1.5;
 }
 
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+z-index:1000;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background-color:rgba(0,0,0,0.8);
+}
+
+.modal-content{
+background-color:#0c0c2b;
+color:white;
+margin:10% auto;
+padding:20px;
+border-radius:8px;
+width:90%;
+max-width:500px;
+position:relative;
+}
+
+.modal-content input,
+.modal-content textarea{
+width:100%;
+padding:8px;
+margin-top:4px;
+border-radius:4px;
+border:1px solid #ccc;
+background-color:#1a1a3d;
+color:white;
+}
+
+.modal-content button{
+margin-top:12px;
+padding:10px 20px;
+background-color:#9c7cff;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.close{
+position:absolute;
+top:10px;
+right:16px;
+font-size:24px;
+cursor:pointer;
+}
+
+#formStatus{
+margin-top:10px;
+color:#7fff7f;
+}
+
 /* FOOTER */
 footer {
     background: #0c0c2b;
@@ -176,31 +233,84 @@ footer {
         <div class="curso">
             <img src="cursos/concientizacion_ciberseguridad.png" alt="Curso de Concientización en Ciberseguridad">
             <h3>Concientización en Ciberseguridad</h3>
-            <p>Duración: 2h45min. Aprendizaje práctico para que los usuarios finales identifiquen riesgos y buenas prácticas.</p>
+            <p>Duración: 2h45min. Aprende a identificar amenazas y aplicar buenas prácticas.</p>
         </div>
 
         <div class="curso">
             <img src="cursos/gestion_incidentes.png" alt="Curso de Gestión de Incidentes IT">
             <h3>Gestión de Incidentes IT</h3>
-            <p>Duración: 4 a 6 horas. Capacitación en ITIL/ITSM para mejorar la resolución y seguimiento de incidentes.</p>
+            <p>Duración: 4 a 6 horas. Basado en ITIL/ITSM para mejorar la operación.</p>
         </div>
 
         <div class="curso">
-            <img src="cursos/iso27001.png" alt="Curso ISO 27001 - Documentación de la Norma">
+            <img src="cursos/iso27001.png" alt="Curso ISO 27001">
             <h3>ISO 27001 - Documentación</h3>
-            <p>Duración: 3 a 4 horas. Aprende a documentar y mantener la norma ISO 27001 en tu organización.</p>
+            <p>Duración: 3 a 4 horas. Aprende a documentar e implementar la norma.</p>
         </div>
 
     </div>
 </section>
+
+<!-- MODAL CONTACTO -->
+<div id="ctaModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Formulario de Contacto</h2>
+    <form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
+      <label>Nombre</label>
+      <input type="text" name="name" required>
+      <label>Correo</label>
+      <input type="email" name="email" required>
+      <label>Teléfono</label>
+      <input type="tel" name="phone" required>
+      <label>Mensaje</label>
+      <textarea name="message" rows="4" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <p id="formStatus"></p>
+  </div>
+</div>
 
 <footer>
 © 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
 </footer>
 
 <script>
+const modal = document.getElementById("ctaModal");
 const contactMenu = document.getElementById("contactMenu");
-contactMenu.onclick = () => window.location.href = "https://formspree.io/f/xwvroyqb";
+const span = document.getElementsByClassName("close")[0];
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
+
+contactMenu.onclick = () => modal.style.display = "block";
+
+span.onclick = () => modal.style.display = "none";
+
+window.onclick = (e) => {
+  if (e.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  fetch(form.action,{
+    method:"POST",
+    body:new FormData(form),
+    headers:{'Accept':'application/json'}
+  })
+  .then(response=>{
+    if(response.ok){
+      status.textContent="¡Gracias! Tu mensaje ha sido enviado.";
+      form.reset();
+    }else{
+      status.textContent="Ups! Hubo un error, intenta nuevamente.";
+    }
+  })
+  .catch(()=>{
+    status.textContent="Ups! Hubo un error, intenta nuevamente.";
+  });
+});
 </script>
 
 </body>
