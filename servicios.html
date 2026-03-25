@@ -1,154 +1,222 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextLayer LATAM | Servicios IT y Ciberseguridad</title>
+
+<title>NextLayer LATAM | Servicios de Ciberseguridad y Consultoría IT</title>
+<meta name="description" content="NextLayer LATAM ofrece servicios de ciberseguridad, gestión de servicios IT, outsourcing y capacitación tecnológica para empresas.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nextlayerlatam.com/servicios.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="NextLayer LATAM | Servicios IT y Ciberseguridad">
+<meta property="og:description" content="Servicios profesionales de ciberseguridad, gestión de servicios IT y capacitación tecnológica para empresas.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nextlayerlatam.com/servicios.html">
+<meta property="og:image" content="https://nextlayerlatam.com/images/logo-nl-morado.jpg">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NextLayer LATAM">
+<meta name="twitter:description" content="Servicios de ciberseguridad, IT y capacitación para empresas.">
+<meta name="twitter:image" content="https://nextlayerlatam.com/images/logo-nl-morado.jpg">
+
+<!-- Seguridad -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://formspree.io; connect-src 'self' https://formspree.io; style-src 'self' 'unsafe-inline'; form-action https://formspree.io;">
+<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+
+<link rel="icon" href="images/logo-nl-morado.jpg">
+
 <style>
 body {
-    margin:0;
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #0c0c2b;
     color: white;
 }
 
 /* HEADER */
-header{
-    background:#0c0c2b;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    position:sticky;
-    top:0;
-    z-index:1000;
+header {
+    background: #0c0c2b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
-header img{
-    height:75px;
+
+header img {
+    height: 75px;
 }
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:25px;
-    font-size:16px;
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 16px;
+    cursor: pointer;
 }
-nav a:hover{
-    color:#9c7cff;
+
+nav a:hover {
+    color: #9c7cff;
 }
 
 /* HERO */
 .hero {
-    background-image: url('servicios/servicios-hero.png');
+    background-image: url("servicios/servicios-hero.png");
     background-size: cover;
     background-position: center;
-    height: 500px;
+    height: 480px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
+    padding-left: 60px;
 }
+
+.hero-text {
+    max-width: 500px;
+}
+
 .hero h1 {
     font-size: 42px;
-    color: white;
-    text-shadow: 1px 1px 10px rgba(0,0,0,0.7);
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.5;
 }
 
 /* SERVICIOS */
+.servicios {
+    background: #11113a;
+    padding: 70px 20px;
+    text-align: center;
+}
+
+.servicios h2 {
+    font-size: 32px;
+    margin-bottom: 50px;
+}
+
 .servicios-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
-    padding: 60px 20px;
+    gap: 40px;
 }
+
 .servicio {
-    background: #11113a;
-    border-radius: 8px;
     max-width: 280px;
+    background: #0d0d3f;
     padding: 20px;
-    text-align: center;
-    transition: transform 0.2s;
+    border-radius: 8px;
 }
-.servicio:hover {
-    transform: translateY(-5px);
-}
+
 .servicio img {
-    width: 100%;       /* ocupa todo el ancho del contenedor */
-    max-width: 220px;  /* tamaño máximo */
-    height: auto;      /* mantiene la proporción */
+    width: 100%;
+    max-width: 220px;
+    height: auto;
     margin-bottom: 15px;
+    border-radius: 6px;
 }
+
 .servicio h3 {
-    font-size: 20px;
     margin-bottom: 10px;
+    font-size: 20px;
 }
+
 .servicio p {
     font-size: 14px;
-    line-height: 1.5;
     color: #d6d6ff;
+    line-height: 1.5;
 }
+
 .servicio a {
+    color: #9c7cff;
     text-decoration: none;
-    color: inherit;
+}
+
+.servicio a:hover {
+    text-decoration: underline;
 }
 
 /* FOOTER */
 footer {
-    background:#0c0c2b;
-    text-align:center;
-    padding:25px;
-    font-size:14px;
+    background: #0c0c2b;
+    text-align: center;
+    padding: 25px;
+    font-size: 14px;
 }
 </style>
+
 </head>
+
 <body>
 
 <header>
-<img src="images/logo-nl-blanco.png" alt="NextLayer LATAM logo">
-<nav>
-<a href="index.html">Inicio</a>
-<a href="servicios.html">Servicios</a>
-<a href="cursos.html">Cursos</a>
-<a id="contactMenu">Contacto</a>
-</nav>
+    <img src="images/logo-nl-blanco.png" alt="NextLayer LATAM logo">
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="cursos.html">Cursos</a>
+        <a id="contactMenu">Contacto</a>
+    </nav>
 </header>
 
 <section class="hero">
-<h1>Servicios IT y Ciberseguridad Profesionales</h1>
+    <div class="hero-text">
+        <h1>Servicios Profesionales IT</h1>
+        <p>Ofrecemos ciberseguridad, gestión de servicios, outsourcing y capacitación tecnológica para empresas.</p>
+    </div>
 </section>
 
-<section class="servicios-container">
-  <div class="servicio">
-    <img src="images/services/ciberseguridad.png" alt="Ciberseguridad">
-    <h3>Ciberseguridad</h3>
-    <p>Evaluación de vulnerabilidades, gestión de riesgos y programas de concientización en seguridad para proteger la información empresarial.</p>
-  </div>
+<section class="servicios">
+    <h2>Nuestros Servicios</h2>
+    <div class="servicios-container">
 
-  <div class="servicio">
-    <img src="images/services/gestion-it.png" alt="Gestión IT">
-    <h3>Gestión de Servicios IT</h3>
-    <p>Implementación de buenas prácticas ITSM, gestión de incidentes, inventario tecnológico y mejora continua de procesos IT.</p>
-  </div>
+        <div class="servicio">
+            <img src="images/services/ciberseguridad.png" alt="Ciberseguridad">
+            <h3>Ciberseguridad</h3>
+            <p>Protegemos la información crítica mediante evaluaciones de vulnerabilidad, gestión de riesgos y controles avanzados.</p>
+        </div>
 
-  <div class="servicio">
-    <img src="images/services/outsourcing.png" alt="Outsourcing IT">
-    <h3>Outsourcing IT</h3>
-    <p>Proveemos personal especializado para IT según las necesidades de tu empresa.</p>
-  </div>
+        <div class="servicio">
+            <img src="images/services/gestion-it.png" alt="Gestión de Servicios IT">
+            <h3>Gestión de Servicios IT</h3>
+            <p>Implementamos buenas prácticas ITSM, gestión de incidentes y mejora continua para optimizar tu infraestructura.</p>
+        </div>
 
-  <div class="servicio">
-    <a href="cursos.html" class="servicio">
-      <img src="images/services/formacion.png" alt="Formación IT">
-      <h3>Formación y Capacitación</h3>
-      <p>Programas de capacitación en ciberseguridad, buenas prácticas tecnológicas y formación para usuarios y equipos IT.</p>
-    </a>
-  </div>
+        <div class="servicio">
+            <img src="images/services/outsourcing.png" alt="Outsourcing de Personal IT">
+            <h3>Outsourcing</h3>
+            <p>Proveemos personal IT especializado según tus necesidades y proyectos tecnológicos.</p>
+        </div>
+
+        <div class="servicio">
+            <img src="images/services/formacion.png" alt="Formación y Capacitación">
+            <h3>Formación / Capacitación</h3>
+            <p>Programas de capacitación en ciberseguridad y buenas prácticas IT. <a href="cursos.html">Ver cursos disponibles</a>.</p>
+        </div>
+
+    </div>
 </section>
 
 <footer>
 © 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
 </footer>
+
+<script>
+const contactMenu = document.getElementById("contactMenu");
+contactMenu.onclick = () => window.location.href = "https://formspree.io/f/xwvroyqb";
+</script>
 
 </body>
 </html>
