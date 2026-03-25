@@ -6,13 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NextLayer LATAM | Servicios de Ciberseguridad y Consultoría IT</title>
-<meta name="description" content="NextLayer LATAM ofrece servicios de ciberseguridad, gestión de servicios IT, outsourcing y capacitación tecnológica para empresas.">
+<meta name="description" content="Servicios profesionales de ciberseguridad, gestión de servicios IT, outsourcing y capacitación tecnológica para empresas.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://nextlayerlatam.com/servicios.html">
 
 <!-- Open Graph -->
 <meta property="og:title" content="NextLayer LATAM | Servicios IT y Ciberseguridad">
-<meta property="og:description" content="Servicios profesionales de ciberseguridad, gestión de servicios IT y capacitación tecnológica para empresas.">
+<meta property="og:description" content="Servicios de ciberseguridad, gestión IT, outsourcing y capacitación para empresas.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nextlayerlatam.com/servicios.html">
 <meta property="og:image" content="https://nextlayerlatam.com/images/logo-nl-morado.jpg">
@@ -20,7 +20,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NextLayer LATAM">
-<meta name="twitter:description" content="Servicios de ciberseguridad, IT y capacitación para empresas.">
+<meta name="twitter:description" content="Servicios de ciberseguridad y consultoría IT para empresas.">
 <meta name="twitter:image" content="https://nextlayerlatam.com/images/logo-nl-morado.jpg">
 
 <!-- Seguridad -->
@@ -62,7 +62,6 @@ nav a {
     text-decoration: none;
     margin-left: 25px;
     font-size: 16px;
-    cursor: pointer;
 }
 
 nav a:hover {
@@ -91,7 +90,6 @@ nav a:hover {
 
 .hero p {
     font-size: 18px;
-    line-height: 1.5;
 }
 
 /* SERVICIOS */
@@ -118,6 +116,11 @@ nav a:hover {
     background: #0d0d3f;
     padding: 20px;
     border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.servicio:hover {
+    transform: translateY(-5px);
 }
 
 .servicio img {
@@ -148,6 +151,63 @@ nav a:hover {
     text-decoration: underline;
 }
 
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+z-index:1000;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background-color:rgba(0,0,0,0.8);
+}
+
+.modal-content{
+background-color:#0c0c2b;
+color:white;
+margin:10% auto;
+padding:20px;
+border-radius:8px;
+width:90%;
+max-width:500px;
+position:relative;
+}
+
+.modal-content input,
+.modal-content textarea{
+width:100%;
+padding:8px;
+margin-top:4px;
+border-radius:4px;
+border:1px solid #ccc;
+background-color:#1a1a3d;
+color:white;
+}
+
+.modal-content button{
+margin-top:12px;
+padding:10px 20px;
+background-color:#9c7cff;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.close{
+position:absolute;
+top:10px;
+right:16px;
+font-size:24px;
+cursor:pointer;
+}
+
+#formStatus{
+margin-top:10px;
+color:#7fff7f;
+}
+
 /* FOOTER */
 footer {
     background: #0c0c2b;
@@ -174,7 +234,7 @@ footer {
 <section class="hero">
     <div class="hero-text">
         <h1>Servicios Profesionales IT</h1>
-        <p>Ofrecemos ciberseguridad, gestión de servicios, outsourcing y capacitación tecnológica para empresas.</p>
+        <p>Soluciones en ciberseguridad, gestión IT y capacitación para empresas.</p>
     </div>
 </section>
 
@@ -185,37 +245,90 @@ footer {
         <div class="servicio">
             <img src="images/services/ciberseguridad.png" alt="Ciberseguridad">
             <h3>Ciberseguridad</h3>
-            <p>Protegemos la información crítica mediante evaluaciones de vulnerabilidad, gestión de riesgos y controles avanzados.</p>
+            <p>Evaluación de vulnerabilidades, gestión de riesgos y protección de la información crítica.</p>
         </div>
 
         <div class="servicio">
-            <img src="images/services/gestion-it.png" alt="Gestión de Servicios IT">
+            <img src="images/services/gestion-it.png" alt="Gestión IT">
             <h3>Gestión de Servicios IT</h3>
-            <p>Implementamos buenas prácticas ITSM, gestión de incidentes y mejora continua para optimizar tu infraestructura.</p>
+            <p>Implementación de ITSM, gestión de incidentes y mejora continua.</p>
         </div>
 
         <div class="servicio">
-            <img src="images/services/outsourcing.png" alt="Outsourcing de Personal IT">
+            <img src="images/services/outsourcing.png" alt="Outsourcing IT">
             <h3>Outsourcing</h3>
-            <p>Proveemos personal IT especializado según tus necesidades y proyectos tecnológicos.</p>
+            <p>Personal especializado para soporte, administración y proyectos tecnológicos.</p>
         </div>
 
         <div class="servicio">
-            <img src="images/services/formacion.png" alt="Formación y Capacitación">
+            <img src="images/services/formacion.png" alt="Capacitación IT">
             <h3>Formación / Capacitación</h3>
-            <p>Programas de capacitación en ciberseguridad y buenas prácticas IT. <a href="cursos.html">Ver cursos disponibles</a>.</p>
+            <p>Entrenamiento en ciberseguridad y buenas prácticas. <a href="cursos.html">Ver cursos</a></p>
         </div>
 
     </div>
 </section>
+
+<!-- MODAL -->
+<div id="ctaModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Formulario de Contacto</h2>
+    <form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
+      <label>Nombre</label>
+      <input type="text" name="name" required>
+      <label>Correo</label>
+      <input type="email" name="email" required>
+      <label>Teléfono</label>
+      <input type="tel" name="phone" required>
+      <label>Mensaje</label>
+      <textarea name="message" rows="4" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <p id="formStatus"></p>
+  </div>
+</div>
 
 <footer>
 © 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
 </footer>
 
 <script>
+const modal = document.getElementById("ctaModal");
 const contactMenu = document.getElementById("contactMenu");
-contactMenu.onclick = () => window.location.href = "https://formspree.io/f/xwvroyqb";
+const span = document.getElementsByClassName("close")[0];
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
+
+contactMenu.onclick = () => modal.style.display = "block";
+
+span.onclick = () => modal.style.display = "none";
+
+window.onclick = (e) => {
+  if (e.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  fetch(form.action,{
+    method:"POST",
+    body:new FormData(form),
+    headers:{'Accept':'application/json'}
+  })
+  .then(response=>{
+    if(response.ok){
+      status.textContent="¡Gracias! Tu mensaje ha sido enviado.";
+      form.reset();
+    }else{
+      status.textContent="Ups! Hubo un error, intenta nuevamente.";
+    }
+  })
+  .catch(()=>{
+    status.textContent="Ups! Hubo un error, intenta nuevamente.";
+  });
+});
 </script>
 
 </body>
