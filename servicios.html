@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextLayer LATAM | Servicios IT y Ciberseguridad</title>
+<style>
+body {
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0c0c2b;
+    color: white;
+}
+
+/* HEADER */
+header{
+    background:#0c0c2b;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+header img{
+    height:75px;
+}
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:16px;
+}
+nav a:hover{
+    color:#9c7cff;
+}
+
+/* HERO */
+.hero {
+    background-image: url('servicios/servicios-hero.png');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+.hero h1 {
+    font-size: 42px;
+    color: white;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.7);
+}
+
+/* SERVICIOS */
+.servicios-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
+}
+.servicio {
+    background: #11113a;
+    border-radius: 8px;
+    max-width: 280px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+.servicio:hover {
+    transform: translateY(-5px);
+}
+.servicio img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+.servicio h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.servicio p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #d6d6ff;
+}
+.servicio a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* FOOTER */
+footer {
+    background:#0c0c2b;
+    text-align:center;
+    padding:25px;
+    font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<img src="images/logo-nl-blanco.png" alt="NextLayer LATAM logo">
+<nav>
+<a href="index.html">Inicio</a>
+<a href="servicios.html">Servicios</a>
+<a href="cursos.html">Cursos</a>
+<a id="contactMenu">Contacto</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Servicios IT y Ciberseguridad Profesionales</h1>
+</section>
+
+<section class="servicios-container">
+  <div class="servicio">
+    <img src="images/services/ciberseguridad.png" alt="Ciberseguridad">
+    <h3>Ciberseguridad</h3>
+    <p>Evaluación de vulnerabilidades, gestión de riesgos y programas de concientización en seguridad para proteger la información empresarial.</p>
+  </div>
+
+  <div class="servicio">
+    <img src="images/services/gestion-it.png" alt="Gestión IT">
+    <h3>Gestión de Servicios IT</h3>
+    <p>Implementación de buenas prácticas ITSM, gestión de incidentes, inventario tecnológico y mejora continua de procesos IT.</p>
+  </div>
+
+  <div class="servicio">
+    <img src="images/services/outsourcing.png" alt="Outsourcing IT">
+    <h3>Outsourcing IT</h3>
+    <p>Proveemos personal especializado para IT según las necesidades de tu empresa.</p>
+  </div>
+
+  <div class="servicio">
+    <a href="cursos.html" class="servicio">
+      <img src="images/services/formacion.png" alt="Formación IT">
+      <h3>Formación y Capacitación</h3>
+      <p>Programas de capacitación en ciberseguridad, buenas prácticas tecnológicas y formación para usuarios y equipos IT.</p>
+    </a>
+  </div>
+</section>
+
+<footer>
+© 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
+</footer>
+
+</body>
+</html>
