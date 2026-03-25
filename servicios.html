@@ -74,8 +74,9 @@ nav a:hover{
     transform: translateY(-5px);
 }
 .servicio img {
-    width: 100px;
-    height: 100px;
+    width: 100%;       /* ocupa todo el ancho del contenedor */
+    max-width: 220px;  /* tamaño máximo */
+    height: auto;      /* mantiene la proporción */
     margin-bottom: 15px;
 }
 .servicio h3 {
