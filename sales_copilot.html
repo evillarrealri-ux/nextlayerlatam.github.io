@@ -9,128 +9,223 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0c0c2b;
+      background: #0b0f1a;
       color: white;
     }
 
-    header {
-      padding: 20px;
-      text-align: center;
-      background: #111144;
-    }
-
+    /* CONTENIDO PRINCIPAL (demo simple) */
     .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
+      padding: 40px;
+      text-align: center;
     }
 
-    .chat-box {
-      background: #1a1a3d;
-      padding: 20px;
-      border-radius: 10px;
-      height: 400px;
+    h1 {
+      color: #a855f7;
+    }
+
+    /* WIDGET */
+    #chat-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    #chat-bubble {
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    #chat-bubble img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #chat-panel {
+      width: 320px;
+      height: 450px;
+      background: #111827;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin-bottom: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: #1f2937;
+    }
+
+    .chat-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .avatar-small {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    .chat-controls button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    #chat-messages {
+      flex: 1;
+      padding: 10px;
       overflow-y: auto;
-      margin-bottom: 20px;
+      font-size: 14px;
     }
 
     .message {
-      margin: 10px 0;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 8px;
+      max-width: 80%;
     }
 
     .user {
-      color: #9c7cff;
+      background: #2563eb;
+      align-self: flex-end;
+      margin-left: auto;
     }
 
     .bot {
-      color: #4dd0e1;
+      background: #374151;
+      align-self: flex-start;
     }
 
-    input, button {
-      padding: 12px;
-      border-radius: 6px;
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #333;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
       border: none;
-      font-size: 16px;
+      outline: none;
+      background: #0f172a;
+      color: white;
     }
 
-    input {
-      width: 70%;
-    }
-
-    button {
-      background: #9c7cff;
+    .chat-input button {
+      padding: 10px;
+      border: none;
+      background: #a855f7;
       color: white;
       cursor: pointer;
     }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>NextLayer Sales Copilot</h1>
-    <p>Demo interactiva de asistencia inteligente para ventas</p>
-  </header>
-
+  <!-- CONTENIDO DEMO -->
   <div class="container">
-
-    <div id="chat" class="chat-box">
-      <div class="message bot">
-        Hola 👋 Soy tu Sales Copilot. Describe tu caso de ventas y te ayudaré a optimizarlo.
-      </div>
-    </div>
-
-    <input type="text" id="userInput" placeholder="Ej: Vendo servicios IT a empresas..." />
-    <button onclick="sendMessage()">Enviar</button>
-
+    <h1>NextLayer Sales Copilot</h1>
+    <p>Demo interactiva de asistente IA para ventas</p>
   </div>
 
+  <!-- WIDGET CHAT -->
+  <div id="chat-widget">
+
+    <!-- BOTÓN AVATAR -->
+    <div id="chat-bubble" onclick="toggleChat()">
+      <img src="images/avatar/copilot.png" alt="Copilot Avatar">
+    </div>
+
+    <!-- PANEL CHAT -->
+    <div id="chat-panel" class="hidden">
+
+      <div class="chat-header">
+        <div class="chat-title">
+          <img src="images/avatar/copilot.png" class="avatar-small">
+          <span>NextLayer Copilot</span>
+        </div>
+        <div class="chat-controls">
+          <button onclick="minimizeChat()">—</button>
+          <button onclick="closeChat()">✕</button>
+        </div>
+      </div>
+
+      <div id="chat-messages"></div>
+
+      <div class="chat-input">
+        <input id="userInput" type="text" placeholder="Escribe tu mensaje..." />
+        <button onclick="sendMessage()">Enviar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
   <script>
+    const chatPanel = document.getElementById("chat-panel");
+    const chatMessages = document.getElementById("chat-messages");
+    const userInput = document.getElementById("userInput");
+
+    function toggleChat() {
+      chatPanel.classList.toggle("hidden");
+    }
+
+    function minimizeChat() {
+      chatPanel.classList.add("hidden");
+    }
+
+    function closeChat() {
+      chatPanel.classList.add("hidden");
+    }
+
+    function addMessage(text, type) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", type);
+      msg.innerText = text;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
     function sendMessage() {
-      const input = document.getElementById("userInput");
-      const chat = document.getElementById("chat");
+      const text = userInput.value.trim();
+      if (text === "") return;
 
-      const userText = input.value.trim();
-      if (!userText) return;
+      addMessage(text, "user");
+      userInput.value = "";
 
-      // Mostrar mensaje del usuario
-      const userMsg = document.createElement("div");
-      userMsg.className = "message user";
-      userMsg.textContent = "Tú: " + userText;
-      chat.appendChild(userMsg);
-
-      // Respuesta simulada del Copilot
-      const botMsg = document.createElement("div");
-      botMsg.className = "message bot";
-
-      botMsg.innerHTML = generateResponse(userText);
-
-      chat.appendChild(botMsg);
-
-      input.value = "";
-      chat.scrollTop = chat.scrollHeight;
+      // Simulación de respuesta IA
+      setTimeout(() => {
+        addMessage("Estoy analizando tu solicitud como Copilot de ventas...", "bot");
+      }, 800);
     }
 
-    function generateResponse(text) {
-      // Simulación simple (luego podemos conectar IA real)
-      return `
-        <strong>Sales Copilot:</strong><br><br>
-        Basado en tu caso, te sugiero:<br><br>
-        • Enfocar el valor en ahorro de tiempo y eficiencia<br>
-        • Identificar el dolor principal del cliente<br>
-        • Proponer una demo personalizada<br><br>
-
-        💡 Ejemplo de respuesta al cliente:<br>
-        "Podemos ayudarte a reducir tiempos de respuesta y aumentar conversiones mediante asistencia en tiempo real."<br><br>
-
-        ¿Quieres que refine un pitch más específico?
-      `;
-    }
+    // ENTER para enviar mensaje
+    userInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
   </script>
 
 </body>
