@@ -181,7 +181,12 @@ document.addEventListener("DOMContentLoaded", function() {
   const chatPanel = document.getElementById("chat-panel");
   const chatMessages = document.getElementById("chat-messages");
   const userInput = document.getElementById("userInput");
-
+  const chatBubble = document.getElementById("chat-bubble");
+  const minimizeBtn = document.getElementById("minimizeBtn");
+  const closeBtn = document.getElementById("closeBtn");
+  chatBubble.addEventListener("click", toggleChat);
+  minimizeBtn.addEventListener("click", minimizeChat);
+  closeBtn.addEventListener("click", closeChat);
   function toggleChat() {
     chatPanel.classList.toggle("hidden");
   }
@@ -222,9 +227,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Exponer funciones globales
-  window.toggleChat = toggleChat;
-  window.minimizeChat = minimizeChat;
-  window.closeChat = closeChat;
+  
   window.sendMessage = sendMessage;
 
 });
