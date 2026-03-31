@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextLayer Sales Copilot Demo</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0c0c2b;
+      color: white;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background: #111144;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .chat-box {
+      background: #1a1a3d;
+      padding: 20px;
+      border-radius: 10px;
+      height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      margin: 10px 0;
+    }
+
+    .user {
+      color: #9c7cff;
+    }
+
+    .bot {
+      color: #4dd0e1;
+    }
+
+    input, button {
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+
+    input {
+      width: 70%;
+    }
+
+    button {
+      background: #9c7cff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>NextLayer Sales Copilot</h1>
+    <p>Demo interactiva de asistencia inteligente para ventas</p>
+  </header>
+
+  <div class="container">
+
+    <div id="chat" class="chat-box">
+      <div class="message bot">
+        Hola 👋 Soy tu Sales Copilot. Describe tu caso de ventas y te ayudaré a optimizarlo.
+      </div>
+    </div>
+
+    <input type="text" id="userInput" placeholder="Ej: Vendo servicios IT a empresas..." />
+    <button onclick="sendMessage()">Enviar</button>
+
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const chat = document.getElementById("chat");
+
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      // Mostrar mensaje del usuario
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user";
+      userMsg.textContent = "Tú: " + userText;
+      chat.appendChild(userMsg);
+
+      // Respuesta simulada del Copilot
+      const botMsg = document.createElement("div");
+      botMsg.className = "message bot";
+
+      botMsg.innerHTML = generateResponse(userText);
+
+      chat.appendChild(botMsg);
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function generateResponse(text) {
+      // Simulación simple (luego podemos conectar IA real)
+      return `
+        <strong>Sales Copilot:</strong><br><br>
+        Basado en tu caso, te sugiero:<br><br>
+        • Enfocar el valor en ahorro de tiempo y eficiencia<br>
+        • Identificar el dolor principal del cliente<br>
+        • Proponer una demo personalizada<br><br>
+
+        💡 Ejemplo de respuesta al cliente:<br>
+        "Podemos ayudarte a reducir tiempos de respuesta y aumentar conversiones mediante asistencia en tiempo real."<br><br>
+
+        ¿Quieres que refine un pitch más específico?
+      `;
+    }
+  </script>
+
+</body>
+</html>
