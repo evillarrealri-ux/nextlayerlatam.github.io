@@ -182,43 +182,60 @@
   </div>
 
   <!-- SCRIPT -->
-  <script>
-    const chatPanel = document.getElementById("chat-panel");
-    const chatMessages = document.getElementById("chat-messages");
-    const userInput = document.getElementById("userInput");
+ <script>
+document.addEventListener("DOMContentLoaded", function() {
 
-    function toggleChat() {
-      chatPanel.classList.toggle("hidden");
+  const chatPanel = document.getElementById("chat-panel");
+  const chatMessages = document.getElementById("chat-messages");
+  const userInput = document.getElementById("userInput");
+
+  function toggleChat() {
+    chatPanel.classList.toggle("hidden");
+  }
+
+  function minimizeChat() {
+    chatPanel.classList.add("hidden");
+  }
+
+  function closeChat() {
+    chatPanel.classList.add("hidden");
+  }
+
+  function addMessage(text, type) {
+    const msg = document.createElement("div");
+    msg.classList.add("message", type);
+    msg.innerText = text;
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function sendMessage() {
+    const text = userInput.value.trim();
+    if (text === "") return;
+
+    addMessage(text, "user");
+    userInput.value = "";
+
+    setTimeout(() => {
+      addMessage("Estoy analizando tu solicitud como Copilot de ventas...", "bot");
+    }, 800);
+  }
+
+  // ENTER
+  userInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      sendMessage();
     }
+  });
 
-    function minimizeChat() {
-      chatPanel.classList.add("hidden");
-    }
+  // 🔥 HACER FUNCIONES GLOBALES PARA onclick
+  window.toggleChat = toggleChat;
+  window.minimizeChat = minimizeChat;
+  window.closeChat = closeChat;
+  window.sendMessage = sendMessage;
 
-    function closeChat() {
-      chatPanel.classList.add("hidden");
-    }
-
-    function addMessage(text, type) {
-      const msg = document.createElement("div");
-      msg.classList.add("message", type);
-      msg.innerText = text;
-      chatMessages.appendChild(msg);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function sendMessage() {
-      const text = userInput.value.trim();
-      if (text === "") return;
-
-      addMessage(text, "user");
-      userInput.value = "";
-
-      // Simulación de respuesta IA
-      setTimeout(() => {
-        addMessage("Estoy analizando tu solicitud como Copilot de ventas...", "bot");
-      }, 800);
-    }
+});
+</script>
 
     // ENTER para enviar mensaje
     userInput.addEventListener("keypress", function(e) {
