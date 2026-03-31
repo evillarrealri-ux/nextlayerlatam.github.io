@@ -13,7 +13,6 @@
       color: white;
     }
 
-    /* CONTENIDO PRINCIPAL (demo simple) */
     .container {
       padding: 40px;
       text-align: center;
@@ -23,7 +22,6 @@
       color: #a855f7;
     }
 
-    /* WIDGET */
     #chat-widget {
       position: fixed;
       bottom: 20px;
@@ -108,13 +106,11 @@
 
     .user {
       background: #2563eb;
-      align-self: flex-end;
       margin-left: auto;
     }
 
     .bot {
       background: #374151;
-      align-self: flex-start;
     }
 
     .chat-input {
@@ -143,7 +139,6 @@
 
 <body>
 
-  <!-- CONTENIDO DEMO -->
   <div class="container">
     <h1>NextLayer Sales Copilot</h1>
     <p>Demo interactiva de asistente IA para ventas</p>
@@ -152,12 +147,10 @@
   <!-- WIDGET CHAT -->
   <div id="chat-widget">
 
-    <!-- BOTÓN AVATAR -->
     <div id="chat-bubble" onclick="toggleChat()">
       <img src="images/avatar/copilot.png" alt="Copilot Avatar">
     </div>
 
-    <!-- PANEL CHAT -->
     <div id="chat-panel" class="hidden">
 
       <div class="chat-header">
@@ -181,8 +174,8 @@
     </div>
   </div>
 
-  <!-- SCRIPT -->
- <script>
+  <!-- SCRIPT CORREGIDO -->
+  <script>
 document.addEventListener("DOMContentLoaded", function() {
 
   const chatPanel = document.getElementById("chat-panel");
@@ -221,28 +214,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 800);
   }
 
-  // ENTER
+  // ENTER para enviar mensaje
   userInput.addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
       sendMessage();
     }
   });
 
-  // 🔥 HACER FUNCIONES GLOBALES PARA onclick
+  // Exponer funciones globales
   window.toggleChat = toggleChat;
   window.minimizeChat = minimizeChat;
   window.closeChat = closeChat;
   window.sendMessage = sendMessage;
 
 });
-</script>
-
-    // ENTER para enviar mensaje
-    userInput.addEventListener("keypress", function(e) {
-      if (e.key === "Enter") {
-        sendMessage();
-      }
-    });
   </script>
 
 </body>
