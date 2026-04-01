@@ -238,7 +238,7 @@
   </nav>
 
   <!-- HERO -->
-  <section id="hero" class="hero">
+  <section id="hero" id="hero" class="hero">
     <img src="images/hero_1.webp" class="active">
     <img src="images/hero_2.webp">
     <img src="images/hero_3.webp">
@@ -342,9 +342,9 @@
         <p>Panamá, Panamá</p>
         <p>info@nextlayerlatam.com</p>
         <div class="footer-social">
-          <a href="#" target="_blank">LinkedIn</a>
-          <a href="#" target="_blank">Facebook</a>
-          <a href="#" target="_blank">Instagram</a>
+          <a href="#hero" target="_blank">LinkedIn</a>
+          <a href="#hero" target="_blank">Facebook</a>
+          <a href="#hero" target="_blank">Instagram</a>
         </div>
       </div>
     </div>
@@ -369,19 +369,30 @@
   <script>
     // Smooth navigation fix
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function(e) {
-        const targetId = this.getAttribute("href");
+  anchor.addEventListener("click", function(e) {
+    const targetId = this.getAttribute("href");
 
-        if (!targetId || targetId === "#") return;
+    // Caso especial: "Inicio" (#hero o #)
+    if (targetId === "#" || targetId === "#hero") {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+      return;
+    }
 
-        const target = document.querySelector(targetId);
+    const target = document.querySelector(targetId);
 
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  });
+});
         }
       });
     });
