@@ -36,6 +36,7 @@
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
 
 <link rel="icon" href="images/logo-nl-morado.jpg">
+<link rel="preload" as="image" href="images/fondo-nextlayer.png">
 
 <style>
 
@@ -68,7 +69,7 @@ margin-left:25px;
 nav a:hover{color:#9c7cff;}
 
 /* HERO STACK */
-.hero-wrapper{height:200vh;}
+.hero-wrapper{height:320vh;}
 
 .sticky-hero{
 position:sticky;
@@ -128,14 +129,77 @@ margin-top:20px;
 position:relative;
 z-index:2;
 padding:80px 20px;
-margin-top:-60px;
-border-radius:20px 20px 0 0;
+margin-top:-120px;
+border-radius:24px 24px 0 0;
+box-shadow:0 -15px 40px rgba(0,0,0,0.25);
 text-align:center;
 }
 
-.problemas{background:#11113a;}
-.elegirnos{background:#0d0d3f;}
-.servicios{background:#ffffff;color:#333;}
+.problemas{background:#11113a;z-index:3;}
+.elegirnos{background:#0d0d3f;z-index:4;}
+.servicios{background:#ffffff;color:#333;z-index:5;}
+
+.problemas-container,
+.elegirnos-container,
+.servicios-container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:40px;
+margin-top:30px;
+}
+
+.problema,.elegir,.servicio{
+max-width:260px;
+}
+
+.problema img,.elegir img,.servicio img{
+width:100%;
+height:auto;
+border-radius:8px;
+margin-bottom:15px;
+}
+
+.modal{
+display:none;
+position:fixed;
+z-index:1000;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background-color:rgba(0,0,0,0.8);
+}
+
+.modal-content{
+background-color:#0c0c2b;
+color:white;
+margin:10% auto;
+padding:20px;
+border-radius:8px;
+width:90%;
+max-width:500px;
+position:relative;
+}
+
+.modal-content input,
+.modal-content textarea{
+width:100%;
+padding:8px;
+margin-top:4px;
+border-radius:4px;
+border:1px solid #ccc;
+background-color:#1a1a3d;
+color:white;
+}
+
+.close{
+position:absolute;
+top:10px;
+right:16px;
+font-size:24px;
+cursor:pointer;
+}
 
 footer{
 background:#0c0c2b;
@@ -150,18 +214,17 @@ padding:25px;
 <body>
 
 <header>
-<img src="images/logo-nl-blanco.png" alt="Logo">
+<img src="images/logo-nl-blanco.png" alt="NextLayer LATAM logo">
 <nav>
-<a href="#">Inicio</a>
-<a href="#">Servicios</a>
-<a href="#">Cursos</a>
+<a href="index.html">Inicio</a>
+<a href="servicios.html">Servicios</a>
+<a href="cursos.html">Cursos</a>
 <a id="contactMenu">Contacto</a>
 </nav>
 </header>
 
 <section class="hero-wrapper">
 <div class="hero sticky-hero">
-
 <div class="hero-slideshow">
 <img src="images/hero_1.webp" class="hero-slide active">
 <img src="images/hero_2.webp" class="hero-slide">
@@ -169,45 +232,103 @@ padding:25px;
 <img src="images/hero_4.webp" class="hero-slide">
 <img src="images/hero_5.webp" class="hero-slide">
 </div>
-
 <div class="hero-overlay"></div>
-
 <div class="hero-text">
 <h1>Soluciones IT y Ciberseguridad</h1>
-<p>Consultoría tecnológica, ciberseguridad y formación profesional para fortalecer tu organización.</p>
+<p>Consultoría tecnológica, ciberseguridad y formación profesional para fortalecer la seguridad informática y optimizar la gestión de servicios IT en las organizaciones.</p>
 <button id="ctaBtn" class="cta-button">Contáctanos</button>
 </div>
-
 </div>
 </section>
 
 <section class="section problemas">
 <h2>Problemas que Resolvemos</h2>
-<p>Riesgos de ciberseguridad, mala gestión IT, falta de cultura y fallas operativas.</p>
+<div class="problemas-container">
+<div class="problema">
+<img src="images/ciberseguridad-empresa.png">
+<h3>Riesgos de Ciberseguridad</h3>
+<p>Amenazas como phishing y malware comprometen información crítica.</p>
+</div>
+<div class="problema">
+<img src="images/gestion-infraestructura-ti.jpg">
+<h3>Gestión IT Desorganizada</h3>
+<p>Infraestructura sin control genera fallas y baja eficiencia.</p>
+</div>
+<div class="problema">
+<img src="images/cultura-ciberseguridad-empresa.png">
+<h3>Falta de Cultura de Seguridad</h3>
+<p>Errores humanos por falta de capacitación adecuada.</p>
+</div>
+<div class="problema">
+<img src="images/interrupcion-tecnologica-oficina.jpg">
+<h3>Interrupciones Tecnológicas</h3>
+<p>Fallas en sistemas afectan la productividad.</p>
+</div>
+</div>
 </section>
 
 <section class="section elegirnos">
 <h2>Por qué elegirnos</h2>
-<p>Experiencia, seguridad, buenas prácticas y capacitación continua.</p>
+<div class="elegirnos-container">
+<div class="elegir">
+<img src="images/experiencia_tecnologica.png">
+<h3>Experiencia</h3>
+<p>Soluciones efectivas basadas en experiencia real.</p>
+</div>
+<div class="elegir">
+<img src="images/buenas_practicas_it.png">
+<h3>Buenas Prácticas</h3>
+<p>Metodologías probadas para eficiencia IT.</p>
+</div>
+<div class="elegir">
+<img src="images/enfoque_en_seguridad.png">
+<h3>Seguridad</h3>
+<p>Protección de información con estrategias avanzadas.</p>
+</div>
+<div class="elegir">
+<img src="images/capacitacion_continua.png">
+<h3>Capacitación</h3>
+<p>Formación continua para equipos y usuarios.</p>
+</div>
+</div>
 </section>
 
 <section class="section servicios">
 <h2>Nuestros Servicios</h2>
-<p>Ciberseguridad, ITSM, outsourcing y formación.</p>
+<div class="servicios-container">
+<div class="servicio">
+<img src="images/services/ciberseguridad.png">
+<h3>Ciberseguridad</h3>
+<p>Evaluación de vulnerabilidades y gestión de riesgos.</p>
+</div>
+<div class="servicio">
+<img src="images/services/gestion-it.png">
+<h3>Gestión IT</h3>
+<p>Implementación de ITSM y mejora de procesos.</p>
+</div>
+<div class="servicio">
+<img src="images/services/outsourcing.png">
+<h3>Outsourcing</h3>
+<p>Personal especializado IT según necesidades.</p>
+</div>
+<div class="servicio">
+<img src="images/services/formacion.png">
+<h3>Formación</h3>
+<p>Capacitación en ciberseguridad y buenas prácticas.</p>
+</div>
+</div>
 </section>
 
-<!-- MODAL -->
-<div id="ctaModal" class="modal" style="display:none;">
+<div id="ctaModal" class="modal">
 <div class="modal-content">
 <span class="close">&times;</span>
 <h2>Contacto</h2>
 <form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
-<input type="text" name="name" placeholder="Nombre" required>
-<input type="email" name="email" placeholder="Email" required>
-<textarea name="message" placeholder="Mensaje"></textarea>
+<input type="text" name="name" required>
+<input type="email" name="email" required>
+<textarea name="message"></textarea>
 <button type="submit">Enviar</button>
 </form>
-<p id="formStatus"></p>
 </div>
 </div>
 
@@ -226,21 +347,13 @@ slides[current].classList.add("active");
 
 const modal=document.getElementById("ctaModal");
 const btn=document.getElementById("ctaBtn");
+const contactMenu=document.getElementById("contactMenu");
 const closeBtn=document.querySelector(".close");
 
 btn.onclick=()=>modal.style.display="block";
+contactMenu.onclick=()=>modal.style.display="block";
 closeBtn.onclick=()=>modal.style.display="none";
 window.onclick=(e)=>{if(e.target==modal) modal.style.display="none";};
-
-const form=document.getElementById("contactForm");
-const status=document.getElementById("formStatus");
-
-form.addEventListener("submit",function(e){
-e.preventDefault();
-fetch(form.action,{method:"POST",body:new FormData(form),headers:{'Accept':'application/json'}})
-.then(r=>{status.textContent=r.ok?"Enviado":"Error";form.reset();})
-.catch(()=>status.textContent="Error");
-});
 </script>
 
 <script src="https://code.tidio.co/hzxoy8im8rvxg5qcymbomvij9b2exu1h.js" async></script>
