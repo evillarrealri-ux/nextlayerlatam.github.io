@@ -182,10 +182,44 @@
 
     /* FOOTER */
     .footer {
-      text-align: center;
-      padding: 20px;
       background: #000;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 10px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      margin-bottom: 5px;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-logo {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #222;
+      padding-top: 15px;
       font-size: 0.8rem;
+      color: #aaa;
     }
   </style>
 </head>
@@ -195,7 +229,7 @@
   <nav class="navbar">
     <div class="logo">NextLayer LATAM</div>
     <ul class="menu">
-      <li><a href="#">Inicio</a></li>
+      <li><a href="#hero">Inicio</a></li>
       <li><a href="#resolvemos">Problemas</a></li>
       <li><a href="#elegirnos">Por qué elegirnos</a></li>
       <li><a href="#servicios">Servicios</a></li>
@@ -204,7 +238,7 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
+  <section id="hero" class="hero">
     <img src="images/hero_1.webp" class="active">
     <img src="images/hero_2.webp">
     <img src="images/hero_3.webp">
@@ -280,7 +314,44 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2026 NextLayer LATAM. Todos los derechos reservados.</p>
+    <div class="footer-container">
+      <div class="footer-col">
+        <img src="images/logo-nl-blanco.png" alt="NextLayer LATAM" class="footer-logo">
+        <p>Consultoría IT, ciberseguridad, infraestructura y soluciones tecnológicas para empresas modernas.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Enlaces</h4>
+        <a href="#hero">Inicio</a>
+        <a href="#resolvemos">Problemas</a>
+        <a href="#elegirnos">Por qué elegirnos</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="servicios.html">Infraestructura IT</a>
+        <a href="servicios.html">Ciberseguridad</a>
+        <a href="servicios.html">IA y Automatización</a>
+        <a href="servicios.html">Consultoría</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p>Panamá, Panamá</p>
+        <p>info@nextlayerlatam.com</p>
+        <div class="footer-social">
+          <a href="#" target="_blank">LinkedIn</a>
+          <a href="#" target="_blank">Facebook</a>
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © <span id="year"></span> NextLayer LATAM. Todos los derechos reservados.
+    </div>
   </footer>
 
   <!-- HERO SLIDER SCRIPT -->
@@ -295,51 +366,30 @@
     }, 4000);
   </script>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-col">
-      <img src="images/logo-nl-blanco.png" alt="NextLayer LATAM" class="footer-logo">
-      <p>Consultoría IT, ciberseguridad, infraestructura y soluciones tecnológicas para empresas modernas.</p>
-    </div>
+  <script>
+    // Smooth navigation fix
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function(e) {
+        const targetId = this.getAttribute("href");
 
-    <div class="footer-col">
-      <h4>Enlaces</h4>
-      <a href="#hero">Inicio</a>
-      <a href="#resolvemos">Problemas</a>
-      <a href="#elegirnos">Por qué elegirnos</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#contacto">Contacto</a>
-    </div>
+        if (!targetId || targetId === "#") return;
 
-    <div class="footer-col">
-      <h4>Servicios</h4>
-      <a href="servicios.html">Infraestructura IT</a>
-      <a href="servicios.html">Ciberseguridad</a>
-      <a href="servicios.html">IA y Automatización</a>
-      <a href="servicios.html">Consultoría</a>
-    </div>
+        const target = document.querySelector(targetId);
 
-    <div class="footer-col">
-      <h4>Contacto</h4>
-      <p>Panamá, Panamá</p>
-      <p>info@nextlayerlatam.com</p>
-      <div class="footer-social">
-        <a href="#" target="_blank">LinkedIn</a>
-        <a href="#" target="_blank">Facebook</a>
-        <a href="#" target="_blank">Instagram</a>
-      </div>
-    </div>
-  </div>
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+      });
+    });
+  </script>
 
-  <div class="footer-bottom">
-    © <span id="year"></span> NextLayer LATAM. Todos los derechos reservados.
-  </div>
-</footer>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
