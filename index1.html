@@ -31,16 +31,14 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://formspree.io; connect-src 'self' https://formspree.io; style-src 'self' 'unsafe-inline'; form-action https://formspree.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://formspree.io https://code.tidio.co; connect-src 'self' https://formspree.io; style-src 'self' 'unsafe-inline'; form-action https://formspree.io;">
 <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
 
 <link rel="icon" href="images/logo-nl-morado.jpg">
-<link rel="preload" as="image" href="images/fondo-nextlayer.png">
 
 <style>
 
-/* GENERAL */
 body{
 margin:0;
 font-family:Arial, Helvetica, sans-serif;
@@ -48,7 +46,6 @@ background-color:#0c0c2b;
 color:white;
 }
 
-/* HEADER */
 header{
 background:#0c0c2b;
 display:flex;
@@ -60,48 +57,63 @@ top:0;
 z-index:1000;
 }
 
-header img{
-height:75px;
-}
+header img{height:75px;}
 
 nav a{
 color:white;
 text-decoration:none;
 margin-left:25px;
-font-size:16px;
-cursor:pointer;
 }
 
-nav a:hover{
-color:#9c7cff;
+nav a:hover{color:#9c7cff;}
+
+/* HERO STACK */
+.hero-wrapper{height:200vh;}
+
+.sticky-hero{
+position:sticky;
+top:0;
+height:100vh;
+overflow:hidden;
+z-index:1;
 }
 
-/* HERO */
-.hero{
-background-image:url("images/fondo-nextlayer.png");
-background-size:cover;
-background-position:center;
-height:520px;
-display:flex;
-align-items:center;
-padding-left:60px;
+.hero-slideshow{
+position:absolute;
+width:100%;
+height:100%;
+}
+
+.hero-slide{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+transition:opacity 1s ease;
+}
+
+.hero-slide.active{opacity:1;}
+
+.hero-overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:1;
 }
 
 .hero-text{
-max-width:500px;
+position:relative;
+z-index:2;
+max-width:600px;
+padding-left:60px;
+top:40%;
 }
 
-.hero h1{
-font-size:42px;
-margin-bottom:15px;
-}
+.hero-text h1{font-size:42px;}
+.hero-text p{font-size:18px;}
 
-.hero p{
-font-size:18px;
-line-height:1.5;
-}
-
-/* CTA */
 .cta-button{
 background-color:#9c7cff;
 color:white;
@@ -109,193 +121,26 @@ padding:12px 24px;
 border:none;
 cursor:pointer;
 border-radius:6px;
-font-size:16px;
 margin-top:20px;
 }
 
-/* PROBLEMAS */
-.problemas{
-background:#11113a;
-padding:70px 20px;
-text-align:center;
-}
-
-.problemas h2{
-font-size:32px;
-margin-bottom:15px;
-}
-
-.problemas-intro{
-max-width:700px;
-margin:auto;
-margin-bottom:50px;
-color:#ccccff;
-}
-
-.problemas-container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
-}
-
-.problema{
-max-width:320px;
-}
-
-.problema img{
-width:100%;
-border-radius:8px;
-margin-bottom:15px;
-}
-
-/* POR QUÉ ELEGIRNOS */
-.elegirnos{
-background:#0d0d3f;
-padding:70px 20px;
-text-align:center;
-}
-
-.elegirnos h2{
-font-size:32px;
-margin-bottom:15px;
-}
-
-.elegirnos-intro{
-max-width:700px;
-margin:auto;
-margin-bottom:50px;
-color:#ccccff;
-}
-
-.elegirnos-container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
-}
-
-.elegir{
-max-width:260px;
-}
-
-.elegir img {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
-  margin-bottom: 15px;
-}
-
-.elegir h3{
-margin-bottom:10px;
-font-size:20px;
-}
-
-.elegir p{
-font-size:14px;
-color:#d6d6ff;
-line-height:1.5;
-}
-
-/* SERVICIOS */
-.servicios{
-background:#ffffff;
-color:#333;
-padding:70px 20px;
-text-align:center;
-}
-
-.servicios h2{
-margin-bottom:50px;
-font-size:32px;
-}
-
-.servicios-container{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:40px;
-}
-
-.servicio{
-max-width:260px;
-padding:20px;
-}
-
-.servicio img {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
-  margin-bottom: 15px;
-}
-
-.servicio h3{
-margin-bottom:10px;
-}
-
-/* MODAL */
-.modal{
-display:none;
-position:fixed;
-z-index:1000;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background-color:rgba(0,0,0,0.8);
-}
-
-.modal-content{
-background-color:#0c0c2b;
-color:white;
-margin:10% auto;
-padding:20px;
-border-radius:8px;
-width:90%;
-max-width:500px;
+.section{
 position:relative;
+z-index:2;
+padding:80px 20px;
+margin-top:-60px;
+border-radius:20px 20px 0 0;
+text-align:center;
 }
 
-.modal-content input,
-.modal-content textarea{
-width:100%;
-padding:8px;
-margin-top:4px;
-border-radius:4px;
-border:1px solid #ccc;
-background-color:#1a1a3d;
-color:white;
-}
+.problemas{background:#11113a;}
+.elegirnos{background:#0d0d3f;}
+.servicios{background:#ffffff;color:#333;}
 
-.modal-content button{
-margin-top:12px;
-padding:10px 20px;
-background-color:#9c7cff;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
-
-.close{
-position:absolute;
-top:10px;
-right:16px;
-font-size:24px;
-cursor:pointer;
-}
-
-#formStatus{
-margin-top:10px;
-color:#7fff7f;
-}
-
-/* FOOTER */
 footer{
 background:#0c0c2b;
 text-align:center;
 padding:25px;
-font-size:14px;
 }
 
 </style>
@@ -305,162 +150,61 @@ font-size:14px;
 <body>
 
 <header>
-<img src="images/logo-nl-blanco.png" alt="NextLayer LATAM logo">
+<img src="images/logo-nl-blanco.png" alt="Logo">
 <nav>
-<a href="index.html">Inicio</a>
-<a href="servicios.html">Servicios</a>
-<a href="cursos.html">Cursos</a>
+<a href="#">Inicio</a>
+<a href="#">Servicios</a>
+<a href="#">Cursos</a>
 <a id="contactMenu">Contacto</a>
 </nav>
 </header>
 
-<section class="hero">
+<section class="hero-wrapper">
+<div class="hero sticky-hero">
+
+<div class="hero-slideshow">
+<img src="images/hero_1.webp" class="hero-slide active">
+<img src="images/hero_2.webp" class="hero-slide">
+<img src="images/hero_3.webp" class="hero-slide">
+<img src="images/hero_4.webp" class="hero-slide">
+<img src="images/hero_5.webp" class="hero-slide">
+</div>
+
+<div class="hero-overlay"></div>
+
 <div class="hero-text">
 <h1>Soluciones IT y Ciberseguridad</h1>
-<p>
-Consultoría tecnológica, ciberseguridad y formación profesional
-para fortalecer la seguridad informática y optimizar la gestión de
-servicios IT en las organizaciones.
-</p>
+<p>Consultoría tecnológica, ciberseguridad y formación profesional para fortalecer tu organización.</p>
 <button id="ctaBtn" class="cta-button">Contáctanos</button>
 </div>
+
+</div>
 </section>
 
-<section class="problemas">
+<section class="section problemas">
 <h2>Problemas que Resolvemos</h2>
-<p class="problemas-intro">
-Muchas organizaciones enfrentan desafíos tecnológicos que afectan su seguridad,
-productividad y estabilidad operativa. NextLayer LATAM ayuda a identificar
-y resolver estos problemas mediante soluciones profesionales de IT y ciberseguridad.
-</p>
-<div class="problemas-container">
-<div class="problema">
-<img src="images/ciberseguridad-empresa.png" alt="Riesgos de ciberseguridad en empresas" loading="lazy">
-<h3>Riesgos de Ciberseguridad</h3>
-<p>
-Las amenazas como phishing, malware y accesos no autorizados pueden comprometer
-la información crítica de una empresa si no se implementan controles adecuados.
-</p>
-</div>
-<div class="problema">
-<img src="images/gestion-infraestructura-ti.jpg" alt="Gestión de infraestructura IT empresarial" loading="lazy">
-<h3>Gestión IT Desorganizada</h3>
-<p>
-Una infraestructura tecnológica sin monitoreo ni administración adecuada
-puede generar fallas, lentitud en los sistemas y dificultades para escalar.
-</p>
-</div>
-<div class="problema">
-<img src="images/cultura-ciberseguridad-empresa.png" alt="Cultura de ciberseguridad en empresas" loading="lazy">
-<h3>Falta de Cultura de Seguridad</h3>
-<p>
-Los errores humanos siguen siendo una de las principales causas de incidentes
-cuando los usuarios no cuentan con capacitación adecuada.
-</p>
-</div>
-<div class="problema">
-<img src="images/interrupcion-tecnologica-oficina.jpg" alt="Interrupciones tecnológicas en empresas" loading="lazy">
-<h3>Interrupciones Tecnológicas</h3>
-<p>
-Las fallas en redes, sistemas o equipos pueden detener las operaciones
-de una empresa y afectar la productividad del equipo.
-</p>
-</div>
-</div>
+<p>Riesgos de ciberseguridad, mala gestión IT, falta de cultura y fallas operativas.</p>
 </section>
 
-<section class="elegirnos">
+<section class="section elegirnos">
 <h2>Por qué elegirnos</h2>
-<p class="elegirnos-intro">
-NextLayer LATAM combina experiencia, seguridad y formación para ofrecer soluciones IT de alta calidad adaptadas a las necesidades de tu empresa.
-</p>
-<div class="elegirnos-container">
-<div class="elegir">
-<img src="images/experiencia_tecnologica.png" alt="Experiencia tecnológica" loading="lazy">
-<h3>Experiencia Tecnológica</h3>
-<p>
-Años de trabajo con empresas de diferentes industrias garantizan soluciones efectivas y confiables.
-</p>
-</div>
-<div class="elegir">
-<img src="images/buenas_practicas_it.png" alt="Buenas prácticas IT" loading="lazy">
-<h3>Buenas Prácticas IT</h3>
-<p>
-Aplicamos metodologías probadas para mantener tus sistemas organizados, seguros y eficientes.
-</p>
-</div>
-<div class="elegir">
-<img src="images/enfoque_en_seguridad.png" alt="Enfoque en Seguridad" loading="lazy">
-<h3>Enfoque en Seguridad</h3>
-<p>
-Protegemos la información de tu empresa con estrategias preventivas y controles avanzados.
-</p>
-</div>
-<div class="elegir">
-<img src="images/capacitacion_continua.png" alt="Capacitación continua" loading="lazy">
-<h3>Capacitación Continua</h3>
-<p>
-Formamos a tus equipos en seguridad y buenas prácticas para reducir riesgos y aumentar la productividad.
-</p>
-</div>
-</div>
+<p>Experiencia, seguridad, buenas prácticas y capacitación continua.</p>
 </section>
 
-<section class="servicios">
+<section class="section servicios">
 <h2>Nuestros Servicios</h2>
-<div class="servicios-container">
-
-<div class="servicio">
-<img src="images/services/ciberseguridad.png" alt="Servicios de ciberseguridad" loading="lazy">
-<h3>Ciberseguridad</h3>
-<p>
-Evaluación de vulnerabilidades, gestión de riesgos y programas de
-concientización en seguridad para proteger la información empresarial.
-</p>
-</div>
-
-<div class="servicio">
-<img src="images/services/gestion-it.png" alt="Gestión de servicios IT" loading="lazy">
-<h3>Gestión de Servicios IT</h3>
-<p>
-Implementación de buenas prácticas ITSM, gestión de incidentes,
-inventario tecnológico y mejora continua de procesos IT.
-</p>
-</div>
-
-<div class="servicio">
-<img src="images/services/outsourcing.png" alt="Outsourcing de personal IT" loading="lazy">
-<h3>Outsourcing</h3>
-<p>
-Proveemos personal especializado para IT según las necesidades de tu empresa.
-</p>
-</div>
-
-<div class="servicio">
-<img src="images/services/formacion.png" alt="Capacitación tecnológica" loading="lazy">
-<h3>Formación</h3>
-<p>
-Programas de capacitación en ciberseguridad, buenas prácticas
-tecnológicas y formación para usuarios y equipos IT.
-</p>
-</div>
-
-</div>
+<p>Ciberseguridad, ITSM, outsourcing y formación.</p>
 </section>
 
-<div id="ctaModal" class="modal">
+<!-- MODAL -->
+<div id="ctaModal" class="modal" style="display:none;">
 <div class="modal-content">
 <span class="close">&times;</span>
-<h2>Formulario de Contacto</h2>
+<h2>Contacto</h2>
 <form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
-<label>Nombre</label>
-<input type="text" name="name" required>
-<label>Correo</label>
-<input type="email" name="email" required>
-<label>Teléfono</label>
-<input type="tel" name="phone" placeholder="+507 6000-0000" required pattern="[\+0-9\s\-]{7,15}">
-<label>Mensaje</label>
-<textarea name="message" rows="4" required></textarea>
+<input type="text" name="name" placeholder="Nombre" required>
+<input type="email" name="email" placeholder="Email" required>
+<textarea name="message" placeholder="Mensaje"></textarea>
 <button type="submit">Enviar</button>
 </form>
 <p id="formStatus"></p>
@@ -468,66 +212,38 @@ tecnológicas y formación para usuarios y equipos IT.
 </div>
 
 <footer>
-© 2026 NextLayer LATAM — Consultoría IT, Ciberseguridad y Capacitación Tecnológica
-
-  <br><br>
-
-<div>
-  <p>Síguenos:</p>
-
-  <a href="https://www.instagram.com/nextlayerlatam" target="_blank">
-    <img src="images/icon-instagram.png" alt="Instagram" style="width:24px; height:24px; vertical-align:middle; margin-right:6px;">
-    Instagram (@nextlayerlatam)
-  </a>
-
-  |
-  
-  <a href="https://www.linkedin.com/company/nextlayer-latam" target="_blank">
-    <img src="images/icon-linkedin.png" alt="LinkedIn" style="width:24px; height:24px; vertical-align:middle; margin-right:6px;">
-    LinkedIn
-  </a>
-</div>
+© 2026 NextLayer LATAM
 </footer>
 
 <script>
+const slides=document.querySelectorAll(".hero-slide");
+let current=0;
+setInterval(()=>{
+slides[current].classList.remove("active");
+current=(current+1)%slides.length;
+slides[current].classList.add("active");
+},4000);
+
 const modal=document.getElementById("ctaModal");
 const btn=document.getElementById("ctaBtn");
-const contactMenu=document.getElementById("contactMenu");
-const span=document.getElementsByClassName("close")[0];
+const closeBtn=document.querySelector(".close");
+
+btn.onclick=()=>modal.style.display="block";
+closeBtn.onclick=()=>modal.style.display="none";
+window.onclick=(e)=>{if(e.target==modal) modal.style.display="none";};
+
 const form=document.getElementById("contactForm");
 const status=document.getElementById("formStatus");
 
-btn.onclick=()=>modal.style.display="block";
-contactMenu.onclick=()=>modal.style.display="block";
-
-span.onclick=()=>modal.style.display="none";
-
-window.onclick=(e)=>{
-if(e.target==modal){
-modal.style.display="none";
-}
-};
-
 form.addEventListener("submit",function(e){
 e.preventDefault();
-fetch(form.action,{
-method:"POST",
-body:new FormData(form),
-headers:{'Accept':'application/json'}
-})
-.then(response=>{
-if(response.ok){
-status.textContent="¡Gracias! Tu mensaje ha sido enviado.";
-form.reset();
-}else{
-status.textContent="Ups! Hubo un error, intenta nuevamente.";
-}
-})
-.catch(()=>{
-status.textContent="Ups! Hubo un error, intenta nuevamente.";
-});
+fetch(form.action,{method:"POST",body:new FormData(form),headers:{'Accept':'application/json'}})
+.then(r=>{status.textContent=r.ok?"Enviado":"Error";form.reset();})
+.catch(()=>status.textContent="Error");
 });
 </script>
+
+<script src="https://code.tidio.co/hzxoy8im8rvxg5qcymbomvij9b2exu1h.js" async></script>
 
 </body>
 </html>
