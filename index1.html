@@ -1,362 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextLayer LATAM</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO -->
+  <meta name="description" content="Servicios IT, ciberseguridad, consultoría y capacitación tecnológica en LATAM.">
 
-<title>NextLayer LATAM | Ciberseguridad, Consultoría IT y Gestión de Servicios Tecnológicos</title>
+  <!-- Styles -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-<meta name="description" content="NextLayer LATAM ofrece servicios de ciberseguridad, consultoría IT, gestión de servicios tecnológicos y capacitación para empresas en Latinoamérica.">
+    body {
+      overflow-x: hidden;
+      background: #000;
+      color: #fff;
+    }
 
-<meta name="robots" content="index, follow">
+    /* HERO */
+    .hero {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-<link rel="canonical" href="https://nextlayerlatam.com/">
+    .hero img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
 
-<!-- Open Graph -->
-<meta property="og:title" content="NextLayer LATAM | Ciberseguridad y Consultoría IT">
-<meta property="og:description" content="Servicios de ciberseguridad, consultoría IT y capacitación tecnológica para empresas.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://nextlayerlatam.com">
-<meta property="og:image" content="https://nextlayerlatam.com/images/logo-nl-morado.jpg">
+    .hero img.active {
+      opacity: 1;
+    }
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="NextLayer LATAM">
-<meta name="twitter:description" content="Consultoría IT y ciberseguridad para empresas.">
-<meta name="twitter:image" content="https://nextlayerlatam.com/images/logo-nl-morado.jpg">
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+    }
 
-<!-- Seguridad -->
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://formspree.io https://code.tidio.co; connect-src 'self' https://formspree.io; style-src 'self' 'unsafe-inline'; form-action https://formspree.io;">
-<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
-<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      padding: 20px;
+    }
 
-<link rel="icon" href="images/logo-nl-morado.jpg">
-<link rel="preload" as="image" href="images/fondo-nextlayer.png">
+    /* SECTIONS */
+    .section {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+    }
 
-<style>
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1;
+    }
 
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background-color:#0c0c2b;
-color:white;
-}
+    .section-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
 
-header{
-background:#0c0c2b;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-position:sticky;
-top:0;
-z-index:1000;
-}
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
 
-header img{height:75px;}
+    p {
+      max-width: 700px;
+      line-height: 1.6;
+    }
 
-nav a{
-color:white;
-text-decoration:none;
-margin-left:25px;
-}
+    /* BACKGROUNDS */
+    .resolvemos-bg {
+      background: url("images/resolvemos.webp") center/cover no-repeat;
+    }
 
-nav a:hover{color:#9c7cff;}
+    .elegirnos-bg {
+      background: url("images/elegirnos.webp") center/cover no-repeat;
+    }
 
-/* HERO STACK */
-.hero-wrapper{height:320vh;}
+    .servicios-bg {
+      background: url("images/servicios.webp") center/cover no-repeat;
+    }
 
-.sticky-hero{
-position:sticky;
-top:0;
-height:100vh;
-overflow:hidden;
-z-index:1;
-}
+    /* FORM */
+    .form-container {
+      width: 100%;
+      max-width: 600px;
+    }
 
-.hero-slideshow{
-position:absolute;
-width:100%;
-height:100%;
-}
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
 
-.hero-slide{
-position:absolute;
-width:100%;
-height:100%;
-object-fit:cover;
-opacity:0;
-transition:opacity 1s ease;
-}
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
 
-.hero-slide.active{opacity:1;}
-
-.hero-overlay{
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-z-index:1;
-}
-
-.hero-text{
-position:relative;
-z-index:2;
-max-width:600px;
-padding-left:60px;
-top:40%;
-}
-
-.hero-text h1{font-size:42px;}
-.hero-text p{font-size:18px;}
-
-.cta-button{
-background-color:#9c7cff;
-color:white;
-padding:12px 24px;
-border:none;
-cursor:pointer;
-border-radius:6px;
-margin-top:20px;
-}
-
-.section{
-position:relative;
-z-index:2;
-padding:80px 20px;
-margin-top:-120px;
-border-radius:24px 24px 0 0;
-box-shadow:0 -15px 40px rgba(0,0,0,0.25);
-text-align:center;
-}
-
-.problemas{background:#11113a;z-index:3;}
-.elegirnos{background:#0d0d3f;z-index:4;}
-.servicios{background:#ffffff;color:#333;z-index:5;}
-
-.problemas-container,
-.elegirnos-container,
-.servicios-container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:40px;
-margin-top:30px;
-}
-
-.problema,.elegir,.servicio{
-max-width:260px;
-}
-
-.problema img,.elegir img,.servicio img{
-width:100%;
-height:auto;
-border-radius:8px;
-margin-bottom:15px;
-}
-
-.modal{
-display:none;
-position:fixed;
-z-index:1000;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background-color:rgba(0,0,0,0.8);
-}
-
-.modal-content{
-background-color:#0c0c2b;
-color:white;
-margin:10% auto;
-padding:20px;
-border-radius:8px;
-width:90%;
-max-width:500px;
-position:relative;
-}
-
-.modal-content input,
-.modal-content textarea{
-width:100%;
-padding:8px;
-margin-top:4px;
-border-radius:4px;
-border:1px solid #ccc;
-background-color:#1a1a3d;
-color:white;
-}
-
-.close{
-position:absolute;
-top:10px;
-right:16px;
-font-size:24px;
-cursor:pointer;
-}
-
-footer{
-background:#0c0c2b;
-text-align:center;
-padding:25px;
-}
-
-</style>
-
+    button {
+      padding: 12px 20px;
+      border: none;
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-<img src="images/logo-nl-blanco.png" alt="NextLayer LATAM logo">
-<nav>
-<a href="index.html">Inicio</a>
-<a href="servicios.html">Servicios</a>
-<a href="cursos.html">Cursos</a>
-<a id="contactMenu">Contacto</a>
-</nav>
-</header>
+  <!-- HERO -->
+  <section class="hero">
+    <img src="images/hero_1.webp" class="active">
+    <img src="images/hero_2.webp">
+    <img src="images/hero_3.webp">
+    <img src="images/hero_4.webp">
+    <img src="images/hero_5.webp">
 
-<section class="hero-wrapper">
-<div class="hero sticky-hero">
-<div class="hero-slideshow">
-<img src="images/hero_1.webp" class="hero-slide active">
-<img src="images/hero_2.webp" class="hero-slide">
-<img src="images/hero_3.webp" class="hero-slide">
-<img src="images/hero_4.webp" class="hero-slide">
-<img src="images/hero_5.webp" class="hero-slide">
-</div>
-<div class="hero-overlay"></div>
-<div class="hero-text">
-<h1>Soluciones IT y Ciberseguridad</h1>
-<p>Consultoría tecnológica, ciberseguridad y formación profesional para fortalecer la seguridad informática y optimizar la gestión de servicios IT en las organizaciones.</p>
-<button id="ctaBtn" class="cta-button">Contáctanos</button>
-</div>
-</div>
-</section>
+    <div class="hero-overlay"></div>
 
-<section class="section problemas">
-<h2>Problemas que Resolvemos</h2>
-<div class="problemas-container">
-<div class="problema">
-<img src="images/ciberseguridad-empresa.png">
-<h3>Riesgos de Ciberseguridad</h3>
-<p>Amenazas como phishing y malware comprometen información crítica.</p>
-</div>
-<div class="problema">
-<img src="images/gestion-infraestructura-ti.jpg">
-<h3>Gestión IT Desorganizada</h3>
-<p>Infraestructura sin control genera fallas y baja eficiencia.</p>
-</div>
-<div class="problema">
-<img src="images/cultura-ciberseguridad-empresa.png">
-<h3>Falta de Cultura de Seguridad</h3>
-<p>Errores humanos por falta de capacitación adecuada.</p>
-</div>
-<div class="problema">
-<img src="images/interrupcion-tecnologica-oficina.jpg">
-<h3>Interrupciones Tecnológicas</h3>
-<p>Fallas en sistemas afectan la productividad.</p>
-</div>
-</div>
-</section>
+    <div class="hero-content">
+      <h1>NextLayer LATAM</h1>
+      <p>Consultoría IT, Ciberseguridad y Soluciones Tecnológicas</p>
+    </div>
+  </section>
 
-<section class="section elegirnos">
-<h2>Por qué elegirnos</h2>
-<div class="elegirnos-container">
-<div class="elegir">
-<img src="images/experiencia_tecnologica.png">
-<h3>Experiencia</h3>
-<p>Soluciones efectivas basadas en experiencia real.</p>
-</div>
-<div class="elegir">
-<img src="images/buenas_practicas_it.png">
-<h3>Buenas Prácticas</h3>
-<p>Metodologías probadas para eficiencia IT.</p>
-</div>
-<div class="elegir">
-<img src="images/enfoque_en_seguridad.png">
-<h3>Seguridad</h3>
-<p>Protección de información con estrategias avanzadas.</p>
-</div>
-<div class="elegir">
-<img src="images/capacitacion_continua.png">
-<h3>Capacitación</h3>
-<p>Formación continua para equipos y usuarios.</p>
-</div>
-</div>
-</section>
+  <!-- PROBLEMAS -->
+  <section class="section resolvemos-bg">
+    <div class="section-content">
+      <h2>Problemas que Resolvemos</h2>
+      <p>Ayudamos a empresas a enfrentar desafíos de infraestructura, seguridad, gestión de incidentes y transformación digital.</p>
+    </div>
+  </section>
 
-<section class="section servicios">
-<h2>Nuestros Servicios</h2>
-<div class="servicios-container">
-<div class="servicio">
-<img src="images/services/ciberseguridad.png">
-<h3>Ciberseguridad</h3>
-<p>Evaluación de vulnerabilidades y gestión de riesgos.</p>
-</div>
-<div class="servicio">
-<img src="images/services/gestion-it.png">
-<h3>Gestión IT</h3>
-<p>Implementación de ITSM y mejora de procesos.</p>
-</div>
-<div class="servicio">
-<img src="images/services/outsourcing.png">
-<h3>Outsourcing</h3>
-<p>Personal especializado IT según necesidades.</p>
-</div>
-<div class="servicio">
-<img src="images/services/formacion.png">
-<h3>Formación</h3>
-<p>Capacitación en ciberseguridad y buenas prácticas.</p>
-</div>
-</div>
-</section>
+  <!-- POR QUÉ ELEGIRNOS -->
+  <section class="section elegirnos-bg">
+    <div class="section-content">
+      <h2>Por qué elegirnos</h2>
+      <p>Combinamos experiencia técnica, enfoque estratégico y soluciones prácticas adaptadas a cada cliente.</p>
+    </div>
+  </section>
 
-<div id="ctaModal" class="modal">
-<div class="modal-content">
-<span class="close">&times;</span>
-<h2>Contacto</h2>
-<form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
-<input type="text" name="name" required>
-<input type="email" name="email" required>
-<textarea name="message"></textarea>
-<button type="submit">Enviar</button>
-</form>
-</div>
-</div>
+  <!-- SERVICIOS -->
+  <section class="section servicios-bg">
+    <div class="section-content">
+      <h2>Nuestros Servicios</h2>
+      <p>Ofrecemos consultoría IT, ciberseguridad, gestión de incidentes y capacitación profesional.</p>
+    </div>
+  </section>
 
-<footer>
-© 2026 NextLayer LATAM
-</footer>
+  <!-- CONTACTO -->
+  <section class="section" style="background:#111;">
+    <div class="section-content">
+      <h2>Contacto</h2>
 
-<script>
-const slides=document.querySelectorAll(".hero-slide");
-let current=0;
-setInterval(()=>{
-slides[current].classList.remove("active");
-current=(current+1)%slides.length;
-slides[current].classList.add("active");
-},4000);
+      <div class="form-container">
+        <form action="https://formspree.io/f/your-id" method="POST">
 
-const modal=document.getElementById("ctaModal");
-const btn=document.getElementById("ctaBtn");
-const contactMenu=document.getElementById("contactMenu");
-const closeBtn=document.querySelector(".close");
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" name="name" required>
+          </div>
 
-btn.onclick=()=>modal.style.display="block";
-contactMenu.onclick=()=>modal.style.display="block";
-closeBtn.onclick=()=>modal.style.display="none";
-window.onclick=(e)=>{if(e.target==modal) modal.style.display="none";};
-</script>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+          </div>
 
-<script src="https://code.tidio.co/hzxoy8im8rvxg5qcymbomvij9b2exu1h.js" async></script>
+          <div class="form-group">
+            <label>Celular</label>
+            <input type="tel" name="phone">
+          </div>
+
+          <div class="form-group">
+            <label>Mensaje</label>
+            <textarea name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit">Enviar</button>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HERO SLIDER SCRIPT -->
+  <script>
+    const slides = document.querySelectorAll(".hero img");
+    let index = 0;
+
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 4000);
+  </script>
 
 </body>
 </html>
