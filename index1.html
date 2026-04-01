@@ -8,7 +8,6 @@
   <!-- SEO -->
   <meta name="description" content="Servicios IT, ciberseguridad, consultoría y capacitación tecnológica en LATAM.">
 
-  <!-- Styles -->
   <style>
     * {
       margin: 0;
@@ -17,10 +16,50 @@
       font-family: Arial, sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       overflow-x: hidden;
       background: #000;
       color: #fff;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: #00bfff;
     }
 
     /* HERO */
@@ -140,9 +179,29 @@
       cursor: pointer;
       border-radius: 5px;
     }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      font-size: 0.8rem;
+    }
   </style>
 </head>
 <body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">NextLayer LATAM</div>
+    <ul class="menu">
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#resolvemos">Problemas</a></li>
+      <li><a href="#elegirnos">Por qué elegirnos</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
 
   <!-- HERO -->
   <section class="hero">
@@ -161,7 +220,7 @@
   </section>
 
   <!-- PROBLEMAS -->
-  <section class="section resolvemos-bg">
+  <section id="resolvemos" class="section resolvemos-bg">
     <div class="section-content">
       <h2>Problemas que Resolvemos</h2>
       <p>Ayudamos a empresas a enfrentar desafíos de infraestructura, seguridad, gestión de incidentes y transformación digital.</p>
@@ -169,7 +228,7 @@
   </section>
 
   <!-- POR QUÉ ELEGIRNOS -->
-  <section class="section elegirnos-bg">
+  <section id="elegirnos" class="section elegirnos-bg">
     <div class="section-content">
       <h2>Por qué elegirnos</h2>
       <p>Combinamos experiencia técnica, enfoque estratégico y soluciones prácticas adaptadas a cada cliente.</p>
@@ -177,7 +236,7 @@
   </section>
 
   <!-- SERVICIOS -->
-  <section class="section servicios-bg">
+  <section id="servicios" class="section servicios-bg">
     <div class="section-content">
       <h2>Nuestros Servicios</h2>
       <p>Ofrecemos consultoría IT, ciberseguridad, gestión de incidentes y capacitación profesional.</p>
@@ -185,7 +244,7 @@
   </section>
 
   <!-- CONTACTO -->
-  <section class="section" style="background:#111;">
+  <section id="contacto" class="section" style="background:#111;">
     <div class="section-content">
       <h2>Contacto</h2>
 
@@ -216,9 +275,13 @@
 
         </form>
       </div>
-
     </div>
   </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 NextLayer LATAM. Todos los derechos reservados.</p>
+  </footer>
 
   <!-- HERO SLIDER SCRIPT -->
   <script>
