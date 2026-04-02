@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextLayer LATAM</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #020617;
+      color: #e2e8f0;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('images/hero.jpg') center/cover no-repeat;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #0f172a;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    /* COURSES */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background: #3b82f6;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #2563eb;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #020617;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h1>NextLayer LATAM</h1>
+      <p>Soluciones en Ciberseguridad, IT y Formación</p>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <h2 class="section-title">Servicios</h2>
+    <div class="services-grid">
+
+      <div class="card">
+        <img src="images/services/ciberseguridad.webp" alt="Ciberseguridad">
+        <div class="card-content">
+          <h3>Ciberseguridad</h3>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/services/gestion-it.webp" alt="Gestión IT">
+        <div class="card-content">
+          <h3>Gestión IT</h3>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/services/outsourcing.webp" alt="Outsourcing">
+        <div class="card-content">
+          <h3>Outsourcing</h3>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/services/formacion.webp" alt="Formación">
+        <div class="card-content">
+          <h3>Formación</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CURSOS -->
+  <section id="cursos">
+    <h2 class="section-title">Cursos</h2>
+    <div class="courses-grid">
+
+      <div class="card">
+        <img src="images/cursos/cursos-concientizacion-01.webp" alt="Concientización en Ciberseguridad">
+        <div class="card-content">
+          <h3>Concientización en Ciberseguridad</h3>
+          <a href="pdfs/concientizacion.pdf" target="_blank" class="btn">Ver PDF</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/cursos/cursos-gestion-inc-01.webp" alt="Gestión de Incidentes IT">
+        <div class="card-content">
+          <h3>Gestión de Incidentes IT</h3>
+          <a href="pdfs/gestion-incidentes.pdf" target="_blank" class="btn">Ver PDF</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/cursos/cursos-iso27001-sgsi-01.webp" alt="ISO 27001 SGSI">
+        <div class="card-content">
+          <h3>ISO 27001 - SGSI</h3>
+          <a href="pdfs/iso27001.pdf" target="_blank" class="btn">Ver PDF</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 NextLayer LATAM</p>
+  </footer>
+
+</body>
+</html>
