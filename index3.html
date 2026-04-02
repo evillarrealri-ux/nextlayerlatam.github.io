@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextLayer LATAM</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:#0c0c2b;color:white;}
+
+/* HEADER */
+header{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+header img{height:60px;}
+nav a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-size:15px;
+}
+nav a:hover{color:#9c7cff;}
+
+/* HERO */
+.hero{
+height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+padding-left:60px;
+overflow:hidden;
+}
+.hero img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+transition:opacity 1s ease;
+}
+.hero img.active{opacity:1;}
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.6);
+}
+.hero-content{
+position:relative;
+z-index:2;
+max-width:500px;
+}
+.hero h1{font-size:42px;margin-bottom:15px;}
+.hero p{font-size:18px;}
+.cta{
+margin-top:20px;
+padding:12px 25px;
+background:#9c7cff;
+border:none;
+border-radius:6px;
+color:white;
+cursor:pointer;
+}
+
+/* SECTIONS */
+.section{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background-size:cover;
+background-position:center;
+position:relative;
+padding:40px;
+}
+.section .overlay{background:rgba(0,0,0,0.7);}
+.section-content{position:relative;z-index:2;max-width:700px;}
+.section h2{font-size:32px;margin-bottom:15px;}
+.section p{color:#ccc;line-height:1.6;}
+
+/* FOOTER */
+footer{
+background:#0c0c2b;
+text-align:center;
+padding:30px;
+}
+footer a{color:#9c7cff;text-decoration:none;margin:0 10px;}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="images/logo-nl-blanco.png">
+<nav>
+<a href="#hero">Inicio</a>
+<a href="#servicios">Servicios</a>
+<a href="#cursos">Cursos</a>
+<a href="#contacto">Contacto</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+<img src="images/hero_1.webp" class="active">
+<img src="images/hero_2.webp">
+<img src="images/hero_3.webp">
+<img src="images/hero_4.webp">
+<img src="images/hero_5.webp">
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+<h1>Soluciones IT y Ciberseguridad</h1>
+<p>Protegemos y optimizamos la infraestructura tecnológica de tu empresa.</p>
+<button class="cta" onclick="scrollToSection('contacto')">Contáctanos</button>
+</div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="section" style="background-image:url('images/servicios.webp')">
+<div class="overlay"></div>
+<div class="section-content">
+<h2>Servicios</h2>
+<p>Ofrecemos soluciones en ciberseguridad, gestión IT, outsourcing y formación tecnológica adaptadas a tu negocio.</p>
+</div>
+</section>
+
+<!-- CURSOS -->
+<section id="cursos" class="section" style="background-image:url('images/elegirnos.webp')">
+<div class="overlay"></div>
+<div class="section-content">
+<h2>Cursos</h2>
+<p>Capacitación en ciberseguridad y buenas prácticas IT para fortalecer tu equipo.</p>
+</div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="section" style="background-image:url('images/resolvemos.webp')">
+<div class="overlay"></div>
+<div class="section-content">
+<h2>Contacto</h2>
+<p>Contáctanos para una evaluación de tus necesidades tecnológicas.</p>
+</div>
+</section>
+
+<footer>
+<p>© 2026 NextLayer LATAM</p>
+<div>
+<a href="https://www.instagram.com/nextlayerlatam">Instagram</a>
+<a href="https://www.linkedin.com/company/nextlayer-latam">LinkedIn</a>
+</div>
+</footer>
+
+<script>
+
+// HERO SLIDER
+const slides = document.querySelectorAll('.hero img');
+let index = 0;
+setInterval(()=>{
+slides[index].classList.remove('active');
+index = (index + 1) % slides.length;
+slides[index].classList.add('active');
+},4000);
+
+// SCROLL
+function scrollToSection(id){
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+</script>
+
+</body>
+</html>
