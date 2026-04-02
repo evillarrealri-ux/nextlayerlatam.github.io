@@ -1,300 +1,231 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextLayer LATAM</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextLayer LATAM</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
-html{scroll-behavior:smooth;}
-body{background:#0c0c2b;color:white;}
+  <!-- SEO -->
+  <meta name="description" content="Servicios de ciberseguridad, gestión IT, outsourcing y formación tecnológica en Panamá.">
+  <meta property="og:title" content="NextLayer LATAM">
+  <meta property="og:description" content="Soluciones IT y ciberseguridad para empresas.">
+  <meta property="og:url" content="https://nextlayerlatam.com">
 
-/* HEADER */
-header{
-position:fixed;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 40px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-z-index:1000;
-}
-header img{height:60px;}
-nav a{color:white;text-decoration:none;margin-left:25px;font-size:15px;}
-nav a:hover{color:#9c7cff;}
+  <!-- Security (basic CSP) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
 
-/* HERO MEJORADO */
-.hero{
-height:100vh;
-position:relative;
-display:flex;
-align-items:center;
-padding-left:60px;
-overflow:hidden;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+    }
 
-.hero img{
-position:absolute;
-width:100%;
-height:100%;
-object-fit:cover;
-opacity:0;
-transform:scale(1.1);
-transition:opacity 1.5s ease, transform 6s ease;
-}
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background: #020617;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
 
-.hero img.active{
-opacity:1;
-transform:scale(1);
-}
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
 
-.overlay{
-position:absolute;
-inset:0;
-background:linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.4));
-}
+    section {
+      padding: 100px 20px;
+      min-height: 100vh;
+    }
 
-.hero-content{
-position:relative;
-z-index:2;
-max-width:520px;
-}
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(to bottom, #020617, #0f172a);
+    }
 
-.fade-text{
-animation:fadeText 1s ease;
-}
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
 
-@keyframes fadeText{
-from{opacity:0;transform:translateY(10px);} 
-to{opacity:1;transform:translateY(0);} 
-}
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
 
-.hero h1{font-size:46px;margin-bottom:15px;}
-.hero p{font-size:18px;line-height:1.5;}
+    .card:hover {
+      transform: translateY(-5px);
+    }
 
-.cta{
-margin-top:25px;
-padding:14px 28px;
-background:#9c7cff;
-border:none;
-border-radius:6px;
-color:white;
-cursor:pointer;
-font-size:16px;
-transition:0.3s;
-}
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #020617;
+    }
 
-.cta:hover{background:#7a5cff;}
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+    }
 
-/* SECTIONS */
-.section{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background-size:cover;
-background-position:center;
-position:relative;
-padding:40px;
-}
-.section .overlay{background:rgba(0,0,0,0.7);}
-.section-content{position:relative;z-index:2;max-width:700px;}
-.section h2{font-size:32px;margin-bottom:15px;}
-.section p{color:#ccc;line-height:1.6;}
+    .modal-content {
+      background: #0f172a;
+      margin: 10% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
 
-/* FOOTER */
-footer{
-background:#0c0c2b;
-text-align:center;
-padding:30px;
-}
-footer a{color:#9c7cff;text-decoration:none;margin:0 10px;}
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      background: #1e293b;
+      color: white;
+    }
 
-/* CARDS */
-.card{
-background:rgba(0,0,0,0.6);
-padding:20px;
-border-radius:12px;
-max-width:260px;
-transition:0.3s;
-}
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      background: #38bdf8;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-.card img{
-width:100%;
-height:150px;
-object-fit:cover;
-border-radius:8px;
-margin-bottom:15px;
-}
-
-.card h3{
-margin-bottom:10px;
-}
-
-.card p{
-font-size:14px;
-color:#ddd;
-}
-
-.card:hover{
-transform:translateY(-8px) scale(1.03);
-box-shadow:0 10px 25px rgba(0,0,0,0.5);
-}
-
-</style>
+    .close {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-<img src="images/logo-nl-blanco.png">
 <nav>
-<a href="#hero">Inicio</a>
-<a href="#servicios">Servicios</a>
-<a href="#cursos">Cursos</a>
-<a href="#contacto">Contacto</a>
+  <div><strong>NextLayer</strong></div>
+  <div>
+    <a href="#hero">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto" onclick="openModal()">Contacto</a>
+  </div>
 </nav>
-</header>
 
-<!-- HERO -->
 <section id="hero" class="hero">
-<img src="images/hero_1.webp" class="active">
-<img src="images/hero_2.webp">
-<img src="images/hero_3.webp">
-<img src="images/hero_4.webp">
-<img src="images/hero_5.webp">
-
-<div class="overlay"></div>
-
-<div class="hero-content">
-<h1 id="heroTitle">Soluciones IT y Ciberseguridad</h1>
-<p id="heroText">Protegemos, optimizamos y fortalecemos la infraestructura tecnológica de tu empresa.</p>
-<button class="cta" onclick="scrollToSection('contacto')">Contáctanos</button>
-</div>
+  <div>
+    <h1>Soluciones IT y Ciberseguridad</h1>
+    <p>Transformamos la tecnología en ventaja competitiva</p>
+    <button onclick="openModal()">Contáctanos</button>
+  </div>
 </section>
 
-<!-- SERVICIOS -->
-<section id="servicios" class="section" style="background-image:url('images/servicios.webp')">
-<div class="overlay"></div>
-<div class="section-content">
-<h2>Nuestros Servicios</h2>
-<p style="margin-bottom:30px;">Soluciones diseñadas para proteger, optimizar y escalar la operación tecnológica de tu empresa.</p>
-
-<div style="display:flex;flex-wrap:wrap;gap:25px;justify-content:center;">
-
-<div class="card">
-<img src="images/services/ciberseguridad.webp" alt="Ciberseguridad">
-<h3>Ciberseguridad</h3>
-<p>Protege tu información crítica con evaluación de vulnerabilidades, gestión de riesgos y capacitación para usuarios.</p>
-</div>
-
-<div class="card">
-<img src="images/services/gestion-it.webp" alt="Gestión IT">
-<h3>Gestión de Servicios IT</h3>
-<p>Optimiza tus procesos tecnológicos con buenas prácticas ITSM, control de incidentes y mejora continua.</p>
-</div>
-
-<div class="card">
-<img src="images/services/outsourcing.webp" alt="Outsourcing IT">
-<h3>Outsourcing IT</h3>
-<p>Accede a talento especializado en IT sin aumentar tu estructura interna. Flexible y escalable.</p>
-</div>
-
-<div class="card">
-<img src="images/services/formacion.webp" alt="Formación">
-<h3>Formación</h3>
-<p>Capacita a tu equipo en ciberseguridad y buenas prácticas para reducir riesgos y mejorar productividad.</p>
-</div>
-
-</div>
-</div>
+<section id="servicios">
+  <h2>Servicios</h2>
+  <div class="services">
+    <div class="card">Ciberseguridad</div>
+    <div class="card">Gestión IT</div>
+    <div class="card">Outsourcing</div>
+    <div class="card">Formación</div>
+  </div>
 </section>
 
-<!-- CURSOS -->
-<section id="cursos" class="section" style="background-image:url('images/elegirnos.webp')">
-<div class="overlay"></div>
-<div class="section-content">
-<h2>Cursos</h2>
-<p>Capacitación en ciberseguridad y buenas prácticas IT para fortalecer tu equipo.</p>
-</div>
+<section id="contacto">
+  <h2>Contacto</h2>
+  <p>Haz clic en el botón para abrir el formulario.</p>
 </section>
 
-<!-- CONTACTO -->
-<section id="contacto" class="section" style="background-image:url('images/resolvemos.webp')">
-<div class="overlay"></div>
-<div class="section-content">
-<h2>Contacto</h2>
-<p>Contáctanos para una evaluación de tus necesidades tecnológicas.</p>
+<!-- MODAL -->
+<div id="ctaModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Formulario de Contacto</h2>
+
+    <form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
+      <label>Nombre</label>
+      <input type="text" name="name" required>
+
+      <label>Correo</label>
+      <input type="email" name="email" required>
+
+      <label>Teléfono</label>
+      <input type="tel" name="phone" required pattern="[\+0-9\s\-]{7,15}">
+
+      <label>Mensaje</label>
+      <textarea name="message" rows="4" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <p id="formStatus"></p>
+  </div>
 </div>
-</section>
 
 <footer>
-<p>© 2026 NextLayer LATAM</p>
-<div>
-<a href="https://www.instagram.com/nextlayerlatam">Instagram</a>
-<a href="https://www.linkedin.com/company/nextlayer-latam">LinkedIn</a>
-</div>
+  <p>© 2026 NextLayer LATAM</p>
 </footer>
 
 <script>
+  const modal = document.getElementById("ctaModal");
+  const closeBtn = document.querySelector(".close");
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("formStatus");
 
-const slides = document.querySelectorAll('.hero img');
-const titles = [
-  "Soluciones IT y Ciberseguridad",
-  "Protección contra amenazas digitales",
-  "Gestión eficiente de servicios IT",
-  "Capacitación en ciberseguridad",
-  "Transformación tecnológica empresarial"
-];
+  function openModal() {
+    modal.style.display = "block";
+  }
 
-const texts = [
-  "Protegemos y optimizamos tu infraestructura tecnológica.",
-  "Defiende tu empresa contra phishing, malware y accesos no autorizados.",
-  "Mejora la operación de tus sistemas con buenas prácticas IT.",
-  "Entrena a tu equipo para reducir riesgos y aumentar productividad.",
-  "Impulsa tu empresa con soluciones tecnológicas modernas."
-];
+  closeBtn.onclick = () => {
+    modal.style.display = "none";
+  }
 
-const heroTitle = document.getElementById('heroTitle');
-const heroText = document.getElementById('heroText');
+  window.onclick = (e) => {
+    if (e.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 
-let index = 0;
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-function startSlider(){
-  slides[0].classList.add('active');
-  updateText(0);
+    const data = new FormData(form);
 
-  setInterval(()=>{
-    slides[index].classList.remove('active');
-    index = (index + 1) % slides.length;
-    slides[index].classList.add('active');
-    updateText(index);
-  },5000);
-}
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
 
-function updateText(i){
-  heroTitle.classList.remove('fade-text');
-  heroText.classList.remove('fade-text');
-
-  setTimeout(()=>{
-    heroTitle.textContent = titles[i];
-    heroText.textContent = texts[i];
-    heroTitle.classList.add('fade-text');
-    heroText.classList.add('fade-text');
-  },200);
-}
-
-window.addEventListener('load', startSlider);
-
-function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth'});
-}
-
+    if (response.ok) {
+      status.innerHTML = "✅ Mensaje enviado correctamente";
+      form.reset();
+    } else {
+      status.innerHTML = "❌ Error al enviar. Intenta nuevamente.";
+    }
+  });
 </script>
 
 </body>
