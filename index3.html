@@ -27,7 +27,7 @@ header img{height:60px;}
 nav a{color:white;text-decoration:none;margin-left:25px;font-size:15px;}
 nav a:hover{color:#9c7cff;}
 
-/* HERO MEJORADO */
+/* HERO */
 .hero{
 height:100vh;
 position:relative;
@@ -132,20 +132,69 @@ border-radius:8px;
 margin-bottom:15px;
 }
 
-.card h3{
-margin-bottom:10px;
-}
-
-.card p{
-font-size:14px;
-color:#ddd;
-}
-
 .card:hover{
 transform:translateY(-8px) scale(1.03);
 box-shadow:0 10px 25px rgba(0,0,0,0.5);
 }
 
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+z-index:2000;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+}
+
+.modal-content{
+background:#0f172a;
+margin:8% auto;
+padding:25px;
+width:90%;
+max-width:500px;
+border-radius:10px;
+}
+
+.modal-content h2{
+margin-bottom:15px;
+}
+
+.modal-content label{
+display:block;
+margin-top:10px;
+margin-bottom:5px;
+font-size:14px;
+}
+
+.modal-content input,
+.modal-content textarea{
+width:100%;
+padding:10px;
+border-radius:6px;
+border:none;
+background:#1e293b;
+color:white;
+}
+
+.modal-content button{
+margin-top:15px;
+width:100%;
+padding:12px;
+background:#9c7cff;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.close{
+float:right;
+font-size:22px;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -174,7 +223,9 @@ box-shadow:0 10px 25px rgba(0,0,0,0.5);
 <div class="hero-content">
 <h1 id="heroTitle">Soluciones IT y Ciberseguridad</h1>
 <p id="heroText">Protegemos, optimizamos y fortalecemos la infraestructura tecnológica de tu empresa.</p>
-<button class="cta" onclick="scrollToSection('contacto')">Contáctanos</button>
+
+<!-- CAMBIO IMPORTANTE -->
+<button class="cta" onclick="openModal()">Contáctanos</button>
 </div>
 </section>
 
@@ -188,27 +239,27 @@ box-shadow:0 10px 25px rgba(0,0,0,0.5);
 <div style="display:flex;flex-wrap:wrap;gap:25px;justify-content:center;">
 
 <div class="card">
-<img src="images/services/ciberseguridad.webp" alt="Ciberseguridad">
+<img src="images/services/ciberseguridad.webp">
 <h3>Ciberseguridad</h3>
-<p>Protege tu información crítica con evaluación de vulnerabilidades, gestión de riesgos y capacitación para usuarios.</p>
+<p>Protege tu información crítica con evaluación de vulnerabilidades.</p>
 </div>
 
 <div class="card">
-<img src="images/services/gestion-it.webp" alt="Gestión IT">
+<img src="images/services/gestion-it.webp">
 <h3>Gestión de Servicios IT</h3>
-<p>Optimiza tus procesos tecnológicos con buenas prácticas ITSM, control de incidentes y mejora continua.</p>
+<p>Optimiza procesos tecnológicos con ITSM.</p>
 </div>
 
 <div class="card">
-<img src="images/services/outsourcing.webp" alt="Outsourcing IT">
+<img src="images/services/outsourcing.webp">
 <h3>Outsourcing IT</h3>
-<p>Accede a talento especializado en IT sin aumentar tu estructura interna. Flexible y escalable.</p>
+<p>Talento especializado sin aumentar estructura interna.</p>
 </div>
 
 <div class="card">
-<img src="images/services/formacion.webp" alt="Formación">
+<img src="images/services/formacion.webp">
 <h3>Formación</h3>
-<p>Capacita a tu equipo en ciberseguridad y buenas prácticas para reducir riesgos y mejorar productividad.</p>
+<p>Capacita tu equipo en ciberseguridad.</p>
 </div>
 
 </div>
@@ -220,7 +271,7 @@ box-shadow:0 10px 25px rgba(0,0,0,0.5);
 <div class="overlay"></div>
 <div class="section-content">
 <h2>Cursos</h2>
-<p>Capacitación en ciberseguridad y buenas prácticas IT para fortalecer tu equipo.</p>
+<p>Capacitación en ciberseguridad y buenas prácticas IT.</p>
 </div>
 </section>
 
@@ -241,23 +292,51 @@ box-shadow:0 10px 25px rgba(0,0,0,0.5);
 </div>
 </footer>
 
+<!-- MODAL -->
+<div id="ctaModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <h2>Formulario de Contacto</h2>
+
+    <form id="contactForm" action="https://formspree.io/f/xwvroyqb" method="POST">
+      <label>Nombre</label>
+      <input type="text" name="name" required>
+
+      <label>Correo</label>
+      <input type="email" name="email" required>
+
+      <label>Teléfono</label>
+      <input type="tel" name="phone" required>
+
+      <label>Mensaje</label>
+      <textarea name="message" rows="4" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <p id="formStatus"></p>
+  </div>
+</div>
+
 <script>
 
 const slides = document.querySelectorAll('.hero img');
+
 const titles = [
-  "Soluciones IT y Ciberseguridad",
-  "Protección contra amenazas digitales",
-  "Gestión eficiente de servicios IT",
-  "Capacitación en ciberseguridad",
-  "Transformación tecnológica empresarial"
+"Soluciones IT y Ciberseguridad",
+"Protección contra amenazas digitales",
+"Gestión eficiente de servicios IT",
+"Capacitación en ciberseguridad",
+"Transformación tecnológica empresarial"
 ];
 
 const texts = [
-  "Protegemos y optimizamos tu infraestructura tecnológica.",
-  "Defiende tu empresa contra phishing, malware y accesos no autorizados.",
-  "Mejora la operación de tus sistemas con buenas prácticas IT.",
-  "Entrena a tu equipo para reducir riesgos y aumentar productividad.",
-  "Impulsa tu empresa con soluciones tecnológicas modernas."
+"Protegemos y optimizamos tu infraestructura tecnológica.",
+"Defiende tu empresa contra amenazas digitales.",
+"Mejora la operación de tus sistemas.",
+"Entrena a tu equipo para reducir riesgos.",
+"Impulsa tu empresa con tecnología moderna."
 ];
 
 const heroTitle = document.getElementById('heroTitle');
@@ -266,34 +345,73 @@ const heroText = document.getElementById('heroText');
 let index = 0;
 
 function startSlider(){
-  slides[0].classList.add('active');
-  updateText(0);
+slides[0].classList.add('active');
+updateText(0);
 
-  setInterval(()=>{
-    slides[index].classList.remove('active');
-    index = (index + 1) % slides.length;
-    slides[index].classList.add('active');
-    updateText(index);
-  },5000);
+setInterval(()=>{
+slides[index].classList.remove('active');
+index = (index + 1) % slides.length;
+slides[index].classList.add('active');
+updateText(index);
+},5000);
 }
 
 function updateText(i){
-  heroTitle.classList.remove('fade-text');
-  heroText.classList.remove('fade-text');
+heroTitle.classList.remove('fade-text');
+heroText.classList.remove('fade-text');
 
-  setTimeout(()=>{
-    heroTitle.textContent = titles[i];
-    heroText.textContent = texts[i];
-    heroTitle.classList.add('fade-text');
-    heroText.classList.add('fade-text');
-  },200);
+setTimeout(()=>{
+heroTitle.textContent = titles[i];
+heroText.textContent = texts[i];
+heroTitle.classList.add('fade-text');
+heroText.classList.add('fade-text');
+},200);
 }
 
 window.addEventListener('load', startSlider);
 
 function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
+
+/* MODAL */
+const modal = document.getElementById("ctaModal");
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
+
+function openModal(){
+modal.style.display = "block";
+}
+
+function closeModal(){
+modal.style.display = "none";
+}
+
+window.onclick = function(e){
+if(e.target == modal){
+modal.style.display = "none";
+}
+}
+
+/* FORMSPREE */
+form.addEventListener("submit", async function(e){
+e.preventDefault();
+
+const data = new FormData(form);
+
+const response = await fetch(form.action,{
+method: form.method,
+body: data,
+headers: { 'Accept': 'application/json' }
+});
+
+if(response.ok){
+status.innerHTML = "✅ Mensaje enviado correctamente";
+form.reset();
+}else{
+status.innerHTML = "❌ Error al enviar";
+}
+});
 
 </script>
 
