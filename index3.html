@@ -24,15 +24,10 @@ backdrop-filter:blur(10px);
 z-index:1000;
 }
 header img{height:60px;}
-nav a{
-color:white;
-text-decoration:none;
-margin-left:25px;
-font-size:15px;
-}
+nav a{color:white;text-decoration:none;margin-left:25px;font-size:15px;}
 nav a:hover{color:#9c7cff;}
 
-/* HERO */
+/* HERO MEJORADO */
 .hero{
 height:100vh;
 position:relative;
@@ -41,35 +36,57 @@ align-items:center;
 padding-left:60px;
 overflow:hidden;
 }
+
 .hero img{
 position:absolute;
 width:100%;
 height:100%;
 object-fit:cover;
 opacity:0;
-transition:opacity 1s ease;
+transform:scale(1.1);
+transition:opacity 1.5s ease, transform 6s ease;
 }
-.hero img.active{opacity:1;}
+
+.hero img.active{
+opacity:1;
+transform:scale(1);
+}
+
 .overlay{
 position:absolute;
 inset:0;
-background:rgba(0,0,0,0.6);
+background:linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.4));
 }
+
 .hero-content{
 position:relative;
 z-index:2;
-max-width:500px;
+max-width:520px;
+animation:fadeIn 1.5s ease;
 }
-.hero h1{font-size:42px;margin-bottom:15px;}
-.hero p{font-size:18px;}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.hero h1{font-size:46px;margin-bottom:15px;}
+.hero p{font-size:18px;line-height:1.5;}
+
 .cta{
-margin-top:20px;
-padding:12px 25px;
+margin-top:25px;
+padding:14px 28px;
 background:#9c7cff;
 border:none;
 border-radius:6px;
 color:white;
 cursor:pointer;
+font-size:16px;
+transition:0.3s;
+}
+
+.cta:hover{
+background:#7a5cff;
 }
 
 /* SECTIONS */
@@ -124,7 +141,7 @@ footer a{color:#9c7cff;text-decoration:none;margin:0 10px;}
 
 <div class="hero-content">
 <h1>Soluciones IT y Ciberseguridad</h1>
-<p>Protegemos y optimizamos la infraestructura tecnológica de tu empresa.</p>
+<p>Protegemos, optimizamos y fortalecemos la infraestructura tecnológica de tu empresa con un enfoque profesional.</p>
 <button class="cta" onclick="scrollToSection('contacto')">Contáctanos</button>
 </div>
 </section>
@@ -166,18 +183,24 @@ footer a{color:#9c7cff;text-decoration:none;margin:0 10px;}
 
 <script>
 
-// HERO SLIDER
+// HERO SLIDER MEJORADO
 const slides = document.querySelectorAll('.hero img');
 let index = 0;
-setInterval(()=>{
-slides[index].classList.remove('active');
-index = (index + 1) % slides.length;
-slides[index].classList.add('active');
-},4000);
+
+function startSlider(){
+  slides[0].classList.add('active');
+  setInterval(()=>{
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+  },5000);
+}
+
+window.addEventListener('load', startSlider);
 
 // SCROLL
 function scrollToSection(id){
-document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
 </script>
