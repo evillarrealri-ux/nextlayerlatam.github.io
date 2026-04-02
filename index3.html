@@ -62,12 +62,15 @@ background:linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.4));
 position:relative;
 z-index:2;
 max-width:520px;
-animation:fadeIn 1.5s ease;
 }
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
+.fade-text{
+animation:fadeText 1s ease;
+}
+
+@keyframes fadeText{
+from{opacity:0;transform:translateY(10px);} 
+to{opacity:1;transform:translateY(0);} 
 }
 
 .hero h1{font-size:46px;margin-bottom:15px;}
@@ -85,9 +88,7 @@ font-size:16px;
 transition:0.3s;
 }
 
-.cta:hover{
-background:#7a5cff;
-}
+.cta:hover{background:#7a5cff;}
 
 /* SECTIONS */
 .section{
@@ -140,8 +141,8 @@ footer a{color:#9c7cff;text-decoration:none;margin:0 10px;}
 <div class="overlay"></div>
 
 <div class="hero-content">
-<h1>Soluciones IT y Ciberseguridad</h1>
-<p>Protegemos, optimizamos y fortalecemos la infraestructura tecnológica de tu empresa con un enfoque profesional.</p>
+<h1 id="heroTitle">Soluciones IT y Ciberseguridad</h1>
+<p id="heroText">Protegemos, optimizamos y fortalecemos la infraestructura tecnológica de tu empresa.</p>
 <button class="cta" onclick="scrollToSection('contacto')">Contáctanos</button>
 </div>
 </section>
@@ -183,22 +184,54 @@ footer a{color:#9c7cff;text-decoration:none;margin:0 10px;}
 
 <script>
 
-// HERO SLIDER MEJORADO
 const slides = document.querySelectorAll('.hero img');
+const titles = [
+  "Soluciones IT y Ciberseguridad",
+  "Protección contra amenazas digitales",
+  "Gestión eficiente de servicios IT",
+  "Capacitación en ciberseguridad",
+  "Transformación tecnológica empresarial"
+];
+
+const texts = [
+  "Protegemos y optimizamos tu infraestructura tecnológica.",
+  "Defiende tu empresa contra phishing, malware y accesos no autorizados.",
+  "Mejora la operación de tus sistemas con buenas prácticas IT.",
+  "Entrena a tu equipo para reducir riesgos y aumentar productividad.",
+  "Impulsa tu empresa con soluciones tecnológicas modernas."
+];
+
+const heroTitle = document.getElementById('heroTitle');
+const heroText = document.getElementById('heroText');
+
 let index = 0;
 
 function startSlider(){
   slides[0].classList.add('active');
+  updateText(0);
+
   setInterval(()=>{
     slides[index].classList.remove('active');
     index = (index + 1) % slides.length;
     slides[index].classList.add('active');
+    updateText(index);
   },5000);
+}
+
+function updateText(i){
+  heroTitle.classList.remove('fade-text');
+  heroText.classList.remove('fade-text');
+
+  setTimeout(()=>{
+    heroTitle.textContent = titles[i];
+    heroText.textContent = texts[i];
+    heroTitle.classList.add('fade-text');
+    heroText.classList.add('fade-text');
+  },200);
 }
 
 window.addEventListener('load', startSlider);
 
-// SCROLL
 function scrollToSection(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
