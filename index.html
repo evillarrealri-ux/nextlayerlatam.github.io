@@ -451,8 +451,8 @@ heroText.classList.add('fade-text');
 },200);
 }
 
-window.addEventListener('load', startSlider);
-
+document.addEventListener('DOMContentLoaded', startSlider);
+  
 function scrollToSection(id){
 document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
