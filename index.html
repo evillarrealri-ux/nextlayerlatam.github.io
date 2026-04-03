@@ -495,7 +495,61 @@ form.reset();
 status.innerHTML = "❌ Error al enviar";
 }
 });
+/* HERO SLIDER */
 
+const slides = document.querySelectorAll('.hero img');
+
+const titles = [
+  "Soluciones IT y Ciberseguridad",
+  "Protección contra amenazas digitales",
+  "Gestión eficiente de servicios IT",
+  "Capacitación en ciberseguridad",
+  "Transformación tecnológica empresarial"
+];
+
+const texts = [
+  "Protegemos y optimizamos tu infraestructura tecnológica.",
+  "Defiende tu empresa contra phishing, malware y accesos no autorizados.",
+  "Mejora la operación de tus sistemas con buenas prácticas IT.",
+  "Entrena a tu equipo para reducir riesgos y aumentar productividad.",
+  "Impulsa tu empresa con soluciones tecnológicas modernas."
+];
+
+const heroTitle = document.getElementById('heroTitle');
+const heroText = document.getElementById('heroText');
+
+let index = 0;
+
+function startSlider() {
+  if (!slides.length) return;
+
+  slides[0].classList.add('active');
+  updateText(0);
+
+  setInterval(() => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+    updateText(index);
+  }, 5000);
+}
+
+function updateText(i) {
+  if (!heroTitle || !heroText) return;
+
+  heroTitle.classList.remove('fade-text');
+  heroText.classList.remove('fade-text');
+
+  setTimeout(() => {
+    heroTitle.textContent = titles[i];
+    heroText.textContent = texts[i];
+    heroTitle.classList.add('fade-text');
+    heroText.classList.add('fade-text');
+  }, 200);
+}
+
+document.addEventListener('DOMContentLoaded', startSlider);
+  
 </script>
 
 </body>
