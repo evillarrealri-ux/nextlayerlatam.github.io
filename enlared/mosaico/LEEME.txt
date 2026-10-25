@@ -1,0 +1,24 @@
+EN LA RED · ISOC PANAMÁ — APP WEB INSTALABLE (PWA)
+Versión MOSAICO (portada en mosaico y edición completa en PDF). Edición #3, abril 2021
+
+CÓMO PUBLICARLA
+1. Sube TODA esta carpeta (con sus subcarpetas) a un sitio web con HTTPS,
+   en una carpeta llamada "mosaico", por ejemplo https://tudominio.com/mosaico/
+   Mantén los archivos juntos y con los mismos nombres.
+   Esta versión es independiente: contiene todos los artículos y no necesita
+   otras carpetas.
+2. Abre esa dirección en el celular o la computadora.
+   Con HTTP (sin la "s") la instalación y el modo sin conexión no funcionan.
+   El PDF de la edición está en pdf/ (no se guarda en la copia sin conexión).
+
+CÓMO LA INSTALA UN LECTOR
+  Android (Chrome): botón "Instalar" en la barra superior o menú ⋮ > Instalar aplicación.
+  Computadora (Chrome o Edge): ícono de instalar en la barra de direcciones.
+  iPhone/iPad (Safari): Compartir > "Añadir a pantalla de inicio".
+
+PARA UNA EDICIÓN NUEVA
+  1. Reemplaza index.html y las fotos de img/ (y el PDF, si hay).
+  2. En sw.js cambia VERSION de 'ed3-v1' a 'ed4-v1' y revisa la lista CORE.
+  3. Vuelve a subir la carpeta. Los lectores reciben la edición al abrir la app con conexión.
+
+NOTA: abrir index.html con doble clic muestra la página, pero no se instala ni guarda copia.
