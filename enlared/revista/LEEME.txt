@@ -1,0 +1,43 @@
+EN LA RED · ISOC PANAMÁ — APP WEB INSTALABLE (PWA)
+Versión REVISTA (páginas que se pasan). Edición #3, abril 2021
+
+QUÉ CONTIENE
+  index.html              La revista.
+  manifest.webmanifest    Nombre, colores e íconos de la app.
+  sw.js                   Permite leerla sin conexión.
+  icons/  img/            Íconos y fotografías.
+
+CÓMO PUBLICARLA
+1. Sube TODA esta carpeta (con sus subcarpetas) a un sitio web con HTTPS,
+   en una carpeta llamada "revista", por ejemplo https://tudominio.com/revista/
+   (la versión PORTAL enlaza a esa carpeta, así que conserva el nombre "revista"
+   y ponla junto a la carpeta "portal", en el mismo dominio).
+   Mantén los archivos juntos y con los mismos nombres.
+2. Abre esa dirección en el celular o la computadora.
+   Si usas el HTTP sin la "s", la instalación y el modo sin conexión no funcionan.
+
+CÓMO LA INSTALA UN LECTOR
+  Android (Chrome): botón "Instalar" en la barra superior de la revista,
+                    o menú ⋮ > Instalar aplicación.
+  Computadora (Chrome o Edge): ícono de instalar en la barra de direcciones,
+                    o el botón "Instalar" de la revista.
+  iPhone/iPad (Safari): botón Compartir > "Añadir a pantalla de inicio".
+  Después se abre como cualquier app, con su ícono, y funciona sin internet
+  una vez que se abrió una primera vez con conexión.
+
+NOTAS
+  - Abrir index.html directamente desde la carpeta del computador (sin
+    servidor web) muestra la revista, pero no se instala ni guarda copia.
+  - Las tipografías se descargan de Google Fonts la primera vez y se guardan
+    en el dispositivo. Sin esa primera descarga se usan tipos de respaldo.
+
+PARA UNA EDICIÓN NUEVA
+  1. Reemplaza index.html y las fotos de img/.
+  2. En sw.js cambia VERSION de 'ed3-v1' a 'ed4-v1' (la parte que sigue a
+     PREFIJO) y la lista de imágenes de CORE si cambian los nombres.
+  3. Vuelve a subir la carpeta. Los lectores reciben la edición nueva al abrir
+     la app con conexión.
+
+CONVIVENCIA CON LA VERSIÓN PORTAL
+  Las dos apps pueden estar en el mismo dominio, cada una en su carpeta.
+  Cada una guarda su propia copia sin borrar la de la otra.

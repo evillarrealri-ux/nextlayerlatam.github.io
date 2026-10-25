@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Boletín oficial de ISOC Panamá. Edición #3, abril 2021.">
+<meta name="theme-color" content="#0B4E9B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="En La Red">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>En la Red · ISOC Panamá</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una edición es una red de diez nodos. Portada con grafo vivo, una página visible a la vez,
+   y una barra inferior que dibuja los nodos conectados y marca dónde estás. */
+:root{
+  --paper:#F2F5FA; --paper-2:#E6ECF5; --card:#FFFFFF;
+  --ink:#0D1A2D; --ink-2:#44546B;
+  --blue:#0B4E9B; --blue-soft:#D9E6F7;
+  --red:#C8102E;
+  --line:#C5D0DF; --bar:#F2F5FA;
+  --f-display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+  --f-body:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --gut-l:max(16px,env(safe-area-inset-left,0px));
+  --gut-r:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#08111F; --paper-2:#0F1C31; --card:#0F1C31;
+    --ink:#E8EEF8; --ink-2:#9FB0C8;
+    --blue:#7DB0F5; --blue-soft:#14284A;
+    --red:#FF6A7F;
+    --line:#22344F; --bar:#08111F;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#08111F; --paper-2:#0F1C31; --card:#0F1C31;
+  --ink:#E8EEF8; --ink-2:#9FB0C8;
+  --blue:#7DB0F5; --blue-soft:#14284A;
+  --red:#FF6A7F;
+  --line:#22344F; --bar:#08111F;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:400 1.0625rem/1.65 var(--f-body);
+  padding-bottom:84px;
+  -webkit-text-size-adjust:100%;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bar)}
+a{color:var(--blue);text-underline-offset:.18em}
+a:hover{color:var(--red)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:2px}
+[tabindex="-1"]:focus{outline:none}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0 0 1.1em}
+.mono,.kicker,.lbl-mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase}
+
+/* ---------- barra superior ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:25;background:var(--bar);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1080px;margin:0 auto;padding:10px var(--gut-r) 10px var(--gut-l);display:flex;align-items:center;gap:12px}
+.brand{font:700 1.15rem/1 var(--f-display);background:none;border:0;padding:6px 0;cursor:pointer;letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}
+.brand i{display:inline-block;width:.45em;height:.45em;border-radius:50%;background:var(--red);align-self:center}
+.brand small{font:500 .7rem var(--f-mono);color:var(--ink-2);letter-spacing:.08em;text-transform:uppercase}
+.spacer{flex:1}
+.pill{background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:500 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--ink)}
+.pill:hover{border-color:var(--blue);color:var(--blue)}
+a.pill{text-decoration:none;display:inline-block}
+#portal .n{display:none}
+.bar-in{flex-wrap:wrap;row-gap:6px}
+@media (max-width:520px){#portal .w{display:none}#portal .n{display:inline}}
+
+/* ---------- barra inferior: la red ---------- */
+.rail{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--bar);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.rail-in{max-width:1080px;margin:0 auto;padding:8px var(--gut-r) 8px var(--gut-l);display:flex;align-items:center;gap:8px}
+.step{width:42px;height:42px;flex:none;border:1px solid var(--line);background:var(--card);border-radius:50%;cursor:pointer;font-size:1.1rem;line-height:1;display:grid;place-items:center}
+.step:hover:not(:disabled){border-color:var(--blue);color:var(--blue)}
+.step:disabled{opacity:.35;cursor:default}
+.nodes{display:flex;flex:1;min-width:0;max-width:440px;margin:0 auto}
+.node{flex:1;position:relative;height:38px;background:none;border:0;padding:0;cursor:pointer;min-width:0}
+.node::before{content:"";position:absolute;left:50%;right:-50%;top:50%;height:2px;margin-top:-1px;background:var(--line)}
+.node:last-child::before{display:none}
+.node.past::before{background:var(--blue)}
+.node::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:var(--paper);border:2px solid var(--blue);transition:transform .2s}
+.node.past::after{background:var(--blue)}
+.node[aria-current="true"]::after{background:var(--red);border-color:var(--red);transform:scale(1.4)}
+.where{display:none;font:500 .72rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:16rem}
+@media (min-width:760px){.where{display:block}.nodes{margin:0}}
+
+/* ---------- páginas ---------- */
+.page{animation:enter .35s ease both}
+@keyframes enter{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+.page-in{max-width:1080px;margin:0 auto;padding:36px var(--gut-r) 56px var(--gut-l)}
+.kicker{color:var(--ink-2);margin:0 0 14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{font-weight:500;color:var(--red)}
+.kicker::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--red)}
+.page h1{font-size:clamp(2.2rem,6.2vw,4.1rem);line-height:1.02;font-weight:700;letter-spacing:-.025em;margin-bottom:28px;max-width:20ch}
+.lead{font-size:1.25rem;line-height:1.5;max-width:42rem;color:var(--ink)}
+
+.cols{display:grid;gap:32px;align-items:start}
+@media (min-width:880px){.cols{grid-template-columns:minmax(0,17rem) minmax(0,1fr);gap:56px}}
+.meta{display:grid;gap:14px;min-width:0}
+.meta dl{margin:0;display:grid;gap:14px}
+.meta dt{font:500 .7rem var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.meta dd{margin:2px 0 0;font:500 1rem/1.4 var(--f-display)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:20px;min-width:0}
+.prose{max-width:38rem;min-width:0}
+.prose h2{font-size:1.5rem;line-height:1.2;margin:1.8em 0 .5em;font-weight:650}
+.dropcap>p:first-child::first-letter{float:left;font:700 4.3em/.78 var(--f-display);padding:.06em .1em 0 0;color:var(--blue)}
+.pull{margin:1.8rem 0;max-width:34rem;font:600 clamp(1.35rem,3.4vw,1.9rem)/1.25 var(--f-display);letter-spacing:-.01em}
+.pull::before{content:"";display:block;width:2.5rem;height:4px;background:var(--red);margin-bottom:.9rem}
+.src{font:400 .8rem/1.5 var(--f-mono);color:var(--ink-2);margin-top:1.6rem}
+.readtime{color:var(--ink-2)}
+
+/* portada */
+.cover{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#net{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--paper) 0%,var(--paper) 30%,transparent 78%);opacity:.82;pointer-events:none}
+.cover .page-in{position:relative;z-index:2;padding-top:56px;padding-bottom:64px}
+.cover-grid{display:grid;gap:28px;align-items:end}
+@media (min-width:880px){.cover-grid{grid-template-columns:minmax(0,1fr) minmax(0,23rem);gap:56px}}
+.cover-photo{margin:0;min-width:0;max-width:22rem}
+@media (min-width:880px){.cover-photo{max-width:none}}
+.cover-photo .zoom img{display:block;width:100%;height:auto;aspect-ratio:853/1280;object-fit:contain}
+.cover-photo figcaption,.cap{font:400 .72rem/1.45 var(--f-mono);letter-spacing:.03em;color:var(--ink-2);margin-top:8px}
+.cover-photo figcaption b,.cap b{font-weight:500;color:var(--ink)}
+.wordmark{font:800 clamp(3.8rem,11vw,7.6rem)/.88 var(--f-display);letter-spacing:-.05em;margin:18px 0 26px;max-width:none}
+.wordmark .red{color:var(--blue)}
+.wordmark .dot{display:inline-block;width:.17em;height:.17em;border-radius:50%;background:var(--red);margin-left:.05em;animation:ping 2.4s ease-in-out infinite}
+@keyframes ping{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 0 .12em color-mix(in srgb,var(--red) 28%,transparent)}}
+.edition{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.edition span{border:1px solid var(--ink);padding:5px 10px}
+.edition span:first-child{background:var(--ink);color:var(--paper)}
+.cover-line{font:500 clamp(1.15rem,2.6vw,1.5rem)/1.3 var(--f-display);max-width:26rem;margin-bottom:28px}
+.teasers{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:2px;max-width:30rem}
+.teasers button{width:100%;text-align:left;background:color-mix(in srgb,var(--paper) 82%,transparent);border:0;border-top:1px solid var(--line);padding:11px 4px;cursor:pointer;display:flex;gap:14px;align-items:baseline;font:500 1rem/1.3 var(--f-display)}
+.teasers button:hover{color:var(--red)}
+.teasers .no{font:500 .72rem var(--f-mono);color:var(--ink-2);flex:none;width:1.8rem}
+.cta{background:var(--red);color:#fff;border:0;border-radius:999px;padding:14px 24px;font:600 1rem var(--f-display);cursor:pointer}
+:root[data-theme="dark"] .cta{color:#08111F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cta{color:#08111F}}
+.cta:hover{filter:brightness(1.08)}
+
+/* fotos y multimedia */
+.photo{margin:0;min-width:0}
+.photo img,.wide img{display:block;width:100%;height:auto;border-radius:2px;background:var(--paper-2)}
+.photo.tall img{aspect-ratio:3/4;object-fit:cover;object-position:50% 20%}
+.wide{margin:0 0 30px}
+.wide img{aspect-ratio:1280/550;object-fit:cover}
+.paper{background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px;min-width:0}
+.paper img{display:block;width:100%;height:auto}
+.zoom{display:block;width:100%;padding:0;border:0;background:var(--paper-2);cursor:zoom-in;position:relative;border-radius:2px;overflow:hidden}
+.zoom img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 0}
+.zoom::after{content:"Ampliar";position:absolute;right:8px;bottom:8px;background:var(--ink);color:var(--paper);font:500 .68rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+.split{display:grid;gap:24px;align-items:start}
+@media (min-width:880px){.split{grid-template-columns:minmax(0,1fr) minmax(0,22rem);gap:48px}}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(5,10,20,.93);display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);place-items:center;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 56px) var(--gut-r) calc(env(safe-area-inset-bottom,0px) + 20px) var(--gut-l)}
+.lb img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+.lb-x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 10px);right:var(--gut-r);background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:8px 16px;font:500 .75rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.lb-x:hover{background:#fff;color:#05090f}
+.panel-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;margin-bottom:10px}
+.panel-head img{width:112px;height:112px;border-radius:50%;object-fit:cover;object-position:50% 30%;display:block;background:var(--paper-2)}
+@media (max-width:520px){.panel-head img{width:84px;height:84px}}
+.banner{display:block;margin-top:34px;border-radius:2px;overflow:hidden}
+.banner img{display:block;width:100%;height:auto}
+
+/* índice */
+.toc{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;text-align:left;cursor:pointer;display:grid;grid-template-columns:3rem minmax(0,1fr);gap:4px 12px;padding:18px 4px}
+.toc button:hover{background:var(--paper-2)}
+.toc .no{font:500 .8rem var(--f-mono);color:var(--red);padding-top:.5rem}
+.toc .sec{font:500 .7rem var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.toc .t{display:block;font:650 clamp(1.2rem,2.8vw,1.7rem)/1.2 var(--f-display);letter-spacing:-.01em}
+.toc .d{display:block;color:var(--ink-2);font-size:.98rem}
+.toc button:hover .t{color:var(--blue)}
+
+/* perfil */
+.quote-big{font:600 clamp(1.4rem,3.4vw,2rem)/1.25 var(--f-display);margin:0 0 6px;max-width:30rem;text-wrap:balance}
+.qa h3{font:650 1.15rem/1.3 var(--f-display);margin:1.6em 0 .4em;color:var(--blue)}
+.qa p{max-width:38rem}
+
+/* compañeras */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 30px}
+.tab{background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer;text-align:left;display:grid;line-height:1.25}
+.tab b{font:650 1rem var(--f-display)}
+.tab span{font:500 .68rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tab[aria-selected="true"] span{color:var(--paper);opacity:.8}
+.panel h2{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.05;margin-bottom:6px;letter-spacing:-.02em}
+.panel .career{font:500 .75rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px}
+.panel .redes{display:flex;gap:8px 18px;flex-wrap:wrap;font:400 .85rem var(--f-mono);margin:0 0 6px}
+.panel details{border-top:1px solid var(--line);padding:6px 0}
+.panel summary{cursor:pointer;font:650 1.1rem/1.35 var(--f-display);padding:12px 0;list-style:none;display:flex;gap:12px;align-items:baseline}
+.panel summary::-webkit-details-marker{display:none}
+.panel summary::before{content:"+";font:500 1rem var(--f-mono);color:var(--red);width:1rem;flex:none}
+.panel details[open] summary::before{content:"–"}
+.panel details p{max-width:40rem;padding-left:28px}
+
+/* anuncios */
+.timeline{display:flex;align-items:center;gap:0;margin:22px 0 10px;max-width:30rem}
+.tl-pt{flex:none;display:grid;gap:2px}
+.tl-pt b{font:700 2.4rem/1 var(--f-display);letter-spacing:-.03em}
+.tl-pt span{font:500 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.tl-line{flex:1;height:2px;background:var(--blue);margin:0 14px;position:relative;min-width:30px}
+.tl-line::before,.tl-line::after{content:"";position:absolute;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--paper);border:2px solid var(--blue)}
+.tl-line::before{left:-5px}.tl-line::after{right:-5px;background:var(--red);border-color:var(--red)}
+.events{display:grid;gap:16px;margin-top:20px}
+@media (min-width:880px){.events{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.event{background:var(--paper-2);border-radius:4px;padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.event .date{font:700 2.6rem/.95 var(--f-display);letter-spacing:-.03em;color:var(--blue)}
+.event .date small{display:block;font:500 .72rem var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-top:6px}
+.event h3{font:650 1.2rem/1.25 var(--f-display)}
+.event p{margin:0;font-size:.98rem;line-height:1.55}
+.event a{overflow-wrap:anywhere;font:400 .82rem/1.4 var(--f-mono)}
+.section-h{font-size:clamp(1.5rem,3.4vw,2.1rem);letter-spacing:-.015em;margin:44px 0 10px;padding-top:26px;border-top:2px solid var(--ink)}
+
+/* covid */
+.measures{list-style:none;margin:24px 0 8px;padding:0;display:grid;gap:10px;max-width:40rem}
+.measures label{display:flex;gap:14px;align-items:center;padding:16px 18px;background:var(--card);border:1px solid var(--line);border-radius:4px;cursor:pointer;font:650 1.15rem/1.25 var(--f-display)}
+.measures input{appearance:none;-webkit-appearance:none;width:24px;height:24px;flex:none;border:2px solid var(--blue);border-radius:50%;background:var(--paper);display:grid;place-items:center;margin:0;cursor:pointer}
+.measures input:checked{background:var(--blue)}
+.measures input:checked::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--paper)}
+.measures label:has(input:checked){border-color:var(--blue);background:var(--blue-soft)}
+.count{font:500 .8rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+
+/* gráfico igualdad */
+.bars{margin:0;display:grid;gap:14px;--val:3.8rem}
+.bars figcaption{font:650 1rem/1.3 var(--f-display)}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) var(--val);gap:4px 10px;align-items:center}
+.bar-row .l{grid-column:1/-1;font-size:.92rem;line-height:1.35;color:var(--ink-2)}
+.track{height:16px;background:var(--paper-2);border-radius:2px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--blue)}
+.bar-row:last-of-type .track i{background:var(--red)}
+.bar-row b{font:700 1.3rem var(--f-display);text-align:right;font-variant-numeric:tabular-nums}
+.axis{display:grid;grid-template-columns:minmax(0,1fr) var(--val);gap:10px;font:400 .68rem var(--f-mono);color:var(--ink-2)}
+.axis .ticks{display:flex;justify-content:space-between}
+.bars .note{font:400 .72rem/1.4 var(--f-mono);color:var(--ink-2)}
+
+/* autoridades */
+.roster{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));margin:14px 0 8px}
+.person{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px;display:grid;gap:12px;min-width:0}
+.av{width:104px;height:104px;border-radius:50%;object-fit:cover;object-position:50% 22%;display:block;background:var(--paper-2)}
+.person b{font:650 1.1rem/1.25 var(--f-display);display:block}
+.person span{font:500 .7rem var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--red)}
+.sub-h{font:500 .75rem var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:28px 0 0}
+.scrollx{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:20rem}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line)}
+th{font:500 .7rem var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);border-bottom:2px solid var(--ink)}
+td:last-child{font-variant-numeric:tabular-nums}
+
+/* editorial */
+.mast{display:grid;gap:22px;margin-top:8px}
+@media (min-width:880px){.mast{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mast h3{font:500 .75rem var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px}
+.mast .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.mast .row .k{font:500 .75rem var(--f-mono);color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em;min-width:5.5rem}
+.mast .addr{font:400 .95rem var(--f-mono);overflow-wrap:anywhere}
+.copy{font:500 .68rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:transparent;border-radius:999px;padding:4px 10px;cursor:pointer}
+.copy:hover{border-color:var(--blue);color:var(--blue)}
+.legal{font:400 .78rem/1.5 var(--f-mono);color:var(--ink-2);margin-top:32px;border-top:1px solid var(--line);padding-top:16px;max-width:44rem}
+.back{margin-top:30px}
+
+@media (max-width:520px){.brand small{display:none}.step{width:38px;height:38px}.pill{padding:6px 11px}}
+@media (prefers-reduced-motion:reduce){.page,.wordmark .dot{animation:none}.node::after{transition:none}}
+</style>
+</head>
+<body>
+
+
+<header class="bar">
+  <div class="bar-in">
+    <button class="brand" type="button" data-go="portada" aria-label="Ir a la portada"><span>En la Red</span><i aria-hidden="true"></i><small>Ed. 3 · Abril 2021</small></button>
+    <span class="spacer"></span>
+    <button class="pill" type="button" data-go="indice">Índice</button>
+    <button class="pill" type="button" id="install" hidden>Instalar</button>
+    <a class="pill" id="portal" href="https://isoc.org.pa/" target="_blank" rel="noopener" aria-label="Abrir el portal de ISOC Panamá en otra pestaña"><span class="w">Portal ISOC</span><span class="n">Portal</span> ↗</a>
+    <button class="pill" type="button" id="theme" aria-label="Cambiar entre modo claro y oscuro">Oscuro</button>
+  </div>
+</header>
+
+<main id="issue">
+
+<!-- 01 PORTADA -->
+<section class="page cover" id="portada" data-title="Portada">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="page-in">
+   <div class="cover-grid">
+    <div class="cover-text">
+    <p class="kicker">Boletín oficial de ISOC Panamá</p>
+    <h1 class="wordmark">En la <span class="red">Red</span><span class="dot" aria-hidden="true"></span></h1>
+    <p class="edition mono"><span>Edición #3</span><span>Abril 2021</span></p>
+    <p class="cover-line">Una edición dedicada a las niñas y mujeres en las TIC.</p>
+    <ul class="teasers" aria-label="En esta edición">
+      <li><button type="button" data-go="perfil"><span class="no">03</span><span>Conociendo a los miembros: Zueline Aguilar</span></button></li>
+      <li><button type="button" data-go="companeras"><span class="no">04</span><span>Nuestras compañeras en las TIC</span></button></li>
+      <li><button type="button" data-go="articulo"><span class="no">06</span><span>Digitalización: un paso en la protección de la información</span></button></li>
+      <li><button type="button" data-go="igualdad"><span class="no">08</span><span>Igualdad de género: a un clic de ratón</span></button></li>
+      <li><button type="button" data-go="autoridades"><span class="no">09</span><span>Nuevas autoridades de ISOC Panamá</span></button></li>
+    </ul>
+    <button class="cta" type="button" data-go="indice">Abrir la edición →</button>
+    </div>
+    <figure class="cover-photo">
+      <button class="zoom" type="button" data-zoom="img/cover.jpg" data-alt="Andrea Lino, mujer emberá, de rodillas junto a un río con los brazos en alto, con collares de cuentas y vestimenta de colores" aria-label="Ampliar la foto de portada"><img src="img/cover.jpg" width="853" height="1280" alt="Andrea Lino, mujer emberá, de rodillas junto a un río con los brazos en alto, con collares de cuentas y vestimenta de colores"></button>
+      <figcaption><b>Foto de portada:</b> Andrea Lino, líder femenina de la comunidad Emberá Drua.</figcaption>
+    </figure>
+   </div>
+  </div>
+</section>
+
+<!-- 02 ÍNDICE -->
+<section class="page" id="indice" data-title="Índice" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 02</b> Índice</p>
+    <h1>En esta edición</h1>
+    <ol class="toc">
+      <li><button type="button" data-go="perfil"><span class="no">03</span><span><span class="sec">Perfil</span><span class="t">Conociendo a los miembros</span><span class="d">Zueline Nohemi Aguilar Sánchez, secretaria de la Junta Directiva.</span></span></button></li>
+      <li><button type="button" data-go="companeras"><span class="no">04</span><span><span class="sec">Entrevistas</span><span class="t">Nuestras compañeras</span><span class="d">Elaine Izquierdo, Staycy Guevara y Leydis Peña.</span></span></button></li>
+      <li><button type="button" data-go="anuncios"><span class="no">05</span><span><span class="sec">Agenda</span><span class="t">Capacitación y anuncios</span><span class="d">Curso para Capítulos, conversación del 21 de abril, webinar y Aceptación Universal.</span></span></button></li>
+      <li><button type="button" data-go="articulo"><span class="no">06</span><span><span class="sec">Artículo principal</span><span class="t">Digitalización: un paso en la protección de la información</span><span class="d">Ing. Amarilis O. De León H.</span></span></button></li>
+      <li><button type="button" data-go="covid"><span class="no">07</span><span><span class="sec">Salud</span><span class="t">No bajemos la guardia ante el COVID-19</span><span class="d">Seis medidas de prevención y bioseguridad.</span></span></button></li>
+      <li><button type="button" data-go="igualdad"><span class="no">08</span><span><span class="sec">Opinión</span><span class="t">Igualdad de género: a un clic de ratón</span><span class="d">Dafne Sabanes Plou.</span></span></button></li>
+      <li><button type="button" data-go="autoridades"><span class="no">09</span><span><span class="sec">Institucional</span><span class="t">Nuevas autoridades de ISOC Panamá</span><span class="d">Junta Directiva 2021-2023 y miembros nuevos.</span></span></button></li>
+      <li><button type="button" data-go="editorial"><span class="no">10</span><span><span class="sec">Editorial</span><span class="t">Nota editorial y créditos</span><span class="d">Comité editorial y contacto.</span></span></button></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 03 PERFIL -->
+<section class="page" id="perfil" data-title="Perfil" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 03</b> Perfiles · Conociendo a los miembros</p>
+    <h1>Zueline Nohemi Aguilar Sánchez</h1>
+    <div class="cols">
+      <aside class="meta">
+        <figure class="photo tall"><img src="img/zueline.jpg" width="900" height="1200" alt="Zueline Aguilar sonriendo, con blusa de estampado blanco y negro"></figure>
+        <div class="card">
+          <dl>
+            <div><dt>Profesión</dt><dd>Ingeniera en Electrónica y Telecomunicaciones</dd></div>
+            <div><dt>Posición en ISOC</dt><dd>Secretaria de la Junta Directiva</dd></div>
+            <div><dt>Fecha de nacimiento</dt><dd>7 de abril</dd></div>
+            <div><dt>Hobbies</dt><dd>Arte floral, senderismo, escribir poemas</dd></div>
+          </dl>
+        </div>
+      </aside>
+      <div class="qa">
+        <p class="quote-big">«No te ahogas al caer a un río, sino al mantenerte sumergido en él.»</p>
+        <p class="mono" style="color:var(--ink-2)">Frase favorita · Paulo Coelho</p>
+        <h3>¿Qué te llevó a unirte a ISOC?</h3>
+        <p>Siempre tuve el interés de unirme a una comunidad en la cual se trataran temas referentes a mi carrera y pudiera aportar mis conocimientos para ayudar a otros. A través de colegas y conocidos, escuché sobre ISOC, quien permite colaborar e interactuar para construir una internet para todos. Y es así que fui involucrándome y colaborando en el capítulo de Panamá y hace dos años comencé a liderar el plan piloto para crear una Red Comunitaria en Panamá, cuya principal meta es ayudar a las comunidades a beneficiarse de las oportunidades que pueden ofrecerse a través del Internet.</p>
+        <p>Aprovecho la oportunidad para invitar a los miembros a participar en las diferentes iniciativas del Capítulo.</p>
+        <p class="quote-big" style="color:var(--red)">Los invito a todos a participar con nosotros. ¡Súmate!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 COMPAÑERAS -->
+<section class="page" id="companeras" data-title="Nuestras compañeras" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 04</b> Entrevistas</p>
+    <h1>Nuestras compañeras</h1>
+    <p class="lead">Como parte del Día Internacional de la Mujer, que se celebró el 8 de marzo, y del Día de las Niñas y las Mujeres en las TIC, que se celebrará el 22 de abril, compartimos los perfiles de tres compañeras de nuestro Capítulo. Sus historias inspiran a niñas y jóvenes a seguir carreras en Ciencias, Tecnologías, Ingenierías y Matemáticas (STEM) y a entender el valor que aportan para que la brecha de género en las carreras profesionales sea cada día más chica.</p>
+
+    <div class="tabs" role="tablist" aria-label="Elige una entrevista">
+      <button class="tab" role="tab" id="tab-elaine" aria-controls="p-elaine" aria-selected="true" type="button"><b>Elaine Izquierdo</b><span>Electrónica y Telecom.</span></button>
+      <button class="tab" role="tab" id="tab-staycy" aria-controls="p-staycy" aria-selected="false" tabindex="-1" type="button"><b>Staycy Guevara</b><span>Redes informáticas</span></button>
+      <button class="tab" role="tab" id="tab-leydis" aria-controls="p-leydis" aria-selected="false" tabindex="-1" type="button"><b>Leydis Peña</b><span>Ingeniería informática</span></button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-elaine" aria-labelledby="tab-elaine">
+      <div class="panel-head"><img src="img/elaine.jpg" width="900" height="675" alt="Elaine Izquierdo con lentes de sol frente a unos cohetes"><div>
+      <h2>Elaine Izquierdo</h2>
+      <p class="career">Ingeniería en Electrónica y Telecomunicaciones</p>
+      <p class="redes">Instagram @elyizqdo</p></div></div>
+      <details open><summary>¿Quién o quiénes te motivaron para tomar la decisión de dedicarte a la carrera de Ingeniería en Electrónica y Telecomunicaciones?</summary>
+        <p>Desde los 15 años supe que quería ser ingeniera; en ese entonces no estaba 100 % segura en qué rama. Todo inició en una visita al puente de mando de una embarcación. Me llamó mucho la atención que la única mujer ahí era una ingeniera naval encargada de las comunicaciones del barco. Era increíble ver su seguridad y confianza con el tablero de control y el respeto que le tenían sus compañeros de trabajo, todo esto sin perder su feminidad. Entonces me dije: wow, qué súper mujer, ¡yo quiero ser así cuando sea grande!</p>
+        <p>En mi último año de secundaria, en 2003, tuve la oportunidad de conocer de la mano de una ingeniera de telecomunicaciones lo bonito de la carrera y las oportunidades que venían con la apertura del mercado. Esto me dio el último empujón que necesitaba para decidirme.</p></details>
+      <details open><summary>¿Qué retos enfrentan las niñas y mujeres en espacios como en el que te desempeñas? Cuéntanos una experiencia positiva y otra no tan positiva.</summary>
+        <p>Hay muchos retos. Por ejemplo, muchas horas de estudio. Nunca dejas de estudiar, aun siendo profesional. Precisamente esas horas de dedicación al estudio y al trabajo me han ayudado a crear un vínculo bonito con mis compañeros de universidad y con muchos colegas del gremio.</p>
+        <p>Entre las no tan positivas están los sesgos de género que aún existen. Esto nos obliga, en ciertas situaciones, a esforzarnos más por demostrar lo que vales como profesional. Puede ser desalentador, pero está en nosotras desafiar este prejuicio para que sea eliminado.</p></details>
+      <details open><summary>¿Cuál es el logro relacionado a tu trabajo o estudios que más te emociona y enorgullece?</summary>
+        <p>He tenido la dicha de que mi trabajo y mis estudios me han permitido conocer muchos lugares del país, viajar e incluso vivir en varios países, conociendo gente maravillosa. Pero lo que más me enorgullece es que, cuando finalizas un proyecto complicado, recibes un agradecimiento de los usuarios beneficiados. Para nosotros es un trabajo. Para ellos es una herramienta para conectarse digitalmente a un nuevo mundo lleno de oportunidades para su desarrollo personal y profesional.</p></details>
+      <details open><summary>¿Qué mensaje les darías a otras niñas y mujeres que están relacionadas con áreas STEM?</summary>
+        <p>No desalentarse y recordar que todas las cosas buenas van acompañadas de retos. Si hay pasión por lo que haces y los objetivos son claros, podrás superar todos los obstáculos.</p></details>
+      <details open><summary>¿Qué consideras fundamental para empoderar a las niñas y las mujeres e incentivarlas a que estudien y cursen carreras en el ámbito de las STEM?</summary>
+        <p>Desde temprana edad, en el hogar, se debe potenciar a las niñas que muestran indicios de querer ir tras carreras técnicas; no se les deben truncar los sueños. Hoy en día hay muchas iniciativas para que las chicas aprendan, mejoren sus habilidades e incrementen su seguridad.</p>
+        <p>También es importante que las niñas tengan un modelo a seguir. Que conozcan referentes femeninos de liderazgo dentro de las STEM que les sirvan de inspiración para ir tras sus objetivos.</p></details>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-staycy" aria-labelledby="tab-staycy" hidden>
+      <div class="panel-head"><img src="img/staycy.jpg" width="900" height="679" alt="Staycy Guevara sonriendo" loading="lazy"><div>
+      <h2>Staycy Guevara</h2>
+      <p class="career">Licenciatura en Redes Informáticas</p>
+      <p class="redes"><a href="https://www.linkedin.com/in/stacy-guevara-aa4a1391" target="_blank" rel="noopener">LinkedIn</a><span>Twitter: Stague</span></p></div></div>
+      <details open><summary>¿Quién o quiénes te motivaron para tomar la decisión de dedicarte a la carrera de Licenciatura en Redes Informáticas?</summary>
+        <p>En realidad, no tuve una motivación externa a mí misma al momento de escoger la carrera. Era algo que me llamaba la atención desde la escuela secundaria: poder descubrir cosas nuevas. Luego de investigar y analizar las carreras dentro de las TIC, vi que era un ámbito que iba a ser necesario en cualquier industria, y es lo que se está viendo en la actualidad, ya que ahora todos estamos interconectados.</p></details>
+      <details open><summary>¿Qué retos enfrentan las niñas y mujeres en espacios como en el que te desempeñas? Cuéntanos una experiencia positiva y otra no tan positiva.</summary>
+        <p>Uno de los retos es romper estereotipos. Considero que los retos se los impone uno mismo en esta área, ya que con esfuerzo y dedicación las mujeres hemos logrado demostrar nuestras capacidades en áreas técnicas que normalmente son ocupadas por hombres. Como experiencia positiva, ver que en un área técnica el 75 % éramos mujeres dejó en evidencia que no hay diferencia por ser mujer. La no tan positiva es sentir que piensen que no eres capaz por ser mujer.</p></details>
+      <details open><summary>¿Cuál es el logro relacionado a tu trabajo o estudios que más te emociona y enorgullece?</summary>
+        <p>Hasta el momento, lo que más me enorgullece es ver cómo los conocimientos en el ámbito de las TIC son necesarios y valorados en áreas como Continuidad del Negocio, y haber aprendido a enlazar lo técnico con lo estratégico y a transmitir a los demás lo que he logrado aprender.</p></details>
+      <details open><summary>¿Qué mensaje les darías a otras niñas y mujeres que están relacionadas con áreas TIC y STEM?</summary>
+        <p>¡Que persigan sus sueños, que todos son alcanzables si así te lo propones! Que descubran qué es lo que más les gusta en esta área, que es muy amplia. El talento femenino es muy positivo, muy brillante y tenemos mucho que aportar. Por eso precisamos cambiar las estadísticas apoyándonos entre nosotras.</p></details>
+      <details open><summary>¿Qué consideras fundamental para empoderar a las niñas y las mujeres e incentivarlas a que estudien y cursen carreras en el ámbito de las TIC y STEM?</summary>
+        <p>Tenemos que animar, impulsar, normalizar y ofrecer referentes a las niñas y mujeres, para dar visibilidad a las mujeres que han alcanzado el éxito en esas profesiones y que puedan tener esos modelos de inspiración. Así mismo, hay que dar a conocer las diferentes alternativas profesionales que tienen en este ámbito, ya que muchas veces ni siquiera las conocen, y en la actualidad hay muchas oportunidades donde se necesita la autenticidad y las características únicas que tenemos las mujeres.</p></details>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-leydis" aria-labelledby="tab-leydis" hidden>
+      <div class="panel-head"><img src="img/leydis.jpg" width="800" height="778" alt="Leydis Peña, retrato" loading="lazy"><div>
+      <h2>Leydis Peña</h2>
+      <p class="career">Ingeniería Informática</p>
+      <p class="redes"><a href="https://www.linkedin.com/in/leydis-pe%C3%B1a-81968b105" target="_blank" rel="noopener">LinkedIn</a><span>Instagram: Leydisp19</span></p></div></div>
+      <details open><summary>¿Quién o quiénes te motivaron para tomar la decisión de dedicarte a la carrera de Ingeniería Informática?</summary>
+        <p>La decisión de estudiar esta carrera la tomé desde los 12 años. Desde niña me llamaban la atención los videojuegos y las películas de tecnología y hackers. Recuerdo que en mi primer año de secundaria un profesor me preguntó qué estudiaría en la universidad y mi respuesta fue «sistemas». Al llegar el momento, así fue. Al terminar la carrera estaba muy feliz porque había tomado la decisión correcta: es una carrera que está al servicio de otras especialidades y de la sociedad.</p></details>
+      <details open><summary>¿Qué retos enfrentan las niñas y mujeres en espacios como en el que te desempeñas? Cuéntanos una experiencia positiva y otra no tan positiva.</summary>
+        <p>Las mujeres en el sector de las TIC se enfrentan a barreras y factores que les impiden ocupar posiciones de liderazgo: el estereotipo del papel de la mujer en la sociedad, la falta de confianza en sí misma, la falta de habilidad para negociar, un ambiente fuertemente dominado por el género masculino y, muchas veces, la falta de apoyo para mantener un equilibrio entre la vida personal y la profesional.</p>
+        <p>Como experiencia positiva me gustaría resaltar ser parte de WoSec, un espacio para mujeres que apoya a las mujeres y una valiosa herramienta para fortalecer el género en las TIC. También destaco el apoyo y la guía que he recibido de mujeres y hombres en el desarrollo de mi vida profesional.</p></details>
+      <details open><summary>¿Cuál es el logro relacionado a tu trabajo o estudios que más te emociona y enorgullece?</summary>
+        <p>En mis estudios, el logro que más me enorgullece es la tesis que desarrollé sobre buenas prácticas para el diseño e implementación de aplicaciones de salud.</p></details>
+      <details open><summary>¿Qué mensaje les darías a otras niñas y mujeres que están relacionadas con áreas TIC y STEM?</summary>
+        <p>Ser una mujer líder en el área de las TIC no es fácil, pero tampoco es un reto imposible. Debemos prepararnos, creer en nosotras, apoyarnos, tener pasión y valentía para enfrentar todos los desafíos.</p></details>
+      <details open><summary>¿Qué consideras fundamental para empoderar a las niñas y las mujeres e incentivarlas a que estudien y cursen carreras en el ámbito de las TIC y STEM?</summary>
+        <p>Debemos disminuir la brecha de género en el sector con actividades y formaciones dirigidas a niñas y adolescentes de los centros educativos, y crear proyectos de emprendimiento digital para niñas. Así buscamos vencer los prejuicios de género asociados a las tecnologías y les brindamos referentes femeninos que promuevan el interés por las TIC y STEM.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 05 ANUNCIOS -->
+<section class="page" id="anuncios" data-title="Capacitación y anuncios" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 05</b> Agenda</p>
+    <h1>Capacitación y anuncios</h1>
+    <h2 class="section-h" style="margin-top:0;border-top:0;padding-top:0">Capacitación para Capítulos</h2>
+    <div class="split"><div>
+    <div class="prose">
+      <p>Como parte de su retroalimentación sobre las necesidades de capacitación en la gestión de Capítulos, se ha hecho un esfuerzo en todas las regiones para ofrecer una capacitación global con los temas clave para el éxito de un Capítulo. Los módulos son «self paced», es decir, cada persona avanza a su ritmo.</p>
+    </div>
+    <div class="timeline" role="img" aria-label="Las inscripciones abren el 18 de abril y el curso inicia el 3 de mayo">
+      <div class="tl-pt"><b>18 abr</b><span>Abren inscripciones</span></div>
+      <div class="tl-line"></div>
+      <div class="tl-pt" style="text-align:right"><b>3 may</b><span>Inicia el curso</span></div>
+    </div>
+    <p style="max-width:40rem">Resumen del programa: <a href="https://www.youtube.com/watch?v=4-DibHw_CGw" target="_blank" rel="noopener">video en YouTube</a>. Más detalles en <a href="https://www.internetsociety.org/es/learning/chapter-management-essentials/" target="_blank" rel="noopener">Chapter Management Essentials</a>.</p>
+    </div>
+    <figure class="paper"><img src="img/gears.jpg" width="1000" height="400" alt="Ilustración de engranajes con íconos de ideas, gráficos y trabajo en equipo" loading="lazy"></figure>
+    </div>
+
+    <h2 class="section-h">Anuncios</h2>
+    <div class="events">
+      <article class="event">
+        <button class="zoom" type="button" data-zoom="img/poster-21abr.jpg" data-alt="Afiche del Día Internacional de Mujeres y Niñas en las TIC, miércoles 21 de abril, con agenda y conversación sobre mujeres en ciberseguridad" aria-label="Ampliar el afiche del 21 de abril"><img src="img/poster-21abr.jpg" width="700" height="1758" alt="" loading="lazy"></button>
+        <div class="date">21<small>Miércoles · Abril</small></div>
+        <h3>Día Internacional de Mujeres en las TIC</h3>
+        <p>Acompáñanos en esta conversación sobre innovación, el rol de las mujeres y el anuncio de los ganadores del #FondoInnovacionCiberseguridad.</p>
+        <p class="lbl-mono" style="font-size:.7rem;color:var(--ink-2)">Inscripciones</p>
+        <a href="https://bit.ly/2RBZxbR" target="_blank" rel="noopener">https://bit.ly/2RBZxbR</a>
+      </article>
+      <article class="event">
+        <button class="zoom" type="button" data-zoom="img/poster-22abr.jpg" data-alt="Afiche del webinar Niñas y mujeres en las TIC: perspectivas desde la Neurociencia, 22 de abril de 2021, 5:00 p. m. (GMT-5), con la doctora María Florencia Álamos" aria-label="Ampliar el afiche del 22 de abril"><img src="img/poster-22abr.jpg" width="900" height="1273" alt="" loading="lazy"></button>
+        <div class="date">22<small>Jueves · Abril · 5 p. m. (GMT-5)</small></div>
+        <h3>Webinar: Niñas y mujeres en las TIC, perspectivas desde la Neurociencia</h3>
+        <p>Conoce cómo potenciar el desarrollo de las niñas en las TIC y qué esfuerzos debemos hacer para derribar los sesgos de género que aún existen en las carreras técnicas.</p>
+        <p class="lbl-mono" style="font-size:.7rem;color:var(--ink-2)">Registro</p>
+        <a href="https://zoom.us/meeting/register/tJIvcO-qrjMvH91SDr4Q5cX0wVv9cfE5zrfI" target="_blank" rel="noopener">Registro en Zoom</a>
+      </article>
+      <article class="event">
+        <button class="zoom" type="button" data-zoom="img/curso-au.jpg" data-alt="Afiche del curso Aceptación Universal, gratuito para técnicos, con inicio el 4 de mayo de 2021" aria-label="Ampliar el afiche del curso"><img src="img/curso-au.jpg" width="900" height="900" alt="" loading="lazy"></button>
+        <div class="date" style="font-size:1.7rem;line-height:1.05">Curso gratuito<small>Para programadores y estudiantes de TI</small></div>
+        <h3>Aceptación Universal</h3>
+        <p>Es el estado en que todos los nombres de dominio y direcciones de e-mail válidos son aceptados, validados, almacenados, procesados y exhibidos de manera correcta y consistente por todas las aplicaciones, dispositivos y sistemas que utilizan internet.</p>
+        <p class="lbl-mono" style="font-size:.7rem;color:var(--ink-2)">Matrícula</p>
+        <a href="http://input.icann.org/go?iv=1m2g9ge1ms8tf" target="_blank" rel="noopener">Matricularse en ICANN</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ARTÍCULO PRINCIPAL -->
+<section class="page" id="articulo" data-title="Artículo principal" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 06</b> Artículo principal</p>
+    <h1>Digitalización: un paso en la protección de la información</h1>
+    <div class="cols">
+      <aside class="meta">
+        <figure class="paper"><img src="img/digital.jpg" width="626" height="391" alt="Ilustración de un equipo de personas trabajando con computadoras y gráficos" loading="lazy"></figure>
+        <div class="card">
+          <dl>
+            <div><dt>Autora</dt><dd>Ing. Amarilis O. De León H.</dd></div>
+            <div><dt>Publicado originalmente</dt><dd>La Estrella de Panamá, 7 de agosto de 2017</dd></div>
+            <div><dt>Lectura</dt><dd><span class="readtime" data-read="#art-digital"></span></dd></div>
+          </dl>
+        </div>
+      </aside>
+      <div class="prose dropcap" id="art-digital">
+        <p>El término «digitalización» nos transporta por sí solo a pensar en computadoras, procesadores y escáneres, entre otros. Se puede definir la digitalización como la conversión de documentos, textos, imágenes y/o sonidos de un formato análogo (original o natural) a un formato que pueda ser reconocido por los microprocesadores o, en un lenguaje sencillo, por las computadoras, es decir, a un formato digital.</p>
+        <p>Hoy día es común escuchar a las organizaciones, en general, implementar procesos de digitalización con fines diversos: mejorar y facilitar nuevas formas de acceso a los documentos; disminuir el papel como una medida de preservar el ambiente; o la que se considera más sustentable para un proyecto de esta magnitud, mitigar el deterioro de los documentos en su estado original al disminuir su manipulación. Todas estas motivaciones son válidas, pero la duda que surge es… ¿se están tomando en cuenta las medidas que permitan acceder a estos objetos digitales a través del tiempo? ¿Es decir, a mediano y a largo plazo? ¿Se están llevando a cabo estrategias que mitiguen la obsolescencia tecnológica? ¿O simplemente estamos pensando en resolver un problema a cortísimo plazo?</p>
+        <p class="pull" style="margin-left:0">Uno de los aspectos primordiales de la protección de la información es garantizar la disponibilidad de los datos.</p>
+        <p>Esto quiere decir que si dentro de 20 años o más algún usuario desea ver esa información, pueda acceder a ella sin problema. Para garantizarlo se han elaborado estándares internacionales que minimizan el riesgo de perder información a futuro. Estas normas, de manera integral, se conocen como preservación digital.</p>
+        <p>Se sabe que existen otros aspectos de la protección de los datos que se deben cuidar desde el momento en que colocamos información en una red de computadoras, ya sea local o, como se hace comúnmente hoy día, permitiendo el acceso a nuestros documentos digitales a través de Internet. Pero la principal preocupación es un aspecto que, a pesar de su importancia, se escucha muy poco, quizás porque no se tiene claro las consecuencias que trae el no considerarlo: la «preservación digital».</p>
+        <p>La preservación digital es un concepto que surge de la preocupación de mantener, aun con el paso del tiempo, la visualización y el acceso a los objetos digitales, sobre todo cuando estos tienen un valor histórico y su original en papel está en franco deterioro. Los principales enemigos de las imágenes digitales son la rápida obsolescencia de los equipos y de los programas informáticos que les permiten existir. La preservación digital a largo plazo tiene la misión de mantener con vida esos objetos digitales, generando objetos auténticos y estables que aseguren la calidad aun con procedimientos de conversión de formato y migración de medios de almacenamiento, cuando así sean requeridos.</p>
+        <p>Estas regulaciones internacionales van desde aspectos básicos a considerar al momento de escanear el documento, hasta los medios de almacenamiento, el ambiente de conservación para el almacenamiento físico y la manipulación de la imagen.</p>
+        <p>Es imperativo que, si se decide digitalizar información importante, se hagan las adecuaciones pertinentes, no sea que estemos invirtiendo una gran cantidad de recursos en una actividad que durará solo unos cuantos años.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 COVID -->
+<section class="page" id="covid" data-title="No bajemos la guardia" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 07</b> Salud</p>
+    <h1>No bajemos la guardia ante el COVID-19</h1>
+    <p class="lead">Ahora que las autoridades nacionales de salud han rebajado las medidas de restricción en todo el país, es importante recordar que el virus del COVID-19 sigue en la calle. Sigamos con las medidas de prevención y bioseguridad.</p>
+    <div class="split">
+    <div>
+    <ul class="measures">
+      <li><label><input type="checkbox" class="m">Permanezcan en casa</label></li>
+      <li><label><input type="checkbox" class="m">Usar la mascarilla</label></li>
+      <li><label><input type="checkbox" class="m">Limpiar y desinfectar</label></li>
+      <li><label><input type="checkbox" class="m">Lavarse las manos frecuentemente</label></li>
+      <li><label><input type="checkbox" class="m">Mantener la distancia con otras personas</label></li>
+      <li><label><input type="checkbox" class="m">No tocarse la cara con las manos</label></li>
+    </ul>
+    <p class="count" id="mcount" aria-live="polite">0 de 6 medidas marcadas</p>
+    </div>
+    <figure class="photo"><div class="paper"><img src="img/prevencion.jpg" width="1400" height="933" alt="Infografía de seis medidas de prevención del coronavirus: quedarse en casa, usar mascarilla, limpiar y desinfectar, lavarse las manos, mantener la distancia y no tocarse la cara" loading="lazy"></div><figcaption class="cap">Infografía: medidas de prevención.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 08 IGUALDAD -->
+<section class="page" id="igualdad" data-title="Igualdad de género" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 08</b> Opinión</p>
+    <h1>Igualdad de género: a un clic de ratón</h1>
+    <figure class="wide"><img src="img/igualdad-1.jpg" width="1280" height="550" alt="Una mujer con su bebé en brazos usa una computadora en un aula con otras personas"><figcaption class="cap">Foto: Radioviva / Asociación Trinidad</figcaption></figure>
+    <div class="cols">
+      <aside class="meta">
+        <div class="card">
+          <dl>
+            <div><dt>Autora</dt><dd>Dafne Sabanes Plou</dd></div>
+            <div><dt>Lectura</dt><dd><span class="readtime" data-read="#art-genero"></span></dd></div>
+          </dl>
+        </div>
+        <figure class="bars card" role="group" aria-label="Brecha de uso de internet entre mujeres y hombres: 26 % en países de ingresos bajos y medios, 33 % en países menos desarrollados">
+          <figcaption>Cuánto menos usan internet las mujeres que los hombres</figcaption>
+          <div class="bar-row"><span class="l">Países de ingresos bajos y medios</span><div class="track"><i style="width:65%"></i></div><b>26 %</b></div>
+          <div class="bar-row"><span class="l">Países menos desarrollados</span><div class="track"><i style="width:82.5%"></i></div><b>33 %</b></div>
+          <div class="axis"><span class="ticks"><span>0</span><span>10</span><span>20</span><span>30</span><span>40 %</span></span><span></span></div>
+          <p class="note">Cifras citadas en el artículo.</p>
+        </figure>
+      </aside>
+      <div class="prose" id="art-genero">
+        <p style="font:italic 400 .95rem/1.5 var(--f-body);color:var(--ink-2)">Este artículo refleja los argumentos de un documento informativo conjunto publicado por la Sociedad de Internet y la Asociación para el Progreso de las Comunicaciones (APC) antes de la cumbre del grupo de mujeres del G20 (W20), celebrada en Argentina del 1 al 3 de octubre de 2018.</p>
+        <div class="dropcap">
+          <p>En nuestra era digital, aprender a utilizar internet ha sido esencial, si no sinónimo, para la empleabilidad en muchos campos. Las tecnologías de la información y la comunicación (TIC) impulsan el crecimiento empresarial y el desarrollo económico de los países. Abren nuevos canales para comunicarse a través de grandes distancias, organizar a las personas, sensibilizar y estimular el activismo.</p>
+        </div>
+        <p>Pero dicha promesa puede profundizar las desigualdades existentes en el mundo físico si no todos pueden acceder y disfrutar de estas tecnologías.</p>
+        <p>Actualmente, las mujeres y las niñas se están quedando atrás en el desarrollo digital. Mientras que en los países con ingresos bajos y medios la brecha entre el uso de las mujeres y los hombres es del 26 %, en los países menos desarrollados (PMD) las mujeres utilizan internet un 33 % menos que los hombres.</p>
+        <p>En algunos casos, las mujeres simplemente no tienen acceso a internet o es demasiado caro. En otros, tienen acceso limitado con servicios de prepago. Además, hay factores culturales que impiden que las mujeres utilicen internet o que incluso tengan un ordenador o teléfono móvil, lo que indica problemas más profundos. En general, las mujeres disponen de menos tiempo de ocio que los hombres, teniendo en cuenta que generalmente asumen una parte mayor de las tareas del hogar y el cuidado de los niños. Además, tienen menos oportunidades que los hombres para conseguir trabajos y ocupar puestos en los que se pueda acceder a internet y obtener conocimientos informáticos. Muchas también afirman que el contenido de internet no es relevante para sus vidas. Otras temen invasiones o abusos de la privacidad en línea. Como resultado, necesitamos más mujeres creadoras de contenidos y espacios en línea más seguros.</p>
+        <p class="pull" style="margin-left:0">El acceso a internet solo es completamente significativo cuando las mujeres tienen los conocimientos o capacidades para usarlo.</p>
+        <p>Asimismo, debemos recordar que el acceso a internet solo es completamente significativo cuando las mujeres tienen los conocimientos o capacidades para usarlo y mejorar sus vidas o las de sus familiares y comunidades. Como las economías son cada vez más digitales y están más interconectadas, es crucial la participación de las mujeres en campos como la ciencia, la tecnología, la ingeniería y las matemáticas (STEM). No obstante, por desgracia, no siguen el mismo ritmo.</p>
+        <p>Necesitamos medidas efectivas, tangibles y cuantificables para acabar con la brecha de género digital en el acceso a internet. Hay que abordar los obstáculos que se oponen a su uso para garantizar que las mujeres y las niñas puedan beneficiarse verdaderamente de la inclusión digital.</p>
+        <p>Sabemos que la desventaja digital refleja mayores desigualdades estructurales, económicas y culturales. Por tanto, las políticas solo pueden ser de naturaleza digital. Las medidas para reducir la brecha digital deben basarse en los derechos humanos, incluido el derecho de la mujer a participar y contribuir al desarrollo social, económico y cultural. Deben considerar la libertad de la mujer para tomar sus propias decisiones e incluir a mujeres de todos los grupos y condiciones sociales para dar forma a estas políticas y tecnologías que afectan a sus vidas.</p>
+        <p>No hay una solución apropiada para todos los casos. Existen enormes variaciones nacionales, tanto en igualdad de género como en desarrollo digital. Para que resulten efectivos, los cambios deben ser específicos desde el punto de vista cultural. Si deseamos superar las desventajas digitales y promover el desarrollo digital, los gobiernos, las empresas y otras partes implicadas deben prestar atención a los diferentes contextos al desarrollar las políticas, los programas y los planes de negocio.</p>
+        <p>Las medidas de desarrollo digital deben integrarse con políticas para combatir la desigualdad de género.</p>
+        <p>En agosto de 2018, el G20 se comprometió a «prestar especial atención» a la brecha digital de género y formuló nueve recomendaciones en relación con la Declaración Ministerial de Economía Digital, adoptada en Salta (Argentina).</p>
+        <p>Sin estas acciones, las diferencias en el acceso y uso de internet aumentarán la brecha, tanto en información como en poder, entre las mujeres y los hombres en lugar de reducirla, lo que resultaría perjudicial para todos.</p>
+        <p class="src">Fuente: <a href="https://www.internetsociety.org/es/blog/2018/10/igualdad-de-genero-a-un-clic-de-raton/" target="_blank" rel="noopener">Internet Society, blog, octubre de 2018</a></p>
+        <figure class="wide" style="margin:28px 0 0"><img src="img/igualdad-2.jpg" width="1280" height="550" alt="Una niña sonriente frente a una laptop, con credencial colgada al cuello" loading="lazy"><figcaption class="cap">En la comunidad Tusipono, el personal de ISOC enseña el uso del Raspberry Pi para ofrecer contenidos educativos que requieran los estudiantes.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 AUTORIDADES -->
+<section class="page" id="autoridades" data-title="Nuevas autoridades" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 09</b> Institucional</p>
+    <h1>Nuevas autoridades de ISOC Panamá</h1>
+    <div class="prose">
+      <p>El pasado 18 de febrero de 2021 se celebró la Asamblea General de Miembros, que en esta ocasión se realizó de forma virtual por las restricciones de movilidad causadas por la pandemia de COVID-19. En esta Asamblea culminó el proceso de elecciones de la nueva Junta Directiva del Capítulo de Panamá de la Sociedad Internet (ISOC Panamá) para el período 2021-2023.</p>
+      <p>El proceso inició a finales de 2020 con la conformación del comité de nominaciones, integrado por Edna Samudio de Jaén, Glenda Magallón y Efraín Vargas, encargados de garantizar la transparencia del proceso y anunciar a los ganadores. Continuó con el llamado a los interesados a formar parte de las autoridades del capítulo, conforme lo establecen los estatutos de la organización, y luego con la invitación a los miembros con voz y voto para ejercer su derecho a elegir y ser elegidos.</p>
+      <p>En la Asamblea, la secretaria Nayreth González presentó, por parte de la Junta Directiva, el informe anual de gestión y resultados. Se destacaron varias iniciativas realizadas gracias al esfuerzo de los Comités de Redes Comunitarias, Educación, Membresía y Comunicaciones, liderados por Zueline Aguilar, Noralí Duín, Kelkyra Fragueiro y Pablo Ruidiaz, respectivamente. Se destacó en especial el segundo lugar global en el Chapterthon 2020 de Internet Society, por el proyecto de manual de programación de dispositivos para la creación de redes inalámbricas en el sitio basado en Raspberry Pi, liderado por Sascha Ram. Finalmente, la tesorera, Querube Urriola, presentó el informe financiero anual y el presupuesto de 2021 para su aprobación.</p>
+      <p>El punto culminante de la Asamblea fue el anuncio de las autoridades electas por parte del presidente encargado, Pablo Ruidiaz M., ratificado por Edna Samudio de Jaén por el Comité de Nominaciones. Estas son las nuevas autoridades que liderarán a ISOC Panamá por los próximos dos años:</p>
+    </div>
+
+    <p class="sub-h">Directiva</p>
+    <div class="roster">
+      <div class="person"><img class="av" src="img/nayreth.jpg" width="300" height="300" alt="Retrato de Nayreth González D." loading="lazy"><div><b>Nayreth González D.</b><span>Presidente</span></div></div>
+      <div class="person"><img class="av" src="img/jayguer.jpg" width="258" height="300" alt="Retrato de Jayguer Vásquez T." loading="lazy"><div><b>Jayguer Vásquez T.</b><span>Vicepresidente</span></div></div>
+      <div class="person"><img class="av" src="img/zueline-jd.jpg" width="280" height="300" alt="Retrato de Zueline Aguilar S." loading="lazy"><div><b>Zueline Aguilar S.</b><span>Secretaria</span></div></div>
+      <div class="person"><img class="av" src="img/kelkyra.jpg" width="229" height="299" alt="Retrato de Kelkyra Fragueiro R." loading="lazy"><div><b>Kelkyra Fragueiro R.</b><span>Tesorera</span></div></div>
+    </div>
+    <p class="sub-h">Vocales</p>
+    <div class="roster">
+      <div class="person"><img class="av" src="img/abdias.jpg" width="300" height="290" alt="Retrato de Abdías Zambrano A." loading="lazy"><div><b>Abdías Zambrano A.</b><span>Vocal</span></div></div>
+      <div class="person"><img class="av" src="img/miguel.jpg" width="300" height="300" alt="Retrato de Miguel Santos" loading="lazy"><div><b>Miguel Santos</b><span>Vocal</span></div></div>
+      <div class="person"><img class="av" src="img/eliseo.jpg" width="300" height="300" alt="Retrato de Eliseo Márquez F." loading="lazy"><div><b>Eliseo Márquez F.</b><span>Vocal</span></div></div>
+    </div>
+
+    <div class="prose" style="margin-top:26px">
+      <p>Al 25 de febrero no se presentaron apelaciones ni impugnaciones en el proceso de elecciones. Las nuevas autoridades tomarán posesión de sus cargos el 18 de marzo de 2021, tercer jueves de marzo, según lo establece la carta máxima de la organización.</p>
+      <p class="src">Fuente: <a href="https://www.isoc.org.pa/nuevas-autoridades-de-isoc-panama/" target="_blank" rel="noopener">isoc.org.pa</a></p>
+    </div>
+
+    <p class="sub-h">Miembros nuevos</p>
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Nombre</th><th>Fecha de ingreso</th></tr></thead>
+        <tbody>
+          <tr><td>Leydis Peña</td><td>1 de abril de 2021</td></tr>
+          <tr><td>Franklin Ward</td><td>6 de febrero de 2021</td></tr>
+          <tr><td>Jorge Romero</td><td>4 de febrero de 2021</td></tr>
+          <tr><td>Miguel Arosemena</td><td>15 de abril de 2021</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 10 EDITORIAL -->
+<section class="page" id="editorial" data-title="Nota editorial" hidden>
+  <div class="page-in">
+    <p class="kicker"><b>Nodo 10</b> Editorial</p>
+    <h1>Nota editorial</h1>
+    <div class="prose dropcap">
+      <p>En el año 2010, la Unión Internacional de las Telecomunicaciones (UIT), organismo adscrito a la Organización de las Naciones Unidas (ONU), propuso el cuarto jueves del mes de abril como el día en que debemos impulsar la educación en TIC de las niñas y jovencitas, así como recordar la enorme brecha digital de género que se ha hecho evidente año tras año.</p>
+      <p>En el mundo digitalizado que vivimos, la participación de las jóvenes en el ámbito estudiantil de las ciencias y las tecnologías es variable. En algunas ocasiones aumenta, pero lamentablemente hay años en que disminuye.</p>
+      <p class="pull" style="margin-left:0">Este ejemplar lo dedicamos al esfuerzo que hacemos como organización para reducir la brecha de género.</p>
+      <p>Para que todas las niñas, jóvenes y mujeres, de todos los estratos sociales y de las diversas comunidades, puedan acceder y disfrutar de las diversas tecnologías de la mano del internet.</p>
+    </div>
+
+    <div class="mast">
+      <div class="card">
+        <h3>Comité editorial</h3>
+        <div class="row"><span class="k">Editor</span><span>Eduardo Villarreal Ricord</span></div>
+        <div class="row"><span class="k">Revisora</span><span>Kelkyra Fragueiro</span></div>
+      </div>
+      <div class="card">
+        <h3>Envía tu colaboración</h3>
+        <div class="row"><span class="addr" id="em1">membresia@isoc.org.pa</span><button class="copy" type="button" data-copy="em1">Copiar</button></div>
+        <div class="row"><span class="addr" id="em2">comunicaciones@isoc.org.pa</span><button class="copy" type="button" data-copy="em2">Copiar</button></div>
+        <div class="row"><a href="https://www.isoc.org.pa/" target="_blank" rel="noopener">www.isoc.org.pa</a></div>
+      </div>
+    </div>
+    <a class="banner" href="https://www.isoc.org.pa/" target="_blank" rel="noopener"><img src="img/sumate.jpg" width="1000" height="500" alt="Súmate. Hay muchas formas de apoyar el Internet. Encuentra hoy cómo puedes crear impacto. Internet Society Capítulo Panamá" loading="lazy"></a>
+    <p class="legal">© 2021 En la Red, boletín interno editado trimestralmente por ISOC Panamá. Edición #3, abril de 2021.</p>
+    <button class="pill back" type="button" data-go="portada">← Volver a la portada</button>
+  </div>
+</section>
+
+</main>
+
+<nav class="rail" aria-label="Navegación de la edición">
+  <div class="rail-in">
+    <button class="step" id="prev" type="button" aria-label="Página anterior">←</button>
+    <div class="nodes" id="nodes"></div>
+    <span class="where" id="where" aria-live="polite"></span>
+    <button class="step" id="next" type="button" aria-label="Página siguiente">→</button>
+  </div>
+</nav>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Imagen ampliada"><button class="lb-x" id="lbx" type="button">Cerrar</button><img id="lbi" alt=""></div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var pages=[].slice.call(document.querySelectorAll('.page'));
+  var ids=pages.map(function(p){return p.id;});
+  var nodesEl=document.getElementById('nodes'), prev=document.getElementById('prev'), next=document.getElementById('next'), where=document.getElementById('where');
+  var cur=0;
+  function pad(n){return (n<10?'0':'')+n;}
+
+  pages.forEach(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='node';
+    b.setAttribute('aria-label','Nodo '+(i+1)+': '+p.getAttribute('data-title'));
+    b.title=p.getAttribute('data-title');
+    b.addEventListener('click',function(){go(i);});
+    nodesEl.appendChild(b);
+  });
+  var dots=[].slice.call(nodesEl.children);
+
+  function go(i,init){
+    if(i<0||i>=pages.length) return;
+    cur=i;
+    pages.forEach(function(p,k){p.hidden=(k!==i);});
+    dots.forEach(function(d,k){
+      d.classList.toggle('past',k<i);
+      if(k===i) d.setAttribute('aria-current','true'); else d.removeAttribute('aria-current');
+    });
+    prev.disabled=(i===0); next.disabled=(i===pages.length-1);
+    where.textContent=pad(i+1)+' / '+pad(pages.length)+' · '+pages[i].getAttribute('data-title');
+    if(!init){
+      window.scrollTo(0,0);
+      var h=pages[i].querySelector('h1,h2');
+      if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true});}catch(e){}}
+    }
+    if(i===0&&window.__netStart) window.__netStart();
+  }
+  prev.addEventListener('click',function(){go(cur-1);});
+  next.addEventListener('click',function(){go(cur+1);});
+  document.addEventListener('click',function(e){
+    var t=e.target.closest&&e.target.closest('[data-go]');
+    if(!t) return;
+    var i=ids.indexOf(t.getAttribute('data-go'));
+    if(i>=0) go(i);
+  });
+  document.addEventListener('keydown',function(e){
+    if(!lb.hidden) return;
+    if(e.target.closest&&(e.target.closest('[role="tablist"]')||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))) return;
+    if(e.key==='ArrowRight') go(cur+1);
+    else if(e.key==='ArrowLeft') go(cur-1);
+  });
+  var sx=0,sy=0,sOk=false;
+  document.addEventListener('touchstart',function(e){
+    var t=e.touches[0]; sx=t.clientX; sy=t.clientY;
+    sOk=!(e.target.closest&&e.target.closest('.scrollx, .lb'));
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(!sOk) return;
+    var t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+    if(Math.abs(dx)>70&&Math.abs(dy)<45){ go(cur+(dx<0?1:-1)); }
+  },{passive:true});
+  function fromHash(init){
+    var i=ids.indexOf(location.hash.replace('#',''));
+    go(i>=0?i:0,init);
+  }
+  window.addEventListener('hashchange',function(){fromHash(false);});
+
+  /* imagen ampliada */
+  var lb=document.getElementById('lb'), lbi=document.getElementById('lbi'), lbx=document.getElementById('lbx'), lbFrom=null;
+  function openLb(t){lbFrom=t;lbi.src=t.getAttribute('data-zoom');lbi.alt=t.getAttribute('data-alt')||'';lb.hidden=false;lbx.focus();}
+  function closeLb(){lb.hidden=true;lbi.removeAttribute('src');if(lbFrom){try{lbFrom.focus({preventScroll:true});}catch(e){}}}
+  document.addEventListener('click',function(e){
+    var z=e.target.closest&&e.target.closest('[data-zoom]');
+    if(z){openLb(z);return;}
+    if(!lb.hidden&&(e.target===lb||e.target===lbx)) closeLb();
+  });
+  document.addEventListener('keydown',function(e){ if(!lb.hidden&&e.key==='Escape') closeLb(); });
+
+  /* tema */
+  var tbtn=document.getElementById('theme');
+  function eff(){var t=root.getAttribute('data-theme'); if(t) return t; return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function paintTheme(){tbtn.textContent=(eff()==='dark')?'Claro':'Oscuro'; if(window.__netTheme) window.__netTheme();}
+  try{var saved=localStorage.getItem('enlared-theme'); if(saved==='dark'||saved==='light') root.setAttribute('data-theme',saved);}catch(e){}
+  tbtn.addEventListener('click',function(){
+    var n=eff()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',n);
+    try{localStorage.setItem('enlared-theme',n);}catch(e){}
+    paintTheme();
+  });
+  try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',paintTheme);}catch(e){}
+
+  /* pestañas */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function selectTab(t,focus){
+    tabs.forEach(function(x){
+      var on=(x===t);
+      x.setAttribute('aria-selected',on?'true':'false');
+      x.tabIndex=on?0:-1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    });
+    if(focus) t.focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){selectTab(t,false);});
+    t.addEventListener('keydown',function(e){
+      var k=e.key, n=-1;
+      if(k==='ArrowRight') n=(i+1)%tabs.length;
+      else if(k==='ArrowLeft') n=(i-1+tabs.length)%tabs.length;
+      else if(k==='Home') n=0; else if(k==='End') n=tabs.length-1;
+      if(n>=0){e.preventDefault(); selectTab(tabs[n],true);}
+    });
+  });
+
+  /* tiempo de lectura */
+  [].forEach.call(document.querySelectorAll('[data-read]'),function(el){
+    var src=document.querySelector(el.getAttribute('data-read'));
+    if(!src) return;
+    var words=(src.textContent||'').trim().split(/\s+/).length;
+    el.textContent=Math.max(1,Math.round(words/200))+' min';
+  });
+
+  /* medidas COVID */
+  var ms=[].slice.call(document.querySelectorAll('input.m')), mc=document.getElementById('mcount');
+  ms.forEach(function(c){c.addEventListener('change',function(){
+    var n=ms.filter(function(x){return x.checked;}).length;
+    mc.textContent=n+' de '+ms.length+' medidas marcadas'+(n===ms.length?'. Así se cuida la comunidad.':'');
+  });});
+
+  /* copiar correos */
+  [].forEach.call(document.querySelectorAll('.copy'),function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.getAttribute('data-copy')), txt=el.textContent;
+      function sel(){var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Seleccionado';}
+      try{
+        navigator.clipboard.writeText(txt).then(function(){b.textContent='Copiado';},sel);
+      }catch(e){sel();}
+      setTimeout(function(){b.textContent='Copiar';},1800);
+    });
+  });
+
+  /* grafo de la portada */
+  (function(){
+    var cv=document.getElementById('net'); if(!cv||!cv.getContext) return;
+    var ctx=cv.getContext('2d'), cover=document.getElementById('portada');
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W=0,H=0,nodes=[],raf=0,tick=0,col={line:'#0b4e9b',hot:'#c8102e'};
+    function colors(){var s=getComputedStyle(root);col.line=s.getPropertyValue('--blue').trim()||col.line;col.hot=s.getPropertyValue('--red').trim()||col.hot;}
+    function mk(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:1.6+Math.random()*1.6,hot:Math.random()<.1};}
+    function size(){
+      var r=cover.getBoundingClientRect(); if(!r.width||!r.height) return false;
+      var d=Math.min(window.devicePixelRatio||1,2);
+      W=r.width;H=r.height;cv.width=Math.round(W*d);cv.height=Math.round(H*d);ctx.setTransform(d,0,0,d,0,0);
+      var n=Math.max(18,Math.min(48,Math.round(W*H/15000)));
+      while(nodes.length<n) nodes.push(mk());
+      nodes.length=n; return true;
+    }
+    function draw(){
+      if(!W) return;
+      ctx.clearRect(0,0,W,H);
+      var D=Math.min(170,Math.max(110,W/6)),i,j,a,b,dx,dy,d2,al;
+      ctx.lineWidth=1; ctx.strokeStyle=col.line;
+      for(i=0;i<nodes.length;i++){a=nodes[i];
+        for(j=i+1;j<nodes.length;j++){b=nodes[j];dx=a.x-b.x;dy=a.y-b.y;d2=dx*dx+dy*dy;
+          if(d2<D*D){al=(1-Math.sqrt(d2)/D)*.42;ctx.globalAlpha=al;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+        }
+      }
+      for(i=0;i<nodes.length;i++){a=nodes[i];
+        ctx.globalAlpha=a.hot?1:.75; ctx.fillStyle=a.hot?col.hot:col.line;
+        ctx.beginPath();ctx.arc(a.x,a.y,a.hot?a.r+1.6:a.r,0,6.2832);ctx.fill();
+        if(a.hot){ctx.globalAlpha=.35;ctx.strokeStyle=col.hot;ctx.beginPath();ctx.arc(a.x,a.y,a.r+5+Math.sin((tick+i*9)/18)*2.5,0,6.2832);ctx.stroke();ctx.strokeStyle=col.line;}
+      }
+      ctx.globalAlpha=1;
+    }
+    function step(){
+      tick++;
+      for(var i=0;i<nodes.length;i++){var n=nodes[i];n.x+=n.vx;n.y+=n.vy;
+        if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1;}
+    }
+    function loop(){ if(cover.hidden){raf=0;return;} step();draw();raf=requestAnimationFrame(loop); }
+    window.__netStart=function(){ colors(); if(!size()) return; if(reduce){draw();return;} if(!raf) raf=requestAnimationFrame(loop); };
+    window.__netTheme=function(){ colors(); if(reduce||!raf) draw(); };
+    window.addEventListener('resize',function(){ if(!cover.hidden){ if(size()&&(reduce||!raf)) draw(); } });
+  })();
+
+  paintTheme();
+  fromHash(true);
+})();
+</script>
+<script>
+(function(){
+  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+    window.addEventListener('load',function(){
+      navigator.serviceWorker.register('sw.js').catch(function(){});
+    });
+  }
+  var btn=document.getElementById('install'), ev=null;
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault(); ev=e; btn.hidden=false;
+  });
+  btn.addEventListener('click',function(){
+    if(!ev) return;
+    ev.prompt();
+    ev.userChoice.then(function(){ ev=null; btn.hidden=true; },function(){});
+  });
+  window.addEventListener('appinstalled',function(){ btn.hidden=true; });
+})();
+</script>
+</body>
+</html>
