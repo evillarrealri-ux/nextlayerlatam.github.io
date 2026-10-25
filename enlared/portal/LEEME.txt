@@ -1,0 +1,38 @@
+EN LA RED · ISOC PANAMÁ — APP WEB INSTALABLE (PWA)
+Versión PORTAL (portada tipo portal de noticias). Edición #3, abril 2021
+
+QUÉ CONTIENE
+  index.html              La portada tipo portal.
+  manifest.webmanifest    Nombre, colores e íconos de la app.
+  sw.js                   Permite verla sin conexión.
+  icons/  img/            Íconos y fotografías.
+
+CÓMO PUBLICARLA
+1. Sube TODA esta carpeta (con sus subcarpetas) al mismo sitio web con HTTPS
+   donde está la revista, en una carpeta llamada "portal":
+      https://tudominio.com/revista/   (versión REVISTA)
+      https://tudominio.com/portal/    (versión PORTAL)
+   Las dos carpetas deben estar una junto a la otra, con esos nombres.
+2. Cada tarjeta de la portada abre el artículo completo en ../revista/ ,
+   por eso la versión REVISTA tiene que estar publicada también.
+
+CÓMO LA INSTALA UN LECTOR
+  Android (Chrome): botón "Instalar" en la barra superior, o menú ⋮ >
+                    Instalar aplicación.
+  Computadora (Chrome o Edge): ícono de instalar en la barra de direcciones,
+                    o el botón "Instalar".
+  iPhone/iPad (Safari): Compartir > "Añadir a pantalla de inicio".
+
+NOTAS
+  - Puedes instalar las dos versiones para compararlas. Se distinguen por
+    el nombre: "En La Red" (revista) y "En La Red Portal".
+  - Abrir index.html con doble clic muestra la página, pero no se instala ni
+    guarda copia. Para probar en tu computadora:  python -m http.server 8000
+    desde la carpeta que contiene "revista" y "portal", y abre
+    http://localhost:8000/portal/
+  - Las tipografías se descargan de Google Fonts la primera vez y quedan
+    guardadas en el dispositivo.
+
+PARA UNA EDICIÓN NUEVA
+  Reemplaza index.html y las fotos de img/, cambia VERSION en sw.js
+  (por ejemplo 'ed4-v1') y la lista CORE si cambian los nombres de las fotos.
